@@ -5,8 +5,10 @@
     </aside>
     <!-- Contenedor para escribir un post -->
     <div id="containerWrite">
+
+        <!-- Aquí se recogen los datos que escriba el usuario (texto del post, imágen del post, y se controla cuando hace click en publicar) -->
         <div id="top">
-            <textarea placeholder="Write here, Add images or a video for visual impact." maxlength="250"></textarea>
+            <textarea placeholder="Write here, Add images or a video for visual impact." maxlength="250" name="postText" id="postText"></textarea>
             <input type="file" id="photoPost" name="photoPost" class="d-none">
         </div>
         <div id="bottom" class="mb-4">
@@ -26,8 +28,8 @@
                     <h6>Video</h6>
                 </div>
             </div>
-            <div id="pusblishPostContainer">
-                <button id="publishPost" title="Publish"><img src="web/images/right-arrow.png" alt=""></button>
+            <div id="publishPostContainer">
+                <button id="addPostButton" title="Publish"><img src="web/images/right-arrow.png" alt=""></button>
             </div>
         </div>
 
@@ -53,7 +55,7 @@
                                         </a>
                                     </div>
                                     <div id="containerDate">
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options"><i class="fas fa-ellipsis-h"></i></a>
+                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options"><i class="fas fa-ellipsis-h" title="Options"></i></a>
                                         <?php
                                         $date = new DateTime($datos['datePost']);
                                         echo "<small>" . $date->format('G:ia d-m') . "</small>";
@@ -88,4 +90,11 @@
         <!-- MOSTRAR POST -->
     </div>
     <aside id="rightContainer" class="d-none d-xl-block">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos amet quia necessitatibus consequatur doloremque qui fuga deleniti aperiam ducimus beatae quas excepturi voluptates a nam, magnam dolorem omnis consequuntur inventore
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos amet quia necessitatibus consequatur doloremque qui fuga deleniti aperiam ducimus beatae quas excepturi voluptates a nam, magnam dolorem omnis consequuntur inventore!</p>
+    </aside>
+</main>
+
+<!--   Recogemos contenido para mostrarlo con el header -->
+<?php $contenido = ob_get_clean(); ?>
+
+<?php include 'header.php' ?>

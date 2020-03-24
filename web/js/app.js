@@ -3,20 +3,20 @@ $(document).ready(function () {
     //Popover opciones post
     $('[data-toggle="popover"]').popover();
 
-    //Los mensajes desaparecen a los 3s
+    //Los mensajes desaparecen a los 3s | MEJORAR
     setInterval(() => {
         $('#success').fadeOut(function () {
             $(this).remove();
         });
     }, 3000);
 
-    //Calendario fecha cumpleaños
+    //Calendario fecha cumpleaños | EN DUDA SI DEJARLO
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
         format: 'yyyy-mm-dd'
     });
 
-    //Formulario para actualizar los datos del usuario
+    //Formulario para actualizar los datos del usuario | MEJORAR CON EL SERIALIZE
     $('#formulario').submit(function (e) {
         e.preventDefault();
         let id = $('#id').val(),
@@ -64,17 +64,17 @@ $(document).ready(function () {
 
     //Validación de lado cliente para que no se envie el campo vacío
     //Desabilitar el botón por defecto
-    $('#addPost').attr('disabled', true);
-    $('#addPost').css('cursor', 'not-allowed');
+    $('#addPostButton').attr('disabled', true);
+    $('#addPostButton').css('cursor', 'not-allowed');
 
     //Cuando se escribe algo
     $('#postText').keyup(function () {
         if ($.trim($(this).val()) == '') {
-            $('#addPost').attr('disabled', true);
-            $('#addPost').css('cursor', 'not-allowed');
+            $('#addPostButton').attr('disabled', true);
+            $('#addPostButton').css('cursor', 'not-allowed');
         } else {
-            $('#addPost').attr('disabled', false);
-            $('#addPost').css('cursor', 'pointer');
+            $('#addPostButton').attr('disabled', false);
+            $('#addPostButton').css('cursor', 'pointer');
         }
     });
     let formularioData = new FormData($('#formularioPost')[0]);
@@ -84,8 +84,8 @@ $(document).ready(function () {
 
         //Si el usuario selecciona una imagen se habilita el botón de publicar foto
         if (name != '') {
-            $('#addPost').attr('disabled', false);
-            $('#addPost').css('cursor', 'pointer');
+            $('#addPostButton').attr('disabled', false);
+            $('#addPostButton').css('cursor', 'pointer');
         }
 
         let extension = name.split('.').pop().toLowerCase();
