@@ -1,0 +1,324 @@
+body {
+  background-color: #f5f5f5;
+}
+
+//HEADER
+.navbar-expand-lg {
+  background-color: #fff;
+  box-shadow: 0 6px 6px -10px #333;
+}
+
+.imagen {
+  width: 70%;
+}
+.icono {
+  font-size: 30px;
+}
+.profilePhoto {
+  width: 55px;
+  height: auto;
+}
+
+div#hiddenNavbar {
+  justify-content: space-between;
+  ul.navbar-nav {
+    width: 70%;
+    justify-content: space-between;
+    a.nav-link {
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  #headerPhoto {
+    a {
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}
+
+//Buscador usuarios header
+div#searcher {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.2px solid #cccccc;
+  padding-bottom: 1px;
+  /*  margin: 15px 0; */
+  img {
+    margin-right: 10px;
+  }
+  input#searchUser {
+    border: none;
+    outline: 0;
+    font-size: 17px;
+    color: #444;
+    width: 100%;
+    &::placeholder {
+      color: #999;
+    }
+  }
+}
+
+//MAIN PART
+main#mainContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+  @media (max-width: 768px) {
+    margin: 0;
+    margin-top: 20px;
+  }
+  #containerWrite {
+    flex: 2;
+    margin: 0 30px;
+    height: 190px;
+    @media (max-width: 1200px) {
+      margin: 0 0 0 30px;
+    }
+    @media (max-width: 768px) {
+      margin: 0 15px;
+    }
+    #top {
+      width: 100%;
+      background: #ffffff;
+      height: 55%;
+      border-radius: 2px;
+      textarea {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: 0;
+        padding: 15px 35px 15px 35px;
+        resize: none;
+      }
+    }
+    #bottom {
+      width: 100%;
+      background: #ffffff;
+      height: 45%;
+      border-radius: 2px;
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div#containerIconsWrite {
+        display: flex;
+        flex-basis: 60%;
+        justify-content: space-around;
+        @media (max-width: 768px) {
+          justify-content: space-evenly;
+        }
+        .iconsWrite {
+          display: flex;
+          cursor: pointer;
+          img {
+            width: 20px;
+            height: 20px;
+            margin-right: 6px;
+            @media (max-width: 768px) {
+              width: 30px;
+              height: 30px;
+            }
+          }
+          h6 {
+            @media (max-width: 768px) {
+              display: none;
+            }
+            &::hover {
+              color: red;
+            }
+          }
+        }
+      }
+      div#pusblishPostContainer {
+        #publishPost {
+          display: flex;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border: none;
+          background: transparent;
+          outline: 0;
+          margin-right: 30px;
+          @media (max-width: 768px) {
+            width: 45px;
+            height: 45px;
+          }
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+  #leftContainer,
+  #rightContainer {
+    flex: 1;
+    height: 450px;
+    background: #ffffff;
+    padding: 20px;
+  }
+}
+
+//Container Posts
+div#postContainer {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 30px;
+  div#infoUser {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    a#linkProfilePerson {
+      color: #333;
+      margin: 0;
+      div#userInfoPost {
+        display: flex;
+        align-items: center;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+        h5 {
+          margin: 0 15px !important;
+        }
+      }
+    }
+    div#containerDate {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      color: #333;
+      a {
+        outline: 0;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  div#shareIcons {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    i {
+      color: #374957;
+    }
+    img {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+  }
+}
+
+//MAIN PART END
+
+//404 Styles
+#notfound {
+  position: relative;
+  height: 100vh;
+
+  .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+.notfound {
+  max-width: 767px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+  padding: 15px;
+
+  .notfound-404 {
+    position: relative;
+    height: 220px;
+
+    h1 {
+      font-family: "Kanit", sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      font-size: 186px;
+      font-weight: 200;
+      margin: 0px;
+      background: linear-gradient(130deg, #ffa34f, #ff6f68);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-transform: uppercase;
+    }
+  }
+
+  h2 {
+    font-family: "Kanit", sans-serif;
+    font-size: 33px;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+  }
+
+  p {
+    font-family: "Kanit", sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+
+  a {
+    font-family: "Kanit", sans-serif;
+    color: #ff6f68;
+    font-weight: 200;
+    text-decoration: none;
+    border-bottom: 1px dashed #ff6f68;
+    border-radius: 2px;
+  }
+}
+
+.notfound-social > a {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  font-size: 14px;
+  color: #ff6f68;
+  border: 1px solid #efefef;
+  border-radius: 50%;
+  margin: 3px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+
+  &:hover {
+    color: #fff;
+    background-color: #ff6f68;
+    border-color: #ff6f68;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .notfound {
+    .notfound-404 {
+      position: relative;
+      height: 168px;
+
+      h1 {
+        font-size: 142px;
+      }
+    }
