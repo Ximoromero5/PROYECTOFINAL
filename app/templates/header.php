@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="web/css/font/flaticon.css">
         <link rel="stylesheet" type="text/css" href="<?php echo 'web/css/' . Config::$dbCss ?>">
         <title>Home</title>
     </head>
@@ -17,8 +18,8 @@
         <nav class="navbar navbar-expand-lg navbar-light p-3">
 
             <!-- Icono para mostrar el menú en vista móvil -->
-            <a class="navbar-toggler border-0" data-toggle="collapse" data-target="#hiddenNavbar" aria-controls="hiddenNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <img src="web/images/menu1.png" alt="" width="30" height="30">
+            <a class="navbar-toggler border-0" id="navbarToggle" data-toggle="collapse" data-target="#hiddenNavbar" aria-controls="hiddenNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="flaticon-menu-1 icono"></i>
             </a>
 
             <!--  Menú horizontal -->
@@ -28,32 +29,63 @@
                 </div>
                 <ul class="navbar-nav">
                     <div id="searcher" class="my-3 my-lg-0">
-                        <img src="web/images/search.png" alt="" width="17" height="17">
+                        <i class="flaticon-search icono mr-2"></i>
                         <input class="nav-item" type="search" placeholder="Search" aria-label="Search" id="searchUser">
                     </div>
                     <ul class="list-group" id="showUsers"></ul>
 
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="home"><img src="web/images/home.png" width="20" height="20" alt="" class="mr-2"> Home</a>
+                        <a class="nav-link" href="home">
+                            <i class="flaticon-home icono mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"><i class="far fa-user mr-2"></i>People</a>
+                        <a class="nav-link" href="#"> <i class="flaticon-user icono mr-2"></i> People</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"><i class="far fa-comment mr-2"></i>Messaging</a>
+                        <a class="nav-link" href="#"> <i class="flaticon-speech-bubble icono mr-2"></i> Messaging</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"><i class="far fa-bell mr-2"></i>Notifications</a>
+                        <a class="nav-link" href="#"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"><i class="fas fa-code-branch mr-2"></i>Work</a>
+                        <a class="nav-link" href="#"> <i class="flaticon-tools icono mr-2"></i> Work</a>
                     </li>
                 </ul>
                 <div class="mr-4" id="headerPhoto">
                     <a href="profile">
                         <?php echo "<img src=" . $datos['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
                     </a>
+                    <div class="btn-group">
+                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options"></i>
+                        <div class="dropdown-menu dropdown-menu-right" id="optionsMenu">
+                            <a href="profile" class="dropdown-item" title="View Profile" id="viewProfile">
+                                <?php echo "<img src=" . $datos['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
+                                <div>
+                                    <h6><?php echo $datos['firstName'] ?></h6>
+                                    <small>View your Profile</small>
+                                </div>
+                            </a>
+                            <hr>
+                            <a href="" class="dropdown-item" title="Configuration" id="containerDropdown"> <i class="flaticon-gear"></i>
+                                <h6>Configuration</h6>
+                            </a>
+                            <label for="checkDarkTheme">
+                                <div class="dropdown-item" id="containerDropdown">
+                                    <i class="fas fa-moon"></i>
+                                    <h6>Dark Mode</h6>
+                                    <label class="switch ml-3">
+                                        <input type="checkbox" id="checkDarkTheme">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </label>
+                            <a href="closeSesion" class="dropdown-item" title="Log Out" id="containerDropdown"> <i class="flaticon-logout"></i>
+                                <h6>Log Out</h6>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </nav>
 

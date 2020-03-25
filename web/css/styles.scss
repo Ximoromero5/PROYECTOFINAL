@@ -1,19 +1,57 @@
+html {
+  //Light colors
+  --backgroundLight: #f5f5f5;
+  --panelsBackgroundLight: #ffffff;
+  --fontColorLight: #888888;
+  --fontColorLight2: #333333;
+  --blueColor: #0a74ec;
+}
+
+html[data-theme="dark"] {
+  //Light colors
+  --backgroundLight: #121212;
+  --panelsBackgroundLight: #242526;
+  --fontColorLight: #f5f5f5;
+  --fontColorLight2: #f5f5f5;
+}
+
+//Para la transición al cambiar al tema oscuro
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 500ms !important;
+  transition-delay: 0 !important;
+}
+
 body {
-  background-color: #f5f5f5;
+  background-color: var(--backgroundLight);
+}
+
+.icono {
+  color: var(--fontColorLight2);
+  &::before {
+    color: var(--fontColorLight2);
+  }
 }
 
 //HEADER
 .navbar-expand-lg {
-  background-color: #fff;
-  box-shadow: 0 6px 6px -10px #333;
+  background-color: var(--panelsBackgroundLight);
+  box-shadow: 0 6px 6px -10px var(--fontColorLight2);
+  a#navbarToggle {
+    i.flaticon-menu-1.icono::before {
+      font-size: 30px;
+    }
+  }
 }
 
 .imagen {
   width: 70%;
 }
-.icono {
+/* .icono {
   font-size: 30px;
-}
+} */
 .profilePhoto {
   width: 55px;
   height: auto;
@@ -28,13 +66,81 @@ div#hiddenNavbar {
       font-size: 17px;
       display: flex;
       align-items: center;
+      color: var(--fontColorLight2);
     }
   }
   #headerPhoto {
     a {
+      text-decoration: none;
       img {
         width: 50px;
         height: 50px;
+      }
+    }
+    div {
+      i {
+        width: 30px;
+        display: flex;
+        height: 30px;
+        background: var(--backgroundLight);
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        cursor: pointer;
+        &::before {
+          font-size: 20px;
+          cursor: pointer;
+          color: var(--fontColorLight2);
+        }
+        &::after {
+          display: none;
+        }
+      }
+      #optionsMenu {
+        margin-top: 15px;
+        padding: 15px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+        background: var(--backgroundLight);
+        #viewProfile {
+          color: var(--fontColorLight2);
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding: 15px;
+          h5 {
+            margin: 0;
+          }
+        }
+        #containerDropdown {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          border-radius: 3px;
+          cursor: pointer;
+          i {
+            margin-right: 10px;
+            &::before {
+              margin: 0;
+              font-size: 18px;
+              color: var(--fontColorLight2);
+            }
+          }
+          h6 {
+            margin: 0;
+            color: var(--fontColorLight2);
+          }
+          label {
+            margin: 0;
+          }
+        }
+        .dropdown-item {
+          background-color: var(--panelsBackgroundLight);
+          &:active {
+            background-color: var(--backgroundLight);
+            color: var(--fontColorLight2);
+          }
+        }
       }
     }
   }
@@ -44,20 +150,23 @@ div#hiddenNavbar {
 div#searcher {
   display: flex;
   align-items: center;
-  border-bottom: 1.2px solid #cccccc;
+  border-bottom: 1.2px solid var(--fontColorLight);
   padding-bottom: 1px;
   /*  margin: 15px 0; */
-  img {
-    margin-right: 10px;
+  i {
+    &::before {
+      margin: 0;
+    }
   }
   input#searchUser {
     border: none;
     outline: 0;
     font-size: 17px;
-    color: #444;
+    color: var(--fontColorLight2);
+    background: transparent;
     width: 100%;
     &::placeholder {
-      color: #999;
+      color: var(--fontColorLight2);
     }
   }
 }
@@ -83,7 +192,7 @@ main#mainContainer {
     }
     #top {
       width: 100%;
-      background: #ffffff;
+      background: var(--panelsBackgroundLight);
       height: 55%;
       border-radius: 2px;
       textarea {
@@ -93,11 +202,13 @@ main#mainContainer {
         outline: 0;
         padding: 15px 35px 15px 35px;
         resize: none;
+        background: transparent;
+        color: var(--fontColorLight2);
       }
     }
     #bottom {
       width: 100%;
-      background: #ffffff;
+      background: var(--panelsBackgroundLight);
       height: 45%;
       border-radius: 2px;
       margin-top: 3px;
@@ -116,25 +227,21 @@ main#mainContainer {
           display: flex;
           align-items: center;
           cursor: pointer;
-          img {
-            width: 20px;
-            height: 20px;
-            margin-right: 6px;
-            @media (max-width: 768px) {
-              width: 30px;
-              height: 30px;
+          i {
+            &::before {
+              font-size: 26px;
             }
           }
           h6 {
             margin: 0;
-            color: #888888;
+            color: var(--fontColorLight);
             @media (max-width: 768px) {
               display: none;
             }
           }
-          &:hover h6 {
-            color: #000000;
-          }
+          /*  &:hover h6 {
+            color: var(--fontColorLight2);
+          } */
         }
         label {
           margin: 0;
@@ -150,13 +257,11 @@ main#mainContainer {
           background: transparent;
           outline: 0;
           margin-right: 30px;
-          @media (max-width: 768px) {
-            width: 45px;
-            height: 45px;
-          }
-          img {
-            width: 100%;
-            height: auto;
+          i.flaticon-right-arrow {
+            &::before {
+              font-size: 28px;
+              color: var(--blueColor);
+            }
           }
         }
       }
@@ -166,22 +271,26 @@ main#mainContainer {
   #rightContainer {
     flex: 1;
     height: 450px;
-    background: #ffffff;
+    background-color: var(--panelsBackgroundLight);
+    color: var(--fontColorLight2);
     padding: 20px;
   }
 }
 
 //Container con todos los posts para mostrar
 div#postContainer {
-  background-color: #fff;
+  background-color: var(--panelsBackgroundLight);
   border-radius: 3px;
-  padding: 30px 30px 0px 30px;
+  /*  padding: 30px 30px 0px 30px; */
+  padding: 0;
   div#infoUser {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    padding: 20px;
+    #userData {
+    }
     a#linkProfilePerson {
-      color: #333;
+      color: var(--fontColorLight2);
       margin: 0;
       div#userInfoPost {
         display: flex;
@@ -201,7 +310,11 @@ div#postContainer {
       flex-direction: column;
       justify-content: center;
       align-items: flex-end;
-      color: #333;
+      color: var(--fontColorLight2);
+      #popoverOptions {
+        /*    color: var(--fontColorLight2);
+        background-color: var(--panelsBackgroundLight); */
+      }
       a {
         outline: 0;
         cursor: pointer;
@@ -215,22 +328,35 @@ div#postContainer {
         border-radius: 50%;
         transition: all 0.2s ease;
         &:hover {
-          background-color: #cccccc;
+          background-color: #e4e6eb;
+        }
+        &:hover i::before {
+          color: var(--backgroundLight);
         }
       }
     }
+  }
+  #parrafoTexto {
+    padding: 0 20px;
+    p {
+      color: var(--fontColorLight2);
+    }
+  }
+  #postImageContainer {
+    cursor: pointer;
   }
   div#shareIcons {
     display: flex;
     width: 40%;
     justify-content: space-between;
+    align-items: center;
     i {
-      color: #374957;
-    }
-    img {
-      width: 18px;
-      height: 18px;
+      color: var(--fontColorLight2);
       cursor: pointer;
+      font-size: 18px;
+    }
+    i.flaticon-share.m-3.icono::before {
+      margin: 0;
     }
   }
 }
@@ -347,3 +473,171 @@ div#postContainer {
   }
 }
 //404 Styles
+
+//TOGGLE SWITCH STYLES
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--blueColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--blueColor);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+//END TOGGLE SWITCH STYLES
+
+/* LOGIN PAGE STYLES */
+div#mainLoginPage {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  #left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 55%;
+    #titlePart {
+      margin-bottom: 10px;
+      color: var(--fontColorLight2);
+      h1 {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+      button {
+        width: 340px;
+        height: 50px;
+        outline: 0;
+        border: none;
+        background: var(--panelsBackgroundLight);
+        color: var(--fontColorLight2);
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        img {
+          width: 20px;
+          margin-right: 10px;
+        }
+        p {
+          margin: 0;
+        }
+      }
+      p {
+        font-size: 15px;
+        margin-bottom: 15px;
+      }
+      div#separatorLine {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        hr {
+          width: 40%;
+        }
+      }
+    }
+    #loginForm {
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        label {
+          font-size: 14px;
+        }
+        input,
+        button {
+          width: 340px;
+          height: 50px;
+          outline: 0;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          padding: 0 15px;
+          border-bottom: 2px solid #ccc !important;
+        }
+        button {
+          color: var(--panelsBackgroundLight);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          background: #3751e4;
+          border: none !important;
+          border-radius: 5px;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+          border: 1px solid var(--blueColor);
+          border-bottom: 2px solid var(--blueColor) !important;
+          //#e60000 COLOR DE RROR CUANDO ALGO SALGA MAL
+        }
+      }
+      .forgot {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #submitButtonContainer {
+        p {
+          text-align: center;
+          margin-top: 15px;
+          a {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  #right {
+    background: rgb(69, 69, 199);
+    flex: 45%;
+  }
+}
+/* END LOGIN PAGE STYLES */

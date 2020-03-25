@@ -40,7 +40,7 @@ if (method_exists($controlador['controller'], $controlador['action'])) {
             $controlador['action']
         ));
     } else {
-        header('Location: index.php?action=login');
+        header('Location: login');
     }
 } else {
     header('Location: app/templates/404.php');

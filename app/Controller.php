@@ -53,10 +53,21 @@ class Controller
                 $validate = new Validation();
 
                 if (isset($_POST['loginButton'])) {
+
+                    //Obtenemos los datos del formulario
                     $username = getData('username');
                     $password = getData('password');
                     $finalPassword = crypt($password, '$2a$09$anexamplestringforsaleLouKejcjRlExmf1671qw3Khl49R3dfu');
                     $data = $_POST;
+
+                    //Botón de recordar datos
+                    if (!empty($_POST["rememberButton"])) {
+                        setcookie("userCookie", $username, time() + (10 * 365 * 24 * 60 * 60));
+                        setcookie("passwordCookie", $password, time() + (10 * 365 * 24 * 60 * 60));
+                    } else {
+                        isset($_COOKIE["userCookie"]) ? setcookie('userCookie', '') : '';
+                        isset($_COOKIE["password"]) ? setcookie('password', '') : '';
+                    }
 
                     $rule = array(
                         array(
@@ -211,9 +222,8 @@ class Controller
     {
         $Sesion = new Sesion();
         $Sesion->closeSesion();
-        header('Location: index.php?action=login');
+        header('Location: login');
     }
-
 
     public function forgotPassword()
     {

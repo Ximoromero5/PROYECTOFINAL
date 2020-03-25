@@ -14,22 +14,22 @@
         <div id="bottom" class="mb-4">
             <div id="containerIconsWrite">
                 <div class="iconsWrite" title="Emoji">
-                    <img src="web/images/smile.png" alt="">
+                    <i class="flaticon-smile mr-2 icono"></i>
                     <h6>Emoji</h6>
                 </div>
                 <label for="photoPost">
                     <div class="iconsWrite" title="Image">
-                        <img src="web/images/camera.png" alt="">
+                        <i class="flaticon-camera mr-2 icono"></i>
                         <h6>Image</h6>
                     </div>
                 </label>
                 <div class="iconsWrite" title="Video">
-                    <img src="web/images/video.png" alt="">
+                    <i class="flaticon-video-camera mr-2 icono"></i>
                     <h6>Video</h6>
                 </div>
             </div>
             <div id="publishPostContainer">
-                <button id="addPostButton" title="Publish"><img src="web/images/right-arrow.png" alt=""></button>
+                <button id="addPostButton" title="Publish"> <i class="flaticon-right-arrow"></i> </button>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                     ?>
                             <div class="jumbotron" id="postContainer">
                                 <div id="infoUser">
-                                    <div>
+                                    <div id="userData">
                                         <a href="index.php?action=peopleProfile&person=<?php echo $datos['username'] ?>" id="linkProfilePerson">
                                             <div id="userInfoPost">
                                                 <img src='<?php echo $datos['photo'] ?>' alt=''>
@@ -55,26 +55,33 @@
                                         </a>
                                     </div>
                                     <div id="containerDate">
-                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options"><i class="fas fa-ellipsis-h" title="Options"></i></a>
+                                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options" id="popoverOptions"><i class="fas fa-ellipsis-h icono" title="Options"></i></a>
                                         <?php
                                         $date = new DateTime($datos['datePost']);
                                         echo "<small>" . $date->format('G:ia d-m') . "</small>";
                                         ?>
                                     </div>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-2" id="parrafoTexto">
                                     <p><?php echo $datos['text'] ?></p>
                                 </div>
-                                <div>
+                                <div id="postImageContainer">
                                     <?php $foto = explode('.', $datos['photoPost']);
                                     if (end($foto) != '') { ?>
-                                        <img src='<?php echo $datos['photoPost'] ?>' class="w-100 rounded">
+                                        <img src='<?php echo $datos['photoPost'] ?>' class="w-100" data-toggle="modal" data-target=".modalCover">
                                     <?php } ?>
+                                    <div class="modal fade modalCover" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <img src="<?php echo $datos['coverPhoto'] ?>" alt="" class="w-100 h-100">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="shareIcons">
-                                    <i class="far fa-heart m-3" style="cursor: pointer;" title="Like"></i>
-                                    <i class="far fa-comment m-3" style="cursor: pointer" title="Comment"></i>
-                                    <img src="web/images/share.png" class="m-3" alt="" title="Share">
+                                    <i class="far fa-heart m-3 icono" title="Like"></i>
+                                    <i class="far fa-comment m-3 icono" title="Comment"></i>
+                                    <i class="flaticon-share m-3 icono" title="Share"></i>
                                 </div>
                             </div>
                     <?php
