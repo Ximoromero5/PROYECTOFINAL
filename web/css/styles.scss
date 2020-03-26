@@ -623,7 +623,6 @@ div#mainLoginPage {
         input[type="password"]:focus {
           border: 1px solid var(--blueColor);
           border-bottom: 2px solid var(--blueColor);
-          //#e60000 COLOR DE RROR CUANDO ALGO SALGA MAL
         }
         i#passwordEye {
           position: absolute;
@@ -667,7 +666,7 @@ div#mainLoginPage {
   }
 }
 
-//CLASES PARA LOS ERRORES DE LOGIN PAGE
+//CLASES PARA LOS ERRORES DE LOGIN PAGE Y REGISTRO
 .invalid {
   border-color: #e60000 !important;
   border-bottom-color: #e60000 !important;
@@ -680,5 +679,60 @@ div#mainLoginPage {
   width: 340px;
   text-align: center;
 }
+.error {
+  color: #e60000;
+}
 
+/* END LOGIN PAGE STYLES */
+
+/* REGISTER PAGE STYLES */
+#mainRegisterPage {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  #left {
+    flex: 45%;
+    background: var(--blueColor);
+  }
+  #right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 55%;
+    flex-direction: column;
+    #registerForm {
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        label {
+          font-size: 14px;
+        }
+        input,
+        button {
+          width: 340px;
+          height: 50px;
+          outline: 0;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          padding: 0 15px;
+          border-bottom: 2px solid #ccc;
+        }
+        button {
+          color: var(--panelsBackgroundLight);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          background: #3751e4;
+          border: none !important;
+          border-radius: 5px;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+          border: 1px solid var(--blueColor);
+          border-bottom: 2px solid var(--blueColor);
+        }
+      }
+    }
+  }
+}
 /* END LOGIN PAGE STYLES */

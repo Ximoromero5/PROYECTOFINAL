@@ -879,5 +879,87 @@ div#mainLoginPage #right #imageContainer img {
   text-align: center;
 }
 
+.error {
+  color: #e60000;
+}
+
+/* END LOGIN PAGE STYLES */
+/* REGISTER PAGE STYLES */
+#mainRegisterPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#mainRegisterPage #left {
+  -webkit-box-flex: 45%;
+      -ms-flex: 45%;
+          flex: 45%;
+  background: var(--blueColor);
+}
+
+#mainRegisterPage #right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 55%;
+      -ms-flex: 55%;
+          flex: 55%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#mainRegisterPage #right #registerForm .form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+#mainRegisterPage #right #registerForm .form-group label {
+  font-size: 14px;
+}
+
+#mainRegisterPage #right #registerForm .form-group input,
+#mainRegisterPage #right #registerForm .form-group button {
+  width: 340px;
+  height: 50px;
+  outline: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 15px;
+  border-bottom: 2px solid #ccc;
+}
+
+#mainRegisterPage #right #registerForm .form-group button {
+  color: var(--panelsBackgroundLight);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #3751e4;
+  border: none !important;
+  border-radius: 5px;
+}
+
+#mainRegisterPage #right #registerForm .form-group input[type="text"]:focus,
+#mainRegisterPage #right #registerForm .form-group input[type="email"]:focus,
+#mainRegisterPage #right #registerForm .form-group input[type="password"]:focus {
+  border: 1px solid var(--blueColor);
+  border-bottom: 2px solid var(--blueColor);
+}
+
 /* END LOGIN PAGE STYLES */
 /*# sourceMappingURL=styles.css.map */

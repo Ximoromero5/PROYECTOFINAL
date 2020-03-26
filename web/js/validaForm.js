@@ -3,7 +3,10 @@ $(function () {
     /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
     $("form#registerForm").validate({
         rules: {
-            username: "required",
+            username: {
+                required: true,
+                minlength: 4
+            },
             email: {
                 required: true,
                 email: true
@@ -17,7 +20,7 @@ $(function () {
         messages: {
             username: {
                 required: "Please provide a username.",
-                minlength: "Username must have at least 6 characters."
+                minlength: "Username must have at least 4 characters."
             },
             email: "Please enter a valid email address (example@example.com).",
             password: {
