@@ -88,6 +88,7 @@ div#hiddenNavbar {
         align-items: center;
         padding: 24px;
         cursor: pointer;
+        transition: all 0.1s;
         &::before {
           font-size: 20px;
           cursor: pointer;
@@ -96,8 +97,12 @@ div#hiddenNavbar {
         &::after {
           display: none;
         }
+        &:hover {
+          background-color: #d8d7d7;
+        }
       }
       #optionsMenu {
+        width: 300px;
         margin-top: 15px;
         padding: 15px;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -105,10 +110,9 @@ div#hiddenNavbar {
         #viewProfile {
           color: var(--fontColorLight2);
           display: flex;
-          justify-content: space-around;
           align-items: center;
           padding: 15px;
-          h5 {
+          h6 {
             margin: 0;
           }
         }
@@ -132,6 +136,15 @@ div#hiddenNavbar {
           }
           label {
             margin: 0;
+          }
+        }
+        label#checkDarkThemeContainer {
+          width: 100%;
+          #containerDropdown {
+            justify-content: space-between;
+            h6 {
+              margin-right: 40px !important;
+            }
           }
         }
         .dropdown-item {
@@ -311,11 +324,7 @@ div#postContainer {
       justify-content: center;
       align-items: flex-end;
       color: var(--fontColorLight2);
-      #popoverOptions {
-        /*    color: var(--fontColorLight2);
-        background-color: var(--panelsBackgroundLight); */
-      }
-      a {
+      a#popoverOptions {
         outline: 0;
         cursor: pointer;
         margin-bottom: 10px;
@@ -328,10 +337,7 @@ div#postContainer {
         border-radius: 50%;
         transition: all 0.2s ease;
         &:hover {
-          background-color: #e4e6eb;
-        }
-        &:hover i::before {
-          color: var(--backgroundLight);
+          background-color: var(--backgroundLight);
         }
       }
     }
@@ -347,7 +353,8 @@ div#postContainer {
   }
   div#shareIcons {
     display: flex;
-    width: 40%;
+    width: 30%;
+    margin-left: 20px;
     justify-content: space-between;
     align-items: center;
     i {
@@ -591,6 +598,7 @@ div#mainLoginPage {
       .form-group {
         display: flex;
         flex-direction: column;
+        position: relative;
         label {
           font-size: 14px;
         }
@@ -602,7 +610,7 @@ div#mainLoginPage {
           border: 1px solid #ccc;
           border-radius: 3px;
           padding: 0 15px;
-          border-bottom: 2px solid #ccc !important;
+          border-bottom: 2px solid #ccc;
         }
         button {
           color: var(--panelsBackgroundLight);
@@ -614,8 +622,15 @@ div#mainLoginPage {
         input[type="text"]:focus,
         input[type="password"]:focus {
           border: 1px solid var(--blueColor);
-          border-bottom: 2px solid var(--blueColor) !important;
+          border-bottom: 2px solid var(--blueColor);
           //#e60000 COLOR DE RROR CUANDO ALGO SALGA MAL
+        }
+        i#passwordEye {
+          position: absolute;
+          right: 15px;
+          bottom: 15px !important;
+          cursor: pointer;
+          color: var(--fontColorLight2);
         }
       }
       .forgot {
@@ -636,8 +651,34 @@ div#mainLoginPage {
     }
   }
   #right {
-    background: rgb(69, 69, 199);
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: #396afc;
+    background: -webkit-linear-gradient(to left, #2948ff, #396afc);
+    background: linear-gradient(to left, #2948ff, #396afc);
     flex: 45%;
+    #imageContainer {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
   }
 }
+
+//CLASES PARA LOS ERRORES DE LOGIN PAGE
+.invalid {
+  border-color: #e60000 !important;
+  border-bottom-color: #e60000 !important;
+}
+.invalid-feedback {
+  color: #e60000 !important;
+}
+
+.alert.alert-danger {
+  width: 340px;
+  text-align: center;
+}
+
 /* END LOGIN PAGE STYLES */

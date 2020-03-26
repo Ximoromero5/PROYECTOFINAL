@@ -1,80 +1,70 @@
 $(function () {
-    /* ************************** -VALIDAR FORMULARIO REGISTRO -************************** */
 
-    //Validar email
-    function isEmail(email) {
-        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return regex.test(email);
-    }
-
-    //Validar contraseña
-    function validPassword(password) {
-        let regex = /^(?=.*\d.*\d)[0-9A-Za-z!@#$%*]{8,}$/;
-        return regex.test(password);
-    }
-
-    let username = $('#username'), email = $('#email'), password = $('#password'), gender = $('#gender');
-    let errores = new Array();
-
-    $('#registerForm').submit(function (e) {
-        if (username.val() == '' || email.val() == '' || password.val() == '') {
-            errores.push('You must fill all fields!');
-        } else {
-
-            //Validar username
-            if (username.val().length < 6 && username.val().length > 15) {
-                errores.push('The username length must be between 6 and 15 characters!');
-            }
-
-            //Validar email
-            if (!isEmail(email.val())) {
-                errores.push('Wrong email format!');
-            }
-
-            //Validar contarseña
-            if (!validPassword(password.val())) {
-                errores.push('Wrong password format!');
-            }
-        }
-
-        //Validamos si el array no está vacío
-        if (errores.length > 0) {
-            errores.forEach(function (e) {
-                $('.errores').after(`<div class="alert alert-danger" id="error" role="alert">${e}</div>`);
-            });
-            e.preventDefault();
-            errores = [];
-            setInterval(() => {
-                $('#error').fadeOut(function () {
-                    $(this).remove();
-                });
-            }, 5000);
+    /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
+    $("form#registerForm").validate({
+        rules: {
+            username: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            gender: "required"
+        },
+        messages: {
+            username: {
+                required: "Please provide a username.",
+                minlength: "Username must have at least 6 characters."
+            },
+            email: "Please enter a valid email address (example@example.com).",
+            password: {
+                required: "Please provide a password.",
+                minlength: "Your password must contain letters and numbers."
+            },
+            gender: "Please enter your gender."
+        },
+        submitHandler: function (form) {
+            form.submit();
         }
     });
+    /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
 
-    /* ************************** -VALIDAR FORMULARIO LOGIN -************************** */
-
+    /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
     let usernameLogin = $('#usernameLogin'), passwordLogin = $('#passwordLogin');
-    let errores2 = new Array();
+    let forms = document.getElementsByClassName('needs-validation');
+    /*  $(passwordLogin).keyup(function () { $(this).val() != '' ? $('#passwordEye').css('bottom', '15px') : $('#passwordEye').css('bottom', '38px'); }) */
 
+    Array.prototype.filter.call(forms, function (formulario) {
+        formulario.addEventListener('submit', function (e) {
+            if (formulario.checkValidity() === false) {
+                e.preventDefault();
+                if (usernameLogin.val() === '') {
+                    e.preventDefault();
+                    $(usernameLogin).addClass('invalid');
+                }
+                if (passwordLogin.val() === '') {
+                    e.preventDefault();
+                    $(passwordLogin).addClass('invalid');
+                }
+            }
 
-    $('#loginForm').submit(function (e) {
-        if (usernameLogin.val() == '' || passwordLogin.val() == '') {
-            errores2.push('You must fill all fields!');
-        }
+            formulario.classList.add('was-validated');
+        });
+    });
 
-        //Validamos si el array está vacío
-        if (errores2.length > 0) {
-            errores2.forEach(function (e) {
-                $('.errores').after(`<div class="alert alert-danger" id="error" role="alert">${e}</div>`);
-            });
-            e.preventDefault();
-            errores2 = [];
-            setInterval(() => {
-                $('#error').fadeOut(function () {
-                    $(this).remove();
-                });
-            }, 5000);
+    /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
+
+    //Funcionalidad de ver la contraseña en el login
+    $('#passwordEye').click(function () {
+        $(this).toggleClass('fa-eye-slash');
+        if (passwordLogin.attr('type') === 'password') {
+            passwordLogin.attr('type', 'text');
+        } else {
+            passwordLogin.attr('type', 'password');
         }
     });
-});
+
+}); //Main key

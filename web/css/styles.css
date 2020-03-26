@@ -106,6 +106,8 @@ div#hiddenNavbar #headerPhoto div i {
           align-items: center;
   padding: 24px;
   cursor: pointer;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 div#hiddenNavbar #headerPhoto div i::before {
@@ -118,7 +120,12 @@ div#hiddenNavbar #headerPhoto div i::after {
   display: none;
 }
 
+div#hiddenNavbar #headerPhoto div i:hover {
+  background-color: #d8d7d7;
+}
+
 div#hiddenNavbar #headerPhoto div #optionsMenu {
+  width: 300px;
   margin-top: 15px;
   padding: 15px;
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -131,15 +138,13 @@ div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   padding: 15px;
 }
 
-div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile h5 {
+div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile h6 {
   margin: 0;
 }
 
@@ -172,6 +177,20 @@ div#hiddenNavbar #headerPhoto div #optionsMenu #containerDropdown h6 {
 
 div#hiddenNavbar #headerPhoto div #optionsMenu #containerDropdown label {
   margin: 0;
+}
+
+div#hiddenNavbar #headerPhoto div #optionsMenu label#checkDarkThemeContainer {
+  width: 100%;
+}
+
+div#hiddenNavbar #headerPhoto div #optionsMenu label#checkDarkThemeContainer #containerDropdown {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+div#hiddenNavbar #headerPhoto div #optionsMenu label#checkDarkThemeContainer #containerDropdown h6 {
+  margin-right: 40px !important;
 }
 
 div#hiddenNavbar #headerPhoto div #optionsMenu .dropdown-item {
@@ -438,12 +457,7 @@ div#postContainer div#infoUser div#containerDate {
   color: var(--fontColorLight2);
 }
 
-div#postContainer div#infoUser div#containerDate #popoverOptions {
-  /*    color: var(--fontColorLight2);
-        background-color: var(--panelsBackgroundLight); */
-}
-
-div#postContainer div#infoUser div#containerDate a {
+div#postContainer div#infoUser div#containerDate a#popoverOptions {
   outline: 0;
   cursor: pointer;
   margin-bottom: 10px;
@@ -464,12 +478,8 @@ div#postContainer div#infoUser div#containerDate a {
   transition: all 0.2s ease;
 }
 
-div#postContainer div#infoUser div#containerDate a:hover {
-  background-color: #e4e6eb;
-}
-
-div#postContainer div#infoUser div#containerDate a:hover i::before {
-  color: var(--backgroundLight);
+div#postContainer div#infoUser div#containerDate a#popoverOptions:hover {
+  background-color: var(--backgroundLight);
 }
 
 div#postContainer #parrafoTexto {
@@ -488,7 +498,8 @@ div#postContainer div#shareIcons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 40%;
+  width: 30%;
+  margin-left: 20px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -765,6 +776,7 @@ div#mainLoginPage #left #loginForm .form-group {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 div#mainLoginPage #left #loginForm .form-group label {
@@ -779,7 +791,7 @@ div#mainLoginPage #left #loginForm .form-group button {
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 0 15px;
-  border-bottom: 2px solid #ccc !important;
+  border-bottom: 2px solid #ccc;
 }
 
 div#mainLoginPage #left #loginForm .form-group button {
@@ -794,7 +806,15 @@ div#mainLoginPage #left #loginForm .form-group button {
 div#mainLoginPage #left #loginForm .form-group input[type="text"]:focus,
 div#mainLoginPage #left #loginForm .form-group input[type="password"]:focus {
   border: 1px solid var(--blueColor);
-  border-bottom: 2px solid var(--blueColor) !important;
+  border-bottom: 2px solid var(--blueColor);
+}
+
+div#mainLoginPage #left #loginForm .form-group i#passwordEye {
+  position: absolute;
+  right: 15px;
+  bottom: 15px !important;
+  cursor: pointer;
+  color: var(--fontColorLight2);
 }
 
 div#mainLoginPage #left #loginForm .forgot {
@@ -820,10 +840,43 @@ div#mainLoginPage #left #loginForm #submitButtonContainer p a {
 }
 
 div#mainLoginPage #right {
-  background: #4545c7;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #396afc;
+  background: -webkit-gradient(linear, right top, left top, from(#2948ff), to(#396afc));
+  background: linear-gradient(to left, #2948ff, #396afc);
   -webkit-box-flex: 45%;
       -ms-flex: 45%;
           flex: 45%;
+}
+
+div#mainLoginPage #right #imageContainer {
+  width: 50%;
+}
+
+div#mainLoginPage #right #imageContainer img {
+  width: 100%;
+}
+
+.invalid {
+  border-color: #e60000 !important;
+  border-bottom-color: #e60000 !important;
+}
+
+.invalid-feedback {
+  color: #e60000 !important;
+}
+
+.alert.alert-danger {
+  width: 340px;
+  text-align: center;
 }
 
 /* END LOGIN PAGE STYLES */

@@ -13,9 +13,6 @@
 <body>
     <div id="mainLoginPage">
         <div id="left">
-            <div class="errores">
-                <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "</div>" : '' ?>
-            </div>
             <div id="titlePart">
                 <h5>Welcome to </h5>
                 <h1>Finterest</h1>
@@ -30,16 +27,25 @@
                     Or
                     <hr>
                 </div>
-
             </div>
-            <form action="login" method="POST" id="loginForm">
+            <div class="errores">
+                <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "</div>" : '' ?>
+            </div>
+            <form action="login" method="POST" id="loginForm" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="usernameLogin">Username</label>
-                    <input type="text" placeholder="Enter your username" id="usernameLogin" name="username" value="<?php echo isset($_COOKIE['userCookie']) ? $_COOKIE['userCookie'] : '' ?>">
+                    <input type="text" placeholder="Enter your username" id="usernameLogin" name="username" value="<?php echo isset($_COOKIE['userCookie']) ? $_COOKIE['userCookie'] : '' ?>" required>
+                    <div class="invalid-feedback">
+                        The user field is required.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="passwordLogin">Password</label>
-                    <input type="password" placeholder="Enter your password" id="passwordLogin" name="password" value="<?php echo isset($_COOKIE['passwordCookie']) ? $_COOKIE['passwordCookie'] : '' ?>">
+                    <input type="password" placeholder="Enter your password" id="passwordLogin" name="password" value="<?php echo isset($_COOKIE['passwordCookie']) ? $_COOKIE['passwordCookie'] : '' ?>" required>
+                    <i class="fas fa-eye" id="passwordEye"></i>
+                    <div class="invalid-feedback">
+                        The user field is required.
+                    </div>
                 </div>
                 <div class="forgot">
                     <div class="pretty p-default p-round">
@@ -59,7 +65,9 @@
             </form>
         </div>
         <div id="right" class="d-none d-xl-block">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti beatae in sunt eaque inventore illo ducimus, voluptatem nesciunt optio, quidem maiores odit veritatis, ratione tempora iste repudiandae. Adipisci, optio ducimus.</p>
+            <div id="imageContainer">
+                <img src="web/images/un1.svg" alt="">
+            </div>
         </div>
     </div>
 
@@ -67,6 +75,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script src="web/js/validaForm.js"></script>
     <script src="web/js/app.js"></script>
 </body>

@@ -90,9 +90,9 @@ class Controller
                             $Sesion->setSesion('username', $username);
                             $Sesion->setSesion('datos', $parametros['datos']);
                             $_SESSION['permissions'] = 1;
-                            header('Location: index.php?action=home');
+                            header('Location: home');
                         } else {
-                            $parametros['mensaje'] = 'Failed to login!';
+                            $parametros['mensaje'] = 'That was an invalid email address or password.';
                         }
                     } else {
                         $parametros['mensaje'] = 'You must fill all the fields!';

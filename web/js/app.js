@@ -183,16 +183,14 @@ $(document).ready(function () {
 
         if (datos != '') {
             $.ajax({
-                url: 'index.php?action=header',
+                url: 'header',
                 method: 'POST',
                 data: { searchUser: datos },
                 cache: false,
             }).done(function (data) {
-
-
                 if (data != '') {
                     let datos = JSON.parse(data);
-                    $('#showUsers').append($('<li class="list-group-item"></li>').text(datos.d));
+                    $('#showUsers').append($('<li class="list-group-item"></li>').append('<a href="#">' + datos.d + '</a>'));
                 } else {
                     $('#showUsers').text('No data found!');
                 }
@@ -207,7 +205,7 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-    /*  SET DARK THEME */
+    /*  IMPLEMENTACIÓN DEL TEMA OSCURO */
     let checkbox = $('#checkDarkTheme');
 
     $(checkbox).change(function () {
@@ -242,5 +240,5 @@ $(document).ready(function () {
             $(document.documentElement).removeClass('transition');
         }, 1000);
     }
-    /*  SET DARK THEME */
+    /*  IMPLEMENTACIÓN DEL TEMA OSCURO */
 });

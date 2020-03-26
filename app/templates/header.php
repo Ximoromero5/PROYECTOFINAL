@@ -69,7 +69,7 @@
                             <a href="" class="dropdown-item" title="Configuration" id="containerDropdown"> <i class="flaticon-gear"></i>
                                 <h6>Configuration</h6>
                             </a>
-                            <label for="checkDarkTheme">
+                            <label for="checkDarkTheme" id="checkDarkThemeContainer">
                                 <div class="dropdown-item" id="containerDropdown">
                                     <i class="fas fa-moon"></i>
                                     <h6>Dark Mode</h6>
