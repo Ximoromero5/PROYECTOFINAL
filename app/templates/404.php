@@ -19,7 +19,7 @@
 			</div>
 			<h2>Oops! Nothing was found</h2>
 			<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.
-				<a href="../../">Return to homepage</a></p>
+				<a href="../../home">Return to homepage</a></p>
 			<div class="notfound-social">
 				<a href="https://www.facebook.com/ximo.romeroesteve" target="_blank"><i class="fab fa-facebook-f"></i></a>
 				<a href="https://twitter.com/Ximoromero5?lang=es" target="_blank"><i class="fab fa-twitter"></i></a>

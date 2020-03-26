@@ -22,7 +22,7 @@ $(function () {
             email: "Please enter a valid email address (example@example.com).",
             password: {
                 required: "Please provide a password.",
-                minlength: "Your password must contain letters and numbers."
+                minlength: "Your password must have at least 6 characters",
             },
             gender: "Please enter your gender."
         },
@@ -30,6 +30,15 @@ $(function () {
             form.submit();
         }
     });
+
+    //Validación visual (si al enviar el formulario algún input tiene la clase error, se añade una clase)
+    $("form#registerForm").submit(function () {
+        $('#username').hasClass('error') ? $('#username').addClass('invalid') : $('#username').removeClass('invalid');
+        $('#email').hasClass('error') ? $('#email').addClass('invalid') : $('#email').removeClass('invalid');
+        $('#password').hasClass('error') ? $('#password').addClass('invalid') : $('#password').removeClass('invalid');
+        $('#gender').hasClass('error') ? $('#gender').addClass('invalid') : $('#gender').removeClass('invalid');
+    });
+
     /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
 
     /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
