@@ -7,7 +7,8 @@ class Config
     static public $dbUser = "root";
     static public $dbPassword = "";
     static public $dbCss = "styles.css";
-    static public $defaultImage = "web/images/user.png";
+    static public $defaultImage = "web/images/0.png";
+    static public $defaultCoverImage = "web/images/defaultCover.jpg";
     static public $validExtensions = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
     static public $imgPath = 'web/images/';
 

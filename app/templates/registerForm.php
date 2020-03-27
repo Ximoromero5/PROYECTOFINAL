@@ -11,15 +11,14 @@
 
 <body>
     <div id="mainRegisterPage">
-        <div class="errores">
-            <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "</div>" : '' ?>
-        </div>
-
-        <div id="left">
+        <div id="left" class="d-none d-xl-block">
 
         </div>
         <div id="right">
-            <h2>Register your account</h2>
+            <div class="errores">
+                <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "<i class='fas fa-times' id='closeAlertServer'></i></div>" : '' ?>
+            </div>
+            <h2 class="mb-2">Create a free account</h2>
             <form action="register" method="POST" id="registerForm">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -35,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" class="browser-default custom-select">
                         <option selected disabled value="">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -43,10 +42,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    Already registered? <a href="login">Login here</a>
-                </div>
-                <div class="form-group">
                     <button type="submit" class="btn btn-primary" name="registerButton">REGISTER</button>
+                </div>
+                <div class="form-group" id="loginPart">
+                    <p>Already registered? <a href="login">Login here</a></p>
                 </div>
             </form>
         </div>

@@ -627,7 +627,7 @@ div#mainLoginPage {
         i#passwordEye {
           position: absolute;
           right: 15px;
-          bottom: 15px !important;
+          bottom: 15px;
           cursor: pointer;
           color: var(--fontColorLight2);
         }
@@ -650,7 +650,7 @@ div#mainLoginPage {
     }
   }
   #right {
-    display: flex !important;
+    display: flex;
     justify-content: center;
     align-items: center;
     background: #396afc;
@@ -679,8 +679,24 @@ div#mainLoginPage {
   width: 340px;
   text-align: center;
 }
-.error {
+label[id$="-error"] {
   color: #e60000;
+  font-size: 80% !important;
+}
+
+.valid {
+  border-color: #5cb85c !important;
+  border-bottom-color: #5cb85c !important;
+}
+
+//MENSAJE DE ERROR DEL LADO SERVIDOR PERSONALIZADO
+.alert.alert-danger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  i {
+    cursor: pointer;
+  }
 }
 
 /* END LOGIN PAGE STYLES */
@@ -693,6 +709,7 @@ div#mainLoginPage {
   #left {
     flex: 45%;
     background: var(--blueColor);
+    clip-path: polygon(100% 0, 0 0, 0 100%);
   }
   #right {
     display: flex;
@@ -731,6 +748,21 @@ div#mainLoginPage {
           border: 1px solid var(--blueColor);
           border-bottom: 2px solid var(--blueColor);
         }
+        .custom-select {
+          height: 50px;
+          border: 1px solid #ccc;
+          border-bottom: 2px solid #ccc;
+          width: 340px;
+          &:focus {
+            box-shadow: none !important;
+            border: 1px solid var(--blueColor);
+            border-bottom: 2px solid var(--blueColor);
+          }
+        }
+      }
+      #loginPart {
+        display: flex;
+        align-items: center;
       }
     }
   }

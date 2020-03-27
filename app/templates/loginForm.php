@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="errores">
-                <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "</div>" : '' ?>
+                <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "<i class='fas fa-times' id='closeAlertServer'></i></div>" : '' ?>
             </div>
             <form action="login" method="POST" id="loginForm" class="needs-validation" novalidate>
                 <div class="form-group">

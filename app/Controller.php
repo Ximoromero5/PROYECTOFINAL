@@ -187,15 +187,13 @@ class Controller
                     } else if ($model->emailExists($email)) {
                         $parametros['mensaje'] = 'The email already exists!';
                     } else {
-                        //Asignamos una imgen de perfil aleatoria
-                        $random = rand(1, count(Config::$defaultImage));
-                        $profilePhoto = Config::$defaultImage[$random];
-                        $coverPhoto = 'web/img/coverDefault.jpg';
+                        $profilePhoto = Config::$defaultImage;
+                        $coverPhoto = Config::$defaultCoverImage;
                         if ($model->register($username, $email, $finalPassword, $gender, $profilePhoto, $coverPhoto, date('Y-m-d'))) {
-                            $parametros['exito'] = 'User registered successfully!';
-                            header('Refresh: 2; index.php?action=login');
+                            $parametros['exito'] = 'User registered successfully.';
+                            header('Refresh: 2; login');
                         } else {
-                            $parametros['mensaje'] = 'Error registering user, check the data!';
+                            $parametros['mensaje'] = 'An error has occurred while registering, please check the data.';
                         }
                     }
                 } else {
@@ -210,10 +208,10 @@ class Controller
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/registerForm.php';
     }

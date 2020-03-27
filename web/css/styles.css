@@ -812,7 +812,7 @@ div#mainLoginPage #left #loginForm .form-group input[type="password"]:focus {
 div#mainLoginPage #left #loginForm .form-group i#passwordEye {
   position: absolute;
   right: 15px;
-  bottom: 15px !important;
+  bottom: 15px;
   cursor: pointer;
   color: var(--fontColorLight2);
 }
@@ -840,9 +840,9 @@ div#mainLoginPage #left #loginForm #submitButtonContainer p a {
 }
 
 div#mainLoginPage #right {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -879,8 +879,30 @@ div#mainLoginPage #right #imageContainer img {
   text-align: center;
 }
 
-.error {
+label[id$="-error"] {
   color: #e60000;
+  font-size: 80% !important;
+}
+
+.valid {
+  border-color: #5cb85c !important;
+  border-bottom-color: #5cb85c !important;
+}
+
+.alert.alert-danger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.alert.alert-danger i {
+  cursor: pointer;
 }
 
 /* END LOGIN PAGE STYLES */
@@ -898,6 +920,8 @@ div#mainLoginPage #right #imageContainer img {
       -ms-flex: 45%;
           flex: 45%;
   background: var(--blueColor);
+  -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
+          clip-path: polygon(100% 0, 0 0, 0 100%);
 }
 
 #mainRegisterPage #right {
@@ -959,6 +983,29 @@ div#mainLoginPage #right #imageContainer img {
 #mainRegisterPage #right #registerForm .form-group input[type="password"]:focus {
   border: 1px solid var(--blueColor);
   border-bottom: 2px solid var(--blueColor);
+}
+
+#mainRegisterPage #right #registerForm .form-group .custom-select {
+  height: 50px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  width: 340px;
+}
+
+#mainRegisterPage #right #registerForm .form-group .custom-select:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  border: 1px solid var(--blueColor);
+  border-bottom: 2px solid var(--blueColor);
+}
+
+#mainRegisterPage #right #registerForm #loginPart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /* END LOGIN PAGE STYLES */

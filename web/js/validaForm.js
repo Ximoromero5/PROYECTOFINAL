@@ -42,6 +42,11 @@ $(function () {
         $('#gender').hasClass('error') ? $('#gender').addClass('invalid') : $('#gender').removeClass('invalid');
     });
 
+    //Poner en verde los campos que sean correctos cuando se escribe
+    $('#username').keyup(function () {
+        $('#username').attr('aria-invalid') == 'false' ? $('#username').addClass('valid') : console.log('Inválido');
+    });
+
     /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
 
     /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
@@ -61,10 +66,15 @@ $(function () {
                     e.preventDefault();
                     $(passwordLogin).addClass('invalid');
                 }
+                /* $(passwordLogin).hasClass('invalid') ? $('#passwordEye').css('bottom', '40px') : $('#passwordEye').css('bottom', '15px'); */
             }
 
             formulario.classList.add('was-validated');
         });
+    });
+
+    $(passwordLogin).keyup(function () {
+        $('#passwordEye').css('bottom', '15px !important');
     });
 
     /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
@@ -77,6 +87,11 @@ $(function () {
         } else {
             passwordLogin.attr('type', 'password');
         }
+    });
+
+    //Funcionalidad para cerrar el mensaje de error del lado servidor
+    $('#closeAlertServer').click(function () {
+        $('.alert-danger').remove();
     });
 
 }); //Main key

@@ -32,7 +32,7 @@ class Validation
                 }
             } else {
 
-                $this->mensaje[$rules['name']] = "The field is not within the validation rule or on the form!";
+                $this->mensaje[$rules['name']] = "The field is not within the validation rule or on the form.";
             }
         }
         if (!empty($this->mensaje)) {
@@ -67,7 +67,7 @@ class Validation
         if ($valor != '') {
             return true;
         } else {
-            $this->mensaje[$campo][] = "The field must be full!";
+            $this->mensaje[$campo][] = "The field must be full.";
             return false;
         }
     }
@@ -77,7 +77,7 @@ class Validation
         if (is_numeric($valor)) {
             return true;
         } else {
-            $this->mensaje[$campo][] = "The field must be numeric!";
+            $this->mensaje[$campo][] = "The field must be numeric.";
             return false;
         }
     }
@@ -87,16 +87,16 @@ class Validation
         if (preg_match("/^[a-z]+([\.]?[a-z0-9_-]+)*@[a-z]+([\.-]+[a-z0-9]+)*\.[a-z]{2,}$/", $valor)) {
             return true;
         } else {
-            $this->mensaje[$campo][] = "The email field of being in the email format user@domain.com";
+            $this->mensaje[$campo][] = "The email field of being in the email format user@domain.com .";
             return false;
         }
     }
     protected function _password($campo, $valor)
     {
-        if (preg_match("/^(?=.*\d.*\d)[0-9A-Za-z!@#$%*]{8,}$/", $valor)) {
+        if (preg_match("/^(?=.*\d.*\d)[0-9A-Za-z]{6,}$/", $valor)) {
             return true;
         } else {
-            $this->mensaje[$campo][] = "Incorrect password format!";
+            $this->mensaje[$campo][] = "Incorrect password format.";
             return false;
         }
     }
