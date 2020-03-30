@@ -1,5 +1,5 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteBase /proyectofinal
 
+RewriteBase /proyectofinal
 RewriteRule ^([a-zA-Z]+)$ index.php?action=$1

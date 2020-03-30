@@ -18,7 +18,7 @@ $map = array(
     'profilePhoto' => array('controller' => 'Controller', 'action' => 'profilePhoto', 'acceso' => 1),
     'addPost' => array('controller' => 'Controller', 'action' => 'addPost', 'acceso' => 1),
     'getPost' => array('controller' => 'Controller', 'action' => 'getPost', 'acceso' => 1),
-    'peopleProfile' => array('controller' => 'Controller', 'action' => 'peopleProfile', 'acceso' => 1),
+    'user' => array('controller' => 'Controller', 'action' => 'user', 'acceso' => 1),
     'header' => array('controller' => 'Controller', 'action' => 'header', 'acceso' => 1)
 );
 

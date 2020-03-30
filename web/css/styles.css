@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 html {
   --backgroundLight: #f5f5f5;
   --panelsBackgroundLight: #ffffff;
@@ -39,10 +41,19 @@ body {
   background-color: var(--panelsBackgroundLight);
   -webkit-box-shadow: 0 6px 6px -10px var(--fontColorLight2);
           box-shadow: 0 6px 6px -10px var(--fontColorLight2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.navbar-expand-lg a#navbarToggle {
+  padding: 10px 0;
 }
 
 .navbar-expand-lg a#navbarToggle i.flaticon-menu-1.icono::before {
   font-size: 30px;
+  margin: 0;
 }
 
 .imagen {
@@ -70,6 +81,12 @@ div#hiddenNavbar ul.navbar-nav {
           justify-content: space-between;
 }
 
+@media (max-width: 768px) {
+  div#hiddenNavbar ul.navbar-nav {
+    width: 100%;
+  }
+}
+
 div#hiddenNavbar ul.navbar-nav a.nav-link {
   font-size: 17px;
   display: -webkit-box;
@@ -88,6 +105,8 @@ div#hiddenNavbar #headerPhoto a {
 div#hiddenNavbar #headerPhoto a img {
   width: 50px;
   height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 div#hiddenNavbar #headerPhoto div i {
@@ -127,10 +146,19 @@ div#hiddenNavbar #headerPhoto div i:hover {
 div#hiddenNavbar #headerPhoto div #optionsMenu {
   width: 300px;
   margin-top: 15px;
-  padding: 15px;
+  padding: 2px;
+  border: 1px solid #cccc !important;
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
-  background: var(--backgroundLight);
+  background: #cccc;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  div#hiddenNavbar #headerPhoto div #optionsMenu {
+    width: 375px;
+    left: -60px;
+  }
 }
 
 div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile {
@@ -141,7 +169,7 @@ div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px;
+  padding: 20px;
 }
 
 div#hiddenNavbar #headerPhoto div #optionsMenu #viewProfile h6 {
@@ -155,8 +183,8 @@ div#hiddenNavbar #headerPhoto div #optionsMenu #containerDropdown {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 10px;
-  border-radius: 3px;
+  padding: 20px;
+  border-top: 1px solid #cccc;
   cursor: pointer;
 }
 
@@ -181,6 +209,8 @@ div#hiddenNavbar #headerPhoto div #optionsMenu #containerDropdown label {
 
 div#hiddenNavbar #headerPhoto div #optionsMenu label#checkDarkThemeContainer {
   width: 100%;
+  margin: 0;
+  border-top: 1px solid #cccc;
 }
 
 div#hiddenNavbar #headerPhoto div #optionsMenu label#checkDarkThemeContainer #containerDropdown {
@@ -211,7 +241,10 @@ div#searcher {
           align-items: center;
   border-bottom: 1.2px solid var(--fontColorLight);
   padding-bottom: 1px;
-  /*  margin: 15px 0; */
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 30px;
 }
 
 div#searcher i::before {
@@ -243,6 +276,102 @@ div#searcher input#searchUser::placeholder {
   color: var(--fontColorLight2);
 }
 
+div#searcher #dropdownSearchUsers {
+  position: absolute;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background-color: var(--panelsBackgroundLight);
+  color: var(--fontColorLight2);
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios {
+  display: block;
+  position: absolute;
+  width: 350px;
+  margin-top: 15px;
+  padding: 0;
+  border: none;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  max-height: 350px;
+  overflow: scroll;
+  overflow-x: hidden;
+  /*  &::-webkit-scrollbar {
+        width: 10px;
+        background-color: var(--fontColorLight);
+        border-radius: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--backgroundLight);
+        border-radius: 6px;
+      } */
+}
+
+@media (max-width: 992px) {
+  div#searcher #dropdownSearchUsers div#listaUsuarios {
+    width: 100%;
+    max-height: 600px !important;
+  }
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  background-color: var(--panelsBackgroundLight);
+  color: var(--fontColorLight2);
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item:hover {
+  background-color: var(--backgroundLight);
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropImage {
+  width: 55px;
+  height: 55px;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropImage img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropName {
+  margin-left: 15px;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropName h6 {
+  font-weight: bold;
+  margin: 0;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropName #verifiedCheck {
+  width: 15px;
+  height: 15px;
+  margin-left: 6px;
+}
+
+div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropName p {
+  margin: 0;
+}
+
+li.nav-item .nav-link i::before {
+  margin: 0;
+}
+
 main#mainContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -251,12 +380,13 @@ main#mainContainer {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 30px;
+  margin-top: 80px;
 }
 
 @media (max-width: 768px) {
   main#mainContainer {
     margin: 0;
-    margin-top: 20px;
+    margin-top: 80px;
   }
 }
 
@@ -434,6 +564,8 @@ div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
@@ -509,13 +641,41 @@ div#postContainer div#shareIcons {
 }
 
 div#postContainer div#shareIcons i {
-  color: var(--fontColorLight2);
   cursor: pointer;
   font-size: 18px;
+  width: 30px;
+  height: 30px;
+  line-height: 20px;
+  border-radius: 50%;
+  padding: 6px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+div#postContainer div#shareIcons i.icono::before {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
 }
 
 div#postContainer div#shareIcons i.flaticon-share.m-3.icono::before {
   margin: 0;
+}
+
+div#postContainer div#shareIcons i.far.fa-heart.m-3.icono:hover::before {
+  background: rgba(224, 36, 94, 0.1);
+  color: #e0245e;
+}
+
+div#postContainer div#shareIcons i.far.fa-comment.m-3.icono:hover::before {
+  background: rgba(29, 161, 242, 0.1);
+  color: #1da1f2;
+}
+
+div#postContainer div#shareIcons i.flaticon-share.m-3.icono:hover::before {
+  background: rgba(23, 191, 99, 0.1);
+  color: #17bf63;
 }
 
 #notfound {
@@ -719,7 +879,7 @@ div#mainLoginPage #left #titlePart h1 {
   margin-bottom: 30px;
 }
 
-div#mainLoginPage #left #titlePart button {
+div#mainLoginPage #left #titlePart a button {
   width: 340px;
   height: 50px;
   outline: 0;
@@ -740,13 +900,19 @@ div#mainLoginPage #left #titlePart button {
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-div#mainLoginPage #left #titlePart button img {
+div#mainLoginPage #left #titlePart a button img {
   width: 20px;
   margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-div#mainLoginPage #left #titlePart button p {
+div#mainLoginPage #left #titlePart a button p {
   margin: 0;
+}
+
+div#mainLoginPage #left #titlePart a:hover {
+  text-decoration: none;
 }
 
 div#mainLoginPage #left #titlePart p {
@@ -809,6 +975,10 @@ div#mainLoginPage #left #loginForm .form-group input[type="password"]:focus {
   border-bottom: 2px solid var(--blueColor);
 }
 
+div#mainLoginPage #left #loginForm .form-group input#passwordLogin {
+  padding-right: 45px !important;
+}
+
 div#mainLoginPage #left #loginForm .form-group i#passwordEye {
   position: absolute;
   right: 15px;
@@ -863,6 +1033,8 @@ div#mainLoginPage #right #imageContainer {
 
 div#mainLoginPage #right #imageContainer img {
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .invalid {
@@ -1009,4 +1181,283 @@ label[id$="-error"] {
 }
 
 /* END LOGIN PAGE STYLES */
+/* Estilos preloader de la página */
+div#preloaderPage {
+  position: fixed;
+  z-index: 999999;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dot {
+  background: #3751e4;
+  color: #ffffff;
+}
+
+.dot, .dot:after {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  -webkit-animation: a 1.5s calc(((var(--i) + var(--o, 0)) / var(--n) - 1) *1.5s) infinite;
+          animation: a 1.5s calc(((var(--i) + var(--o, 0)) / var(--n) - 1) *1.5s) infinite;
+}
+
+.dot:after {
+  --o: 1;
+  background: currentcolor;
+  content: "";
+}
+
+@-webkit-keyframes a {
+  0%,
+  50% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes a {
+  0%,
+  50% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+/* Estilos preloader de la página */
+/* ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
+#containerProfile header {
+  width: 100%;
+  height: 350px;
+}
+
+#containerProfile header img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+
+#containerProfile #main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+#containerProfile #main #left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background: transparent;
+  padding: 30px;
+  max-height: 600px;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #left {
+    padding: 0;
+  }
+}
+
+#containerProfile #main #left #carta {
+  font-family: "Muli", sans-serif;
+  width: 100%;
+  background-color: var(--panelsBackgroundLight);
+  border-radius: 10px;
+  padding: 15px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  position: relative;
+  bottom: 200px;
+}
+
+#containerProfile #main #left #carta #profilePhoto {
+  width: 150px;
+  height: 150px;
+  margin: 30px auto 40px auto;
+}
+
+#containerProfile #main #left #carta #profilePhoto img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+#containerProfile #main #left #carta #namePart {
+  margin: 0 0 25px 30px;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #left #carta #namePart {
+    margin: 0 0 25px 20px;
+  }
+}
+
+#containerProfile #main #left #carta #namePart #verifiedCheck {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+}
+
+#containerProfile #main #left #carta #namePart h3 {
+  font-size: 25px;
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #left #carta #namePart p {
+  margin: 0;
+  color: var(--fontColorLight);
+  font-size: 17px;
+}
+
+#containerProfile #main #left #carta #namePart h6 {
+  margin-top: 10px;
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #left #carta #information {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #left #carta #information {
+    margin-left: 10px;
+  }
+}
+
+#containerProfile #main #left #carta #information .place,
+#containerProfile #main #left #carta #information .joined,
+#containerProfile #main #left #carta #information .birthday,
+#containerProfile #main #left #carta #information #followers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 10px;
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #left #carta #information .place i,
+#containerProfile #main #left #carta #information .joined i,
+#containerProfile #main #left #carta #information .birthday i,
+#containerProfile #main #left #carta #information #followers i {
+  font-size: 17px;
+  margin-right: 10px;
+}
+
+#containerProfile #main #left #carta #information .place p,
+#containerProfile #main #left #carta #information .joined p,
+#containerProfile #main #left #carta #information .birthday p,
+#containerProfile #main #left #carta #information #followers p {
+  margin: 0;
+  font-size: 15px;
+}
+
+#containerProfile #main #left #carta #information #followers .following,
+#containerProfile #main #left #carta #information #followers .followers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
+#containerProfile #main #left #carta #information #followers .following p,
+#containerProfile #main #left #carta #information #followers .followers p {
+  font-weight: lighter;
+}
+
+#containerProfile #main #left #carta #information #followers .following h6,
+#containerProfile #main #left #carta #information #followers .followers h6 {
+  margin: 0;
+  margin-right: 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#containerProfile #main #left #carta #information #followers .following {
+  margin-right: 20px;
+}
+
+#containerProfile #main #center {
+  background: transparent;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  padding: 30px 0;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #center {
+    padding: 10px;
+    position: relative;
+    bottom: 190px;
+  }
+}
+
+#containerProfile #main #center #noPostDisplay {
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #right {
+  background: transparent;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  max-height: 620px;
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#containerProfile #main #right .card {
+  padding: 15px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* FIN ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
 /*# sourceMappingURL=styles.css.map */

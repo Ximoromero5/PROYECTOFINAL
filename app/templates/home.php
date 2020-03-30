@@ -1,4 +1,13 @@
 <?php ob_start(); ?>
+<!-- Preloader de la página -->
+<div class="a" style="--n: 5;" id="preloaderPage">
+    <div class="dot" style="--i: 0;"></div>
+    <div class="dot" style="--i: 1;"></div>
+    <div class="dot" style="--i: 2;"></div>
+    <div class="dot" style="--i: 3;"></div>
+    <div class="dot" style="--i: 4;"></div>
+</div>
+<!-- Preloader de la página -->
 <main id="mainContainer">
     <aside id="leftContainer" class="d-none d-md-block">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ab repellendus illo corrupti tempore? Aspernatur, nostrum labore porro inventore, et quaerat impedit consequatur eum illum blanditiis architecto! Qui, quos numquam!</p>
@@ -40,6 +49,7 @@
                     <?php
                     if (count($parametros['datos']) > 0) {
                         foreach ($parametros['datos'] as $datos) {
+                            $verified = $datos['verified'] == '1' ? '<img src="web/images/check.png" id="verifiedCheck">' : '';
                     ?>
                             <div class="jumbotron" id="postContainer">
                                 <div id="infoUser">
@@ -48,7 +58,7 @@
                                             <div id="userInfoPost">
                                                 <img src='<?php echo $datos['photo'] ?>' alt=''>
                                                 <div>
-                                                    <h5><?php echo $datos['firstName'] . " " . $datos['lastName'] ?></h5>
+                                                    <h5><?php echo $datos['firstName'] . " " . $datos['lastName'] . $verified ?></h5>
                                                     <small class="ml-3">Web Developer Front End</small>
                                                 </div>
                                             </div>
@@ -68,20 +78,20 @@
                                 <div id="postImageContainer">
                                     <?php $foto = explode('.', $datos['photoPost']);
                                     if (end($foto) != '') { ?>
-                                        <img src='<?php echo $datos['photoPost'] ?>' class="w-100" data-toggle="modal" data-target=".modalCover">
+                                        <img src='<?php echo $datos['photoPost'] ?>' class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">
                                     <?php } ?>
-                                    <div class="modal fade modalCover" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
-                                                <img src="<?php echo $datos['coverPhoto'] ?>" alt="" class="w-100 h-100">
+                                                <img src="<?php echo $datos['photoPost'] ?>" alt="" class="w-100 h-100">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="shareIcons">
-                                    <i class="far fa-heart m-3 icono" title="Like"></i>
-                                    <i class="far fa-comment m-3 icono" title="Comment"></i>
-                                    <i class="flaticon-share m-3 icono" title="Share"></i>
+                                    <i class="far fa-heart m-3 icono"></i>
+                                    <i class="far fa-comment m-3 icono"></i>
+                                    <i class="flaticon-share m-3 icono"></i>
                                 </div>
                             </div>
                     <?php

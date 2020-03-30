@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    //Preloader de la página
+    setTimeout(() => {
+        $('#preloaderPage').fadeOut();
+    }, 1000);
 
     //Popover opciones post
     $('[data-toggle="popover"]').popover();
@@ -188,17 +192,36 @@ $(document).ready(function () {
                 data: { searchUser: datos },
                 cache: false,
             }).done(function (data) {
-                if (data != '') {
-                    let datos = JSON.parse(data);
-                    $('#showUsers').append($('<li class="list-group-item"></li>').append('<a href="#">' + datos.d + '</a>'));
-                } else {
-                    $('#showUsers').text('No data found!');
-                }
-
+                let datos = JSON.parse(data);
+                let output = $("<div class='dropdown-menu' aria-labelledby='searchUser' id='listaUsuarios' data-toggle='modal'></div>");
+                let verified = '';
+                $.each(datos, function (e, item) {
+                    if (item.verified == 1) {
+                        verified = '<img src="web/images/check.png" id="verifiedCheck">';
+                    }
+                    if (item.username != '') {
+                        output.append($(`<a href='index.php?action=user&person=${item.username}' class='dropdown-item'><div id='dropImage'><img src='${item.photo}' alt=''></div><div id='dropName'><h6>${item.firstName}${verified}</h6><p>@${item.username}</p></div></a>`));
+                    } if (item.username === '') {
+                        output.append($("<li class='dropdown-item'>User not found!</li>"));
+                    }
+                });
+                $('#dropdownSearchUsers').html(output);
             });
         }
     });
 
+    //Ocultar lista usuarios, al hace click fuera del contenedor, simulando lo del modal
+    $(document).mouseup(function (e) {
+        let container = $('#listaUsuarios');
+        /* let hiddenNavbar = $('#hiddenNavbar'); */
+
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide();
+        }
+        /*  if (!hiddenNavbar.is(e.target) && hiddenNavbar.has(e.target).length === 0 && $('#navbarToggle').is(e.target)) {
+             hiddenNavbar.hide();
+         } */
+    })
 
     //Dropdown quitar evento
     $('.dropdown-item').click(function (e) {

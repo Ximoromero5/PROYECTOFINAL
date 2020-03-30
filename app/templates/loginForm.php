@@ -17,11 +17,12 @@
                 <h5>Welcome to </h5>
                 <h1>Finterest</h1>
                 <p>Log in with</p>
-                <button type="button" id="google-button" title="Google Log In">
-                    <img src="web/images/google.png" alt="">
-                    <p>Log in with Google</p>
-                </button>
-
+                <a href="<?php echo $parametros['loginButton']; ?>">
+                    <button type="button" id="google-button" title="Google Log In">
+                        <img src="web/images/google.png" alt="">
+                        <p>Log in with Google</p>
+                    </button>
+                </a>
                 <div id="separatorLine">
                     <hr>
                     Or

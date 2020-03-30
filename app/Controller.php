@@ -15,19 +15,20 @@ class Controller
                     'datos' => array()
                 );
                 foreach ($_SESSION['datos'] as $key) {
+
+                    //GET POSTS
+                    $parametros['datos'] =  $model->getPost($key['id']);
                 }
-                //GET POSTS
-                $parametros['datos'] =  $model->getPost($key['id']);
             } catch (Exception $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-                header('Location: index.php?action=error');
+                header('Location: error');
             } catch (Error $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-                header('Location: index.php?action=error');
+                header('Location: error');
             }
             require __DIR__ . '/templates/home.php';
         } else {
-            header('Location: index.php?action=login');
+            header('Location: login');
         }
     }
 
@@ -38,6 +39,7 @@ class Controller
 
     public function login()
     {
+        include('googleConfig.php');
         if (!isset($_SESSION['username'])) {
 
             try {
@@ -66,7 +68,7 @@ class Controller
                         setcookie("passwordCookie", $password, time() + (10 * 365 * 24 * 60 * 60));
                     } else {
                         isset($_COOKIE["userCookie"]) ? setcookie('userCookie', '') : '';
-                        isset($_COOKIE["password"]) ? setcookie('password', '') : '';
+                        isset($_COOKIE["passwordCookie"]) ? setcookie('passwordCookie', '') : '';
                     }
 
                     $rule = array(
@@ -95,45 +97,40 @@ class Controller
                             $parametros['mensaje'] = 'That was an invalid email address or password.';
                         }
                     } else {
-                        $parametros['mensaje'] = 'You must fill all the fields!';
+                        $parametros['mensaje'] = 'You must fill all the fields.';
                     }
-                }
-
-                require_once 'google-api-php-client/vendor/autoload.php';
-
-                $googleClient = new Google_Client();
-
-                $googleClient->setClientId(Config::$googleClientID);
-                $googleClient->setClientSecret(Config::$googleClientSecretKey);
-                $googleClient->setRedirectUri(Config::$googleRedirect);
-                $googleClient->addScope("email");
-                $googleClient->addScope("profile");
-
-                if (isset($_GET['code'])) {
-                    $token = $googleClient->fetchAccessTokenWithAuthCode($_GET['code']);
-                    $googleClient->setAccessToken($token['access_token']);
-
-                    //Obtener información del cliente
-                    $googleService = new Google_Service($googleClient);
-                    $parametros['datos'] = $googleService->userinfo->get();
-
-                    //Iniciar variables sesión
-                    $Sesion = new Sesion();
-                    $Sesion->setSesion('username', $name);
-                    $Sesion->setSesion('datos', $parametros['datos']);
-                    /*   header('Location: index.php?action=home'); */
                 } else {
-                    $parametros['loginButton'] = "<a href='" . $googleClient->createAuthUrl() . "'>LOGIN WITH GOOGLE</a>";
+
+                    if (isset($_GET['code'])) {
+                        $token = $googleClient->fetchAccessTokenWithAuthCode($_GET['code']);
+
+                        if (!isset($token['error'])) {
+                            $Sesion = new Sesion();
+                            $googleClient->setAccessToken($token['access_token']);
+                            $Sesion->setSesion('access_token', $token['access_token']);
+
+                            //Obtener información del cliente
+                            $googleService = new Google_Service_Oauth2($googleClient);
+                            $parametros['datos'] = $googleService->userinfo->get();
+
+                            //Iniciar variables sesión
+                            $Sesion->setSesion('datos', $parametros['datos']);
+                            $_SESSION['permissions'] = 1;
+                        }
+                    }
+                    if (!isset($_SESSION['access_token'])) {
+                        $parametros['loginButton'] = $googleClient->createAuthUrl();
+                    }
                 }
             } catch (Exception $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-                header('Location: index.php?action=error');
+                header('Location: error');
             } catch (Error $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-                header('Location: index.php?action=error');
+                header('Location: error');
             }
         } else {
-            header('Location: index.php?action=home');
+            header('Location: home');
         }
         require __DIR__ . '/templates/loginForm.php';
     }
@@ -294,10 +291,10 @@ class Controller
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/forgotPassword.php';
     }
@@ -353,7 +350,7 @@ class Controller
                                     //Ejecutamos el metodo para actualizar contraseña y borrar token
                                     if ($model->deleteToken($email)) {
                                         $parametros['exito'] = 'The password has been updated successfully!';
-                                        header('Refresh: 2; index.php?action=login');
+                                        header('Refresh: 2; login');
                                     } else {
                                         $parametros['mensaje'] = "Error updating password!";
                                     }
@@ -373,14 +370,14 @@ class Controller
                     $parametros['mensaje'] = "The token is incorrect!";
                 }
             } else {
-                header('Location: index.php?action=login');
+                header('Location: login');
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/resetPassword.php';
     }
@@ -414,10 +411,10 @@ class Controller
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/profile.php';
     }
@@ -465,10 +462,10 @@ class Controller
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/profile.php';
     }
@@ -506,18 +503,25 @@ class Controller
             $model->addPostMix($data);
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         require __DIR__ . '/templates/home.php';
     }
 
     //Visitar el perfil de alguien
-    public function peopleProfile()
+    public function user()
     {
         try {
+            $parametros = array(
+                'datos' => array(),
+                'botonFollow' => '',
+                'error' => '',
+                'userPosts' => array()
+            );
+
             if (isset($_GET['person'])) {
                 $username = $_GET['person'];
             }
@@ -530,12 +534,6 @@ class Controller
             foreach ($_SESSION['datos'] as $datoSesion) {
                 $receiver_id = $datoSesion['id'];
             }
-
-            $parametros = array(
-                'datos' => array(),
-                'botonFollow' => '',
-                'error' => ''
-            );
 
             $model = new Model();
 
@@ -552,6 +550,9 @@ class Controller
                 <button name="followButton" class="btn btn-primary" data-action="follow" data-sender_id="' . $dato['id'] . '" id="buttonFollow">Follow <i class="fas fa-user-plus ml-1"></i></button>
                 ';
                 }
+
+                //Enviamos los post del usuario con el id
+                $parametros['userPosts'] = $model->getUserData($dato['id']);
             }
 
             if ($_REQUEST['action'] == 'follow') {
@@ -562,34 +563,33 @@ class Controller
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
-        require __DIR__ . '/templates/peopleProfile.php';
+        require __DIR__ . '/templates/user.php';
     }
 
     //Buscar en usuario
     public function header()
     {
         try {
-            $model = new Model();
-            $datos = '';
             if (isset($_REQUEST['searchUser'])) {
                 $username = $_REQUEST['searchUser'];
-            }
 
-            $resultado = $model->searchUser($username);
-            foreach ($resultado as $dato) {
-                echo json_encode(array('d' => $dato['username']));
+                //Ejecutamos la función que devuelve los usuarios
+                $model = new Model();
+                $resultado = $model->searchUser($username);
+
+                echo json_encode($resultado);
             }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         } catch (Error $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: index.php?action=error');
+            header('Location: error');
         }
         /* require __DIR__ . '/templates/header.php'; */
     }

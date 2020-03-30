@@ -1,4 +1,6 @@
-<?php foreach ($_SESSION['datos'] as $datos) { ?>
+<?php
+
+foreach ($_SESSION['datos'] as $datos) { ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -15,7 +17,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light p-3">
+        <nav class="navbar navbar-expand-lg navbar-light">
 
             <!-- Icono para mostrar el menú en vista móvil -->
             <a class="navbar-toggler border-0" id="navbarToggle" data-toggle="collapse" data-target="#hiddenNavbar" aria-controls="hiddenNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,27 +30,27 @@
                     <a class="navbar-brand d-none d-lg-block" href="home"><img src="web/images/linkedin.png" alt="" width="35" height="35"></a>
                 </div>
                 <ul class="navbar-nav">
+
                     <div id="searcher" class="my-3 my-lg-0">
                         <i class="flaticon-search icono mr-2"></i>
-                        <input class="nav-item" type="search" placeholder="Search" aria-label="Search" id="searchUser">
+                        <input class="nav-item" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Search finterest">
+                        <div class="dropdown" id="dropdownSearchUsers"></div>
                     </div>
-                    <ul class="list-group" id="showUsers"></ul>
-
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="home">
                             <i class="flaticon-home icono mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"> <i class="flaticon-user icono mr-2"></i> People</a>
+                        <a class="nav-link" href="#0"> <i class="flaticon-user icono mr-2"></i> People</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"> <i class="flaticon-speech-bubble icono mr-2"></i> Messaging</a>
+                        <a class="nav-link" href="#0"> <i class="flaticon-speech-bubble icono mr-2"></i> Messaging</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
+                        <a class="nav-link" href="#0"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#"> <i class="flaticon-tools icono mr-2"></i> Work</a>
+                        <a class="nav-link" href="#0"> <i class="flaticon-tools icono mr-2"></i> Work</a>
                     </li>
                 </ul>
                 <div class="mr-4" id="headerPhoto">
@@ -56,7 +58,7 @@
                         <?php echo "<img src=" . $datos['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
                     </a>
                     <div class="btn-group">
-                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options"></i>
+                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Account"></i>
                         <div class="dropdown-menu dropdown-menu-right" id="optionsMenu">
                             <a href="profile" class="dropdown-item" title="View Profile" id="viewProfile">
                                 <?php echo "<img src=" . $datos['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
@@ -65,7 +67,6 @@
                                     <small>View your Profile</small>
                                 </div>
                             </a>
-                            <hr>
                             <a href="" class="dropdown-item" title="Configuration" id="containerDropdown"> <i class="flaticon-gear"></i>
                                 <h6>Configuration</h6>
                             </a>
@@ -91,6 +92,7 @@
 
         <!--   Aquí va el contenido de la página -->
     <?php }
+
 echo isset($contenido) ? $contenido : '' ?>
 
     <!-- SCRIPTS -->

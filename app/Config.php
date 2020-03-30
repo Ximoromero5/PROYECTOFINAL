@@ -13,7 +13,7 @@ class Config
     static public $imgPath = 'web/images/';
 
     //Google login
-    static public $googleClientID = "974296783605-5lg52q02jqi2oevfvbb1htch2dla0l7u.apps.googleusercontent.com";
-    static public $googleClientSecretKey = "oTzgYeTFJBKPv3ayqVuyggXW";
-    static public $googleRedirect = "http://localhost/web/index.php?action=inicio";
+    static public $googleClientID = "468146607582-olr4gfqtrqfbv38am5cg6ppsnvirf8oc.apps.googleusercontent.com";
+    static public $googleClientSecretKey = "nU36y2AZzABkD9WDtI3ZXl1l";
+    static public $googleRedirect = "http://localhost/proyectofinal/home";
 }

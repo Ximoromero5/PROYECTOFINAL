@@ -143,6 +143,14 @@ class Model extends PDO
 
         return $resultado->fetchAll();
     }
+    //Función que obtiene los datos de un usuario especifico mediante el username
+    public function getUserData($id_user)
+    {
+        $consulta = "SELECT * FROM posts INNER JOIN users ON users.id = posts.id_user WHERE users.id = '$id_user'";
+        $resultado = $this->conexion->query($consulta);
+
+        return $resultado->fetchAll();
+    }
 
     //Función para añadir un post //MEJORAR
     public function addPostMix($data)
