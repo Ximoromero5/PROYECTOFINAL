@@ -21,21 +21,35 @@ foreach ($_SESSION['datos'] as $datos) { ?>
 
             <!-- Icono para mostrar el menú en vista móvil -->
             <a class="navbar-toggler border-0" id="navbarToggle" data-toggle="collapse" data-target="#hiddenNavbar" aria-controls="hiddenNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="flaticon-menu-1 icono"></i>
+                <i class="fas fa-bars icono"></i>
             </a>
+
+            <!-- Icono principal -->
+            <div class="ml-4" id="logoContainer">
+                <a class="navbar-brand" href="home">
+                    <!-- <img src="web/images/linkedin.png" alt="" width="35" height="35"> -->
+                    <h4>logo.</h4>
+                </a>
+            </div>
+
+            <div id="searcherMobileOpen">
+                <i class="flaticon-magnifying-glass"></i>
+            </div>
+            <!-- Buscador de usuarios -->
+            <div id="searcher" class="my-3 my-lg-0">
+                <i class="flaticon-magnifying-glass"></i>
+                <input class="nav-item" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Searcher...">
+                <div class="dropdown" id="dropdownSearchUsers"></div>
+                <i class="flaticon-close" id="searcherMobileClose"></i>
+            </div>
 
             <!--  Menú horizontal -->
             <div class="collapse navbar-collapse" id="hiddenNavbar">
-                <div class="ml-4">
-                    <a class="navbar-brand d-none d-lg-block" href="home"><img src="web/images/linkedin.png" alt="" width="35" height="35"></a>
-                </div>
+
+
                 <ul class="navbar-nav">
 
-                    <div id="searcher" class="my-3 my-lg-0">
-                        <i class="flaticon-search icono mr-2"></i>
-                        <input class="nav-item" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Search finterest">
-                        <div class="dropdown" id="dropdownSearchUsers"></div>
-                    </div>
+
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="home">
                             <i class="flaticon-home icono mr-2"></i>Home</a>
