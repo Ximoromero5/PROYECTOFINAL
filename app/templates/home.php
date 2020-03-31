@@ -28,28 +28,29 @@
 
         <!-- Aquí se recogen los datos que escriba el usuario (texto del post, imágen del post, y se controla cuando hace click en publicar) -->
         <div id="top">
-            <textarea placeholder="Write here, Add images or a video for visual impact." maxlength="250" name="postText" id="postText" onkeyup="this.style.height=this.scrollHeight+'px';"></textarea>
+            <textarea placeholder="What are you thinking about?" maxlength="250" name="postText" id="postText" onkeyup="this.style.height=this.scrollHeight+'px';"></textarea>
             <input type="file" id="photoPost" name="photoPost" class="d-none">
         </div>
         <div id="bottom" class="mb-4">
             <div id="containerIconsWrite">
-                <div class="iconsWrite" title="Emoji">
-                    <i class="flaticon-smile mr-2 icono"></i>
+                <div class="iconsWrite">
+                    <i class="fas fa-smile m-2 icono"></i>
                     <h6>Emoji</h6>
                 </div>
                 <label for="photoPost">
-                    <div class="iconsWrite" title="Image">
-                        <i class="flaticon-camera mr-2 icono"></i>
-                        <h6>Image</h6>
+                    <div class="iconsWrite">
+                        <i class="fas fa-camera m-2 icono"></i>
+                        <h6>Photo</h6>
                     </div>
                 </label>
-                <div class="iconsWrite" title="Video">
-                    <i class="flaticon-video-camera mr-2 icono"></i>
+                <div class="iconsWrite">
+                    <i class="fas fa-video m-2 icono"></i>
                     <h6>Video</h6>
                 </div>
             </div>
             <div id="publishPostContainer">
-                <button id="addPostButton" title="Publish"> <i class="flaticon-right-arrow"></i> </button>
+                <button id="addPostButton">
+                    <!-- <i class="flaticon-right-arrow"></i> --> Publish</button>
             </div>
         </div>
 
@@ -100,9 +101,18 @@
                                     </div>
                                 </div>
                                 <div id="shareIcons">
-                                    <i class="far fa-heart m-3 icono"></i>
-                                    <i class="far fa-comment m-3 icono"></i>
-                                    <i class="flaticon-share m-3 icono"></i>
+                                    <div id="shareIcon">
+                                        <i class="fas fa-external-link-alt icono"></i>
+                                        <span>Share</span>
+                                    </div>
+                                    <div id="commentIcon">
+                                        <i class="far fa-comment icono"></i>
+                                        <span>358</span>
+                                    </div>
+                                    <div id="likeIcon">
+                                        <i class="far fa-heart icono"></i>
+                                        <span>9,453</span>
+                                    </div>
                                 </div>
                             </div>
                     <?php

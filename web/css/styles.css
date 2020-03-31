@@ -24,7 +24,7 @@ html ::-webkit-scrollbar-track {
 }
 
 html[data-theme="dark"] {
-  --backgroundLight: #121212;
+  --backgroundLight: #18191a;
   --panelsBackgroundLight: #242526;
   --fontColorLight: #f5f5f5;
   --fontColorLight2: #f5f5f5;
@@ -34,8 +34,8 @@ html.transition,
 html.transition *,
 html.transition *:before,
 html.transition *:after {
-  -webkit-transition: all 500ms !important;
-  transition: all 500ms !important;
+  -webkit-transition: all 200ms !important;
+  transition: all 200ms !important;
   -webkit-transition-delay: 0 !important;
           transition-delay: 0 !important;
 }
@@ -54,8 +54,9 @@ body {
 
 .navbar-expand-lg {
   background-color: var(--panelsBackgroundLight);
-  -webkit-box-shadow: 0 6px 6px -10px var(--fontColorLight2);
-          box-shadow: 0 6px 6px -10px var(--fontColorLight2);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   position: relative;
   top: 0;
   width: 100%;
@@ -288,6 +289,10 @@ div#hiddenNavbar #headerPhoto div #optionsMenu .dropdown-item:active {
   color: var(--fontColorLight2);
 }
 
+.activeLink {
+  color: var(--blueColor) !important;
+}
+
 div#searcher {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -320,6 +325,7 @@ div#searcher {
 div#searcher i.flaticon-magnifying-glass::before {
   margin: 0;
   margin-right: 10px;
+  font-size: 17px;
 }
 
 div#searcher i.fa-times-circle::before {
@@ -479,7 +485,7 @@ main#mainContainer {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 20px;
+  margin: 10px;
 }
 
 @media (max-width: 768px) {
@@ -492,7 +498,7 @@ main#mainContainer #containerWrite {
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
-  margin: 0 20px;
+  margin: 0 10px;
   height: 190px;
   /* @media (max-width: 768px) {
       margin: 0;
@@ -510,6 +516,8 @@ main#mainContainer #containerWrite #top {
   background: var(--panelsBackgroundLight);
   height: 55%;
   border-radius: 2px;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 main#mainContainer #containerWrite #top textarea {
@@ -539,6 +547,8 @@ main#mainContainer #containerWrite #bottom {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 main#mainContainer #containerWrite #bottom div#containerIconsWrite {
@@ -547,19 +557,10 @@ main#mainContainer #containerWrite #bottom div#containerIconsWrite {
   display: flex;
   -ms-flex-preferred-size: 60%;
       flex-basis: 60%;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-@media (max-width: 768px) {
-  main#mainContainer #containerWrite #bottom div#containerIconsWrite {
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-  }
+  margin-left: 10px;
 }
 
 main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite {
@@ -569,14 +570,21 @@ main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
   /*  &:hover h6 {
             color: var(--fontColorLight2);
           } */
 }
 
+main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite:hover {
+  background-color: var(--backgroundLight);
+}
+
 main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite i::before {
-  font-size: 26px;
+  font-size: 20px;
+  color: var(--fontColorLight);
 }
 
 main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite h6 {
@@ -601,12 +609,17 @@ main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPo
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 40px;
+  width: 120px;
   height: 40px;
+  border-radius: 20px;
   border: none;
   background: transparent;
   outline: 0;
-  margin-right: 30px;
+  margin-right: 20px;
+  background-color: #0a74ec;
+  color: #ffffff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPostButton i.flaticon-right-arrow::before {
@@ -614,8 +627,8 @@ main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPo
   color: var(--blueColor);
 }
 
-main#mainContainer #leftContainer,
-main#mainContainer #rightContainer {
+main#mainContainer aside#leftContainer,
+main#mainContainer aside#rightContainer {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -623,21 +636,19 @@ main#mainContainer #rightContainer {
   background-color: var(--panelsBackgroundLight);
   color: var(--fontColorLight2);
   padding: 20px;
-}
-
-div#postList {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 div#postList div#postContainer {
   font-size: 2vh;
-  background-color: var(--backgroundLight);
-  border-radius: 0;
-  /*  padding: 30px 30px 0px 30px; */
-  margin: 0 0 5px 0 !important;
+  background-color: var(--panelsBackgroundLight);
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 6px;
+  margin: 0 0 10px 0 !important;
   padding: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 div#postList div#postContainer div#infoUser {
@@ -736,15 +747,27 @@ div#postList div#postContainer div#shareIcons {
   display: flex;
   width: 30%;
   margin-left: 20px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-div#postList div#postContainer div#shareIcons i {
+div#postList div#postContainer div#shareIcons div#likeIcon,
+div#postList div#postContainer div#shareIcons div#commentIcon,
+div#postList div#postContainer div#shareIcons div#shareIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bolder;
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer div#shareIcons div#likeIcon i,
+div#postList div#postContainer div#shareIcons div#commentIcon i,
+div#postList div#postContainer div#shareIcons div#shareIcon i {
   cursor: pointer;
   font-size: 18px;
   width: 30px;
@@ -754,30 +777,44 @@ div#postList div#postContainer div#shareIcons i {
   padding: 6px;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 16px 3px 16px 16px;
 }
 
-div#postList div#postContainer div#shareIcons i.icono::before {
+div#postList div#postContainer div#shareIcons div#likeIcon i.icono::before,
+div#postList div#postContainer div#shareIcons div#commentIcon i.icono::before,
+div#postList div#postContainer div#shareIcons div#shareIcon i.icono::before {
   width: 30px;
   height: 30px;
   padding: 6px;
   border-radius: 50%;
 }
 
-div#postList div#postContainer div#shareIcons i.flaticon-share.m-3.icono::before {
-  margin: 0;
-}
-
-div#postList div#postContainer div#shareIcons i.far.fa-heart.m-3.icono:hover::before {
+div#postList div#postContainer div#shareIcons div#likeIcon div#likeIcon:hover i.far.fa-heart.icono::before,
+div#postList div#postContainer div#shareIcons div#commentIcon div#likeIcon:hover i.far.fa-heart.icono::before,
+div#postList div#postContainer div#shareIcons div#shareIcon div#likeIcon:hover i.far.fa-heart.icono::before {
   background: rgba(224, 36, 94, 0.1);
   color: #e0245e;
 }
 
-div#postList div#postContainer div#shareIcons i.far.fa-comment.m-3.icono:hover::before {
+div#postList div#postContainer div#shareIcons div#likeIcon i.far.fa-comment.icono:hover::before,
+div#postList div#postContainer div#shareIcons div#commentIcon i.far.fa-comment.icono:hover::before,
+div#postList div#postContainer div#shareIcons div#shareIcon i.far.fa-comment.icono:hover::before {
   background: rgba(29, 161, 242, 0.1);
   color: #1da1f2;
 }
 
-div#postList div#postContainer div#shareIcons i.flaticon-share.m-3.icono:hover::before {
+div#postList div#postContainer div#shareIcons div#likeIcon i.fa-external-link-alt.icono:hover::before,
+div#postList div#postContainer div#shareIcons div#commentIcon i.fa-external-link-alt.icono:hover::before,
+div#postList div#postContainer div#shareIcons div#shareIcon i.fa-external-link-alt.icono:hover::before {
   background: rgba(23, 191, 99, 0.1);
   color: #17bf63;
 }

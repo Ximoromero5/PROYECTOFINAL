@@ -25,7 +25,7 @@ html {
 
 html[data-theme="dark"] {
   //Dark colors
-  --backgroundLight: #121212;
+  --backgroundLight: #18191a;
   --panelsBackgroundLight: #242526;
   --fontColorLight: #f5f5f5;
   --fontColorLight2: #f5f5f5;
@@ -36,7 +36,7 @@ html.transition,
 html.transition *,
 html.transition *:before,
 html.transition *:after {
-  transition: all 500ms !important;
+  transition: all 200ms !important;
   transition-delay: 0 !important;
 }
 
@@ -54,7 +54,8 @@ body {
 //HEADER
 .navbar-expand-lg {
   background-color: var(--panelsBackgroundLight);
-  box-shadow: 0 6px 6px -10px var(--fontColorLight2);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   position: relative;
   top: 0;
   width: 100%;
@@ -228,6 +229,11 @@ div#hiddenNavbar {
   }
 }
 
+//Clase para el icono de la página sobre el que estás
+.activeLink {
+  color: var(--blueColor) !important;
+}
+
 //Buscador usuarios header
 div#searcher {
   display: flex;
@@ -251,6 +257,7 @@ div#searcher {
     &::before {
       margin: 0;
       margin-right: 10px;
+      font-size: 17px;
     }
   }
   i.fa-times-circle {
@@ -372,13 +379,13 @@ li.nav-item {
 main#mainContainer {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  margin: 10px;
   @media (max-width: 768px) {
     margin: 5px;
   }
   #containerWrite {
     flex: 2;
-    margin: 0 20px;
+    margin: 0 10px;
     height: 190px;
     @media (max-width: 1200px) {
       margin: 0;
@@ -391,6 +398,7 @@ main#mainContainer {
       background: var(--panelsBackgroundLight);
       height: 55%;
       border-radius: 2px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
       textarea {
         width: 100%;
         height: auto;
@@ -412,21 +420,25 @@ main#mainContainer {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
       div#containerIconsWrite {
         display: flex;
         flex-basis: 60%;
-        justify-content: space-around;
         align-items: center;
-        @media (max-width: 768px) {
-          justify-content: space-evenly;
-        }
+        margin-left: 10px;
         .iconsWrite {
           display: flex;
           align-items: center;
+          padding: 10px 16px;
+          border-radius: 6px;
+          &:hover {
+            background-color: var(--backgroundLight);
+          }
           cursor: pointer;
           i {
             &::before {
-              font-size: 26px;
+              font-size: 20px;
+              color: var(--fontColorLight);
             }
           }
           h6 {
@@ -448,12 +460,16 @@ main#mainContainer {
         button#addPostButton {
           display: flex;
           justify-content: center;
-          width: 40px;
+          width: 120px;
           height: 40px;
+          border-radius: 20px;
           border: none;
           background: transparent;
           outline: 0;
-          margin-right: 30px;
+          margin-right: 20px;
+          background-color: #0a74ec;
+          color: #ffffff;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           i.flaticon-right-arrow {
             &::before {
               font-size: 28px;
@@ -464,28 +480,27 @@ main#mainContainer {
       }
     }
   }
-  #leftContainer,
-  #rightContainer {
+  aside#leftContainer,
+  aside#rightContainer {
     flex: 1;
     height: 450px;
     background-color: var(--panelsBackgroundLight);
     color: var(--fontColorLight2);
     padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   }
 }
 
 //Container con todos los posts para mostrar
 div#postList {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
   div#postContainer {
     font-size: 2vh;
-    background-color: var(--backgroundLight);
-    border-radius: 0;
-    /*  padding: 30px 30px 0px 30px; */
-    margin: 0 0 5px 0 !important;
+    background-color: var(--panelsBackgroundLight);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 6px;
+    margin: 0 0 10px 0 !important;
     padding: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
     div#infoUser {
       display: flex;
       justify-content: space-between;
@@ -546,43 +561,51 @@ div#postList {
       display: flex;
       width: 30%;
       margin-left: 20px;
-      justify-content: space-between;
       align-items: center;
-      i {
-        cursor: pointer;
-        font-size: 18px;
-        width: 30px;
-        height: 30px;
-        line-height: 20px;
-        border-radius: 50%;
-        padding: 6px;
-        transition: all 0.2s;
-      }
-      i.icono::before {
-        width: 30px;
-        height: 30px;
-        padding: 6px;
-        border-radius: 50%;
-      }
-      i.flaticon-share.m-3.icono::before {
-        margin: 0;
-      }
-      i.far.fa-heart.m-3.icono:hover {
-        &::before {
-          background: rgba(224, 36, 94, 0.1);
-          color: rgb(224, 36, 94);
+      div#likeIcon,
+      div#commentIcon,
+      div#shareIcon {
+        display: flex;
+        align-items: center;
+        font-weight: bolder;
+        color: var(--fontColorLight2);
+        i {
+          cursor: pointer;
+          font-size: 18px;
+          width: 30px;
+          height: 30px;
+          line-height: 20px;
+          border-radius: 50%;
+          padding: 6px;
+          transition: all 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 16px 3px 16px 16px;
         }
-      }
-      i.far.fa-comment.m-3.icono:hover {
-        &::before {
-          background: rgba(29, 161, 242, 0.1);
-          color: rgb(29, 161, 242);
+        i.icono::before {
+          width: 30px;
+          height: 30px;
+          padding: 6px;
+          border-radius: 50%;
         }
-      }
-      i.flaticon-share.m-3.icono:hover {
-        &::before {
-          background: rgba(23, 191, 99, 0.1);
-          color: rgb(23, 191, 99);
+        div#likeIcon:hover {
+          i.far.fa-heart.icono::before {
+            background: rgba(224, 36, 94, 0.1);
+            color: rgb(224, 36, 94);
+          }
+        }
+        i.far.fa-comment.icono:hover {
+          &::before {
+            background: rgba(29, 161, 242, 0.1);
+            color: rgb(29, 161, 242);
+          }
+        }
+        i.fa-external-link-alt.icono:hover {
+          &::before {
+            background: rgba(23, 191, 99, 0.1);
+            color: rgb(23, 191, 99);
+          }
         }
       }
     }

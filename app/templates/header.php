@@ -47,9 +47,7 @@ foreach ($_SESSION['datos'] as $datos) { ?>
             <div class="collapse navbar-collapse" id="hiddenNavbar">
 
 
-                <ul class="navbar-nav">
-
-
+                <ul class="navbar-nav" id="horizontalMenu">
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="home">
                             <i class="flaticon-home icono mr-2"></i>Home</a>
@@ -63,9 +61,9 @@ foreach ($_SESSION['datos'] as $datos) { ?>
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="#0"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
                     </li>
-                    <li class="nav-item mb-2 mb-lg-0">
+                    <!--  <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="#0"> <i class="flaticon-tools icono mr-2"></i> Work</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="mr-4" id="headerPhoto">
                     <a href="profile">

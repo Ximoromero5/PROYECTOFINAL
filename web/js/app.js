@@ -267,7 +267,7 @@ $(document).ready(function () {
         $(document.documentElement).addClass('transition');
         window.setTimeout(() => {
             $(document.documentElement).removeClass('transition');
-        }, 1000);
+        }, 500);
     }
     /*  IMPLEMENTACIÓN DEL TEMA OSCURO */
 
@@ -278,5 +278,11 @@ $(document).ready(function () {
     });
     $('#searcherMobileClose').click(function () {
         $('#searcher').removeClass('openSearcherClass');
+    });
+
+    //Cambiar color links menú
+    $('#horizontalMenu li a').each(function () {
+        $(this).removeClass('activeLink');
+        $(this).click(function () { $(this).addClass('activeLink'); });
     });
 });
