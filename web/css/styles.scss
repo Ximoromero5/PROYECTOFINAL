@@ -138,6 +138,7 @@ div#hiddenNavbar {
         height: 50px;
         object-fit: cover;
         object-position: top;
+        background-color: #fff;
       }
     }
     div {
@@ -482,7 +483,7 @@ main#mainContainer {
           background: transparent;
           outline: 0;
           margin-right: 20px;
-          background-color: #0a74ec;
+          background-color: #0a52a3;
           color: #ffffff;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           i.flaticon-right-arrow {
@@ -538,6 +539,11 @@ div#postList {
           }
           h5 {
             margin: 0 15px !important;
+            img {
+              width: 20px;
+              height: 20px;
+              margin-left: 3px;
+            }
           }
         }
       }
@@ -627,7 +633,7 @@ div#postList {
       }
       div#likeIcon {
         span {
-          width: 72px;
+          width: 100px;
         }
       }
     }
@@ -935,9 +941,11 @@ div#mainLoginPage {
     background: linear-gradient(to left, #2948ff, #396afc);
     flex: 45%;
     #imageContainer {
-      width: 50%;
+      width: 100%;
+      height: 100%;
       img {
         width: 100%;
+        height: 100%;
         object-fit: cover;
       }
     }
@@ -986,8 +994,15 @@ label[id$="-error"] {
   min-height: 100vh;
   #left {
     flex: 45%;
-    background: var(--blueColor);
-    clip-path: polygon(100% 0, 0 0, 0 100%);
+    /* background: var(--blueColor);
+    clip-path: polygon(100% 0, 0 0, 0 100%); */
+    #imageContainer {
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
   #right {
     display: flex;
@@ -1131,7 +1146,7 @@ $t: 1.5s;
         padding: 15px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         position: relative;
-        bottom: 200px;
+        bottom: 100px;
         #profilePhoto {
           width: 150px;
           height: 150px;
@@ -1242,3 +1257,11 @@ $t: 1.5s;
   }
 }
 /* FIN ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
+
+//Estilos alert de warning
+.alert.alert-warning.alert-dismissible.fade {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}

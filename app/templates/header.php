@@ -1,7 +1,3 @@
-<?php
-
-foreach ($_SESSION['datos'] as $datos) { ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -35,6 +31,7 @@ foreach ($_SESSION['datos'] as $datos) { ?>
             <div id="searcherMobileOpen">
                 <i class="flaticon-magnifying-glass"></i>
             </div>
+            
             <!-- Buscador de usuarios -->
             <div id="searcher" class="my-3 my-lg-0">
                 <i class="flaticon-magnifying-glass"></i>
@@ -45,8 +42,6 @@ foreach ($_SESSION['datos'] as $datos) { ?>
 
             <!--  Menú horizontal -->
             <div class="collapse navbar-collapse" id="hiddenNavbar">
-
-
                 <ul class="navbar-nav" id="horizontalMenu">
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="home">
@@ -61,21 +56,18 @@ foreach ($_SESSION['datos'] as $datos) { ?>
                     <li class="nav-item mb-2 mb-lg-0">
                         <a class="nav-link" href="#0"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
                     </li>
-                    <!--  <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"> <i class="flaticon-tools icono mr-2"></i> Work</a>
-                    </li> -->
                 </ul>
                 <div class="mr-4" id="headerPhoto">
                     <a href="profile">
-                        <?php echo "<img src=" . $datos['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
+                        <?php echo "<img src=" . $_SESSION['datos'][0]['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
                     </a>
                     <div class="btn-group">
                         <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-menu-right" id="optionsMenu">
                             <a href="profile" class="dropdown-item" title="View Profile" id="viewProfile">
-                                <?php echo "<img src=" . $datos['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
+                                <?php echo "<img src=" . $_SESSION['datos'][0]['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
                                 <div>
-                                    <h6><?php echo $datos['firstName'] ?></h6>
+                                    <h6><?php echo $_SESSION['datos'][0]['firstName'] . $_SESSION['datos'][0]['lastName'] ?></h6>
                                     <small>View your Profile</small>
                                 </div>
                             </a>
@@ -98,22 +90,19 @@ foreach ($_SESSION['datos'] as $datos) { ?>
                         </div>
                     </div>
                 </div>
-
             </div>
         </nav>
 
         <!--   Aquí va el contenido de la página -->
-    <?php }
+        <?php echo isset($contenido) ? $contenido : '' ?>
 
-echo isset($contenido) ? $contenido : '' ?>
-
-    <!-- SCRIPTS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <script src="https://kit.fontawesome.com/f32dfec8d8.js" crossorigin="anonymous"></script>
-    <script src="web/js/app.js"></script>
-    <!-- SCRIPTS -->
+        <!-- SCRIPTS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+        <script src="https://kit.fontawesome.com/f32dfec8d8.js" crossorigin="anonymous"></script>
+        <script src="web/js/app.js"></script>
+        <!-- SCRIPTS -->
 
     </body>
 

@@ -12,7 +12,9 @@
 <body>
     <div id="mainRegisterPage">
         <div id="left" class="d-none d-xl-block">
-
+            <div id="imageContainer">
+                <img src="web/images/right2.jpg" alt="">
+            </div>
         </div>
         <div id="right">
             <div class="errores">

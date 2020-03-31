@@ -153,7 +153,7 @@ class Model extends PDO
     }
 
     //Función para añadir un post //MEJORAR
-    public function addPostMix($data)
+    public function addPost($data)
     {
         $consulta = "INSERT INTO posts (id_user, photoPost, text, datePost) VALUES (:id_user, :photoPost, :text, :datePost)";
         $resultado = $this->conexion->prepare($consulta);

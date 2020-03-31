@@ -166,6 +166,7 @@ div#hiddenNavbar #headerPhoto a img {
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
+  background-color: #fff;
 }
 
 div#hiddenNavbar #headerPhoto div i {
@@ -643,7 +644,7 @@ main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPo
   background: transparent;
   outline: 0;
   margin-right: 20px;
-  background-color: #0a74ec;
+  background-color: #0a52a3;
   color: #ffffff;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -715,6 +716,12 @@ div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
   margin: 0 15px !important;
+}
+
+div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
 }
 
 div#postList div#postContainer div#infoUser div#containerDate {
@@ -1206,11 +1213,13 @@ div#mainLoginPage #right {
 }
 
 div#mainLoginPage #right #imageContainer {
-  width: 50%;
+  width: 100%;
+  height: 100%;
 }
 
 div#mainLoginPage #right #imageContainer img {
   width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1269,9 +1278,17 @@ label[id$="-error"] {
   -webkit-box-flex: 45%;
       -ms-flex: 45%;
           flex: 45%;
-  background: var(--blueColor);
-  -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
-          clip-path: polygon(100% 0, 0 0, 0 100%);
+  /* background: var(--blueColor);
+    clip-path: polygon(100% 0, 0 0, 0 100%); */
+}
+
+#mainRegisterPage #left #imageContainer {
+  height: 100%;
+}
+
+#mainRegisterPage #left #imageContainer img {
+  width: 100%;
+  height: 100%;
 }
 
 #mainRegisterPage #right {
@@ -1481,7 +1498,7 @@ div#preloaderPage {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   position: relative;
-  bottom: 200px;
+  bottom: 100px;
 }
 
 #containerProfile #main #left #carta #profilePhoto {
@@ -1642,4 +1659,10 @@ div#preloaderPage {
 }
 
 /* FIN ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
+.alert.alert-warning.alert-dismissible.fade {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
 /*# sourceMappingURL=styles.css.map */

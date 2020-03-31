@@ -1,18 +1,10 @@
 $(document).ready(function () {
-    //Preloader de la página
-    setTimeout(() => {
-        $('#preloaderPage').fadeOut();
-    }, 1000);
+
+    //Obtenemos todos los post nada más cargue la página
+    getPost();
 
     //Popover opciones post
     $('[data-toggle="popover"]').popover();
-
-    //Los mensajes desaparecen a los 3s | MEJORAR
-    setInterval(() => {
-        $('#success').fadeOut(function () {
-            $(this).remove();
-        });
-    }, 3000);
 
     //Calendario fecha cumpleaños | EN DUDA SI DEJARLO
     $('#datepicker').datepicker({
@@ -59,93 +51,164 @@ $(document).ready(function () {
         });
     });
 
-    //Cambiar el alto del textarea del post automáticamente
-    /* $("textarea").keyup(function (e) {
-        while ($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-            $(this).height($(this).height() + 1);
-        };
-    }); */
-
     //Validación de lado cliente para que no se envie el campo vacío
-    //Desabilitar el botón por defecto
     $('#addPostButton').attr('disabled', true);
     $('#addPostButton').css('cursor', 'not-allowed');
 
-    //Cuando se escribe algo
+    //Cuando se escribe algo en el textarea de los post
     $('#postText').keyup(function () {
         if ($.trim($(this).val()) == '') {
             $('#addPostButton').attr('disabled', true);
             $('#addPostButton').css('cursor', 'not-allowed');
+            $('#addPostButton').css('background-color', '#0a52a3');
         } else {
             $('#addPostButton').attr('disabled', false);
             $('#addPostButton').css('cursor', 'pointer');
+            $('#addPostButton').css('background-color', '#0a74ec');
         }
     });
-    let formularioData = new FormData($('#formularioPost')[0]);
+
+    //Este es el 'formulario que se envía al servidor'
+    let formularioData = new FormData();
+
     //Si se selecciona alguna foto se ejecuta lo siguiente:
     $('#photoPost').on('change', function () {
         let name = document.getElementById("photoPost").files[0].name;
 
         //Si el usuario selecciona una imagen se habilita el botón de publicar foto
-        if (name != '') {
+        if (name !== '') {
             $('#addPostButton').attr('disabled', false);
             $('#addPostButton').css('cursor', 'pointer');
         }
 
         let extension = name.split('.').pop().toLowerCase();
         if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-            alert("Invalid Image File");
+            $(document.body).append($(`
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <b>Image extension not supported</b>, please select another.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`));
         }
         let fileReader = new FileReader();
         fileReader.readAsDataURL(document.getElementById("photoPost").files[0]);
         let file = document.getElementById("photoPost").files[0];
         let fileSize = file.size || file.fileSize;
 
-        if (fileSize > 400000) { //4MB
-            alert("Image File Size is very big");
+        if (fileSize > 300000) { //3MB
+            $(document.body).append($(`
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <b>Image is so big</b>, please select another.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`));
         } else {
-            if (name != '') {
-                formularioData.append("photoPost", document.getElementById("photoPost").files[0]);
+            if (name !== '') {
+                file = '';
+                formularioData.append("photoPost", file);
+            } else {
+                formularioData.append("photoPost", file);
             }
         }
     });
 
-    //Al enviar el formulario
-    $('#formularioPost').submit(function (event) {
-        event.preventDefault();
+    //Función para añadir post
+    $('#addPostButton').click(function () {
         formularioData.append('postText', $('#postText').val());
         $.ajax({
-            url: "index.php?action=addPost",
+            url: "addPost",
             method: "POST",
             data: formularioData,
             cache: false,
             contentType: false,
-            processData: false,
-            success: function (data) {
-                $('#formularioPost')[0].reset();
-                location.reload();
-                /* showPost(); */
-            }
+            processData: false
+        }).done(function (data) {
+            $('#postList').empty();
+            getPost();
         });
     });
 
-    /*  showPost(); */
-
-    function showPost() {
+    //Función para obtener los post de las personas a las que sigues y de ti mismo.
+    function getPost() {
         $.ajax({
             url: 'index.php',
             method: "GET",
             data: {
                 action: 'getPost'
-            },
-            success: function (data) {
-
-                $('#postList').html(data);
-
             }
+        }).done(function (data) {
+            //Mostramos la información de los post a través de jumbotron
+            let datos = JSON.parse(data);
+            let verified, date, photo;
+            let contenedorPost = $('#postList');
+
+            //Fecha del post con formato
+            let newDate = "";
+            $.each(datos, function (e, item) {
+
+                //Asignamos verificado y la foto si hay
+                verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
+                photo = item.photoPost !== '' ? item.photoPost : '';
+                newDate = new Date(item.datePost);
+                let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+                let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
+
+                //Añadimos cada uno de los post que haya con formato html
+                contenedorPost.append($(`
+                <div class="jumbotron" id="postContainer">
+                    <div id="infoUser">
+                        <div id="userData">
+                                <a href="index.php?action=user&person=${item.username}" id="linkProfilePerson">
+                                <div id="userInfoPost">
+                                    <img src="${item.photo}" alt="">
+                                    <div>
+                                        <h5>${item.firstName} ${item.lastName} ${verified}</h5>
+                                        <small class="ml-3">Web Developer Front End</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="containerDate">
+                            <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options" id="popoverOptions"><i class="fas fa-ellipsis-h icono" title="Options"></i></a>
+                            <small>${day} of ${month} ${hour}:${minute}</small>
+                        </div>
+                    </div>
+                    <div class="mt-2" id="parrafoTexto">
+                        <p>${item.text}</p>
+                    </div>
+                    <div id="postImageContainer">
+                            <img src="${photo}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">
+                        <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <img src="${photo}" alt="" class="w-100 h-100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="shareIcons">
+                        <div id="shareIcon">
+                            <i class="fas fa-share icono"></i>
+                            <span>Share</span>
+                        </div>
+                        <div id="commentIcon">
+                            <i class="far fa-comment icono"></i>
+                            <span>358</span>
+                        </div>
+                        <div id="likeIcon">
+                            <i class="far fa-heart icono"></i>
+                            <span>9,453 likes</span>
+                        </div>
+                    </div>
+                </div>
+                `));
+            });
+
+            /*  console.log(data); */
         });
     }
-    /*  setInterval(function () { showPost(); }, 30000); */
 
     //Follow
     $('#buttonFollow').on('click', function () {

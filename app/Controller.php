@@ -476,31 +476,36 @@ class Controller
         try {
             //Instanciamos clases necesariass
             $model = new Model();
-            $name = ' ';
-            //Comprobamos que exista el campo oculto action
-            if (isset($_FILES['photoPost']) && $_FILES["photoPost"] != '') {
 
-                //Recojo foto si hay
-                $test = explode('.', $_FILES["photoPost"]["name"]);
-                $extension = end($test);
-                $name = rand(100, 9999) . '.' . $extension;
-                $location = Config::$imgPath . $name;
-                move_uploaded_file($_FILES["photoPost"]["tmp_name"], $location);
+            //Obtenemos el id de quien hace la publicación
+            $id = $_SESSION['datos'][0]['id'];
+            $location = null;
+            $text = $_POST['postText'];
+
+            //Comprobamos si hay foto de post
+            if (isset($_REQUEST['photoPost'])) {
+                if ($_REQUEST['photoPost'] != '') {
+                    //Recojo foto si hay
+                    $test = explode('.', $_FILES["photoPost"]["name"]);
+                    $extension = end($test);
+                    $name = rand(100, 9999) . '.' . $extension;
+                    $location = Config::$imgPath . $name;
+                    move_uploaded_file($_FILES["photoPost"]["tmp_name"], $location);
+                } else {
+                    $location = '';
+                }
             }
 
-            //ADD POST
-
-            $id = '';
-            foreach ($_SESSION['datos'] as $row) {
-                $id = $row['id'];
-            }
+            //Formamos un array con los datos
             $data = array(
                 ':id_user' => $id,
-                ':text' => $_POST['postText'],
+                ':text' => $text,
                 ':photoPost' => $location,
                 ':datePost' => date('Y-m-d') . ' ' . date("H:i:s", strtotime(date('h:i:sa')))
             );
-            $model->addPostMix($data);
+
+            //Añadimos el post
+            $model->addPost($data);
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');
@@ -508,7 +513,7 @@ class Controller
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
             header('Location: error');
         }
-        require __DIR__ . '/templates/home.php';
+        /* require __DIR__ . '/templates/home.php'; */
     }
 
     //Visitar el perfil de alguien
@@ -561,6 +566,8 @@ class Controller
             if ($_REQUEST['action'] == 'unfollow') {
                 $model->unfollow($sender_id, $receiver_id);
             }
+
+            echo json_encode($parametros['userPosts']);
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');
@@ -592,5 +599,22 @@ class Controller
             header('Location: error');
         }
         /* require __DIR__ . '/templates/header.php'; */
+    }
+
+    //Función para recibir los post con Ajax
+    public function getPost()
+    {
+        try {
+            $model = new Model();
+            $resultado = $model->getPost($_SESSION['datos'][0]['id']);
+
+            echo json_encode($resultado);
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
+            header('Location: error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+            header('Location: error');
+        }
     }
 }

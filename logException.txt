@@ -1,0 +1,5 @@
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'photoPost' cannot be null0.73680800 1585674842
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'photoPost' cannot be null0.62847500 1585674887
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'photoPost' cannot be null0.33060800 1585674896
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'photoPost' cannot be null0.00261800 1585674974
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'photoPost' cannot be null0.39260600 1585675051

@@ -67,7 +67,7 @@
         </div>
         <div id="right" class="d-none d-xl-block">
             <div id="imageContainer">
-                <img src="web/images/un1.svg" alt="">
+                <img src="web/images/right3.jpg" alt="">
             </div>
         </div>
     </div>
