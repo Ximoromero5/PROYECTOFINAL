@@ -28,6 +28,7 @@
 
         <!-- Aquí se recogen los datos que escriba el usuario (texto del post, imágen del post, y se controla cuando hace click en publicar) -->
         <div id="top">
+            <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
             <textarea placeholder="What are you thinking about?" maxlength="250" name="postText" id="postText" onkeyup="this.style.height=this.scrollHeight+'px';"></textarea>
             <input type="file" id="photoPost" name="photoPost" class="d-none">
         </div>
@@ -102,7 +103,7 @@
                                 </div>
                                 <div id="shareIcons">
                                     <div id="shareIcon">
-                                        <i class="fas fa-external-link-alt icono"></i>
+                                        <i class="fas fa-share icono"></i>
                                         <span>Share</span>
                                     </div>
                                     <div id="commentIcon">
@@ -111,7 +112,7 @@
                                     </div>
                                     <div id="likeIcon">
                                         <i class="far fa-heart icono"></i>
-                                        <span>9,453</span>
+                                        <span>9,453 likes</span>
                                     </div>
                                 </div>
                             </div>

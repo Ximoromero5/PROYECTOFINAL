@@ -137,6 +137,7 @@ div#hiddenNavbar {
         width: 50px;
         height: 50px;
         object-fit: cover;
+        object-position: top;
       }
     }
     div {
@@ -144,7 +145,6 @@ div#hiddenNavbar {
         width: 30px;
         display: flex;
         height: 30px;
-        background: var(--backgroundLight);
         border-radius: 50%;
         justify-content: center;
         align-items: center;
@@ -160,7 +160,7 @@ div#hiddenNavbar {
           display: none;
         }
         &:hover {
-          background-color: #d8d7d7;
+          background: var(--backgroundLight);
         }
       }
       #optionsMenu {
@@ -238,13 +238,14 @@ div#hiddenNavbar {
 div#searcher {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  /*   border: 1px solid #ccc; */
   padding: 5px;
   border-radius: 8px;
   position: relative;
   left: 0;
   margin: 0 !important;
-  background: #ffffff;
+  background: var(--backgroundLight);
+  color: var(--fontColorLight2);
   transition: all 0.2s;
   @media (max-width: 800px) {
     position: absolute;
@@ -272,11 +273,12 @@ div#searcher {
     border: none;
     outline: 0;
     font-size: 17px;
-    color: #333333;
-    background: #ffffff;
+    color: var(--fontColorLight2);
+    background: transparent;
     width: 100%;
     &::placeholder {
-      color: #333333;
+      color: var(--fontColorLight2);
+      font-weight: lighter;
     }
   }
   #dropdownSearchUsers {
@@ -296,7 +298,7 @@ div#searcher {
     div#listaUsuarios {
       display: block;
       position: absolute;
-      width: 100%;
+      width: 360px;
       margin-top: 15px;
       padding: 0;
       border: none;
@@ -336,6 +338,7 @@ div#searcher {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top;
             border-radius: 50%;
             border: 1px solid #ccc;
           }
@@ -399,13 +402,25 @@ main#mainContainer {
       height: 55%;
       border-radius: 2px;
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      img {
+        margin: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+        background-color: #ffffff;
+      }
       textarea {
-        width: 100%;
-        height: auto;
+        width: 90%;
+        height: 100%;
         overflow: hidden;
         border: none;
         outline: 0;
-        padding: 15px 35px 15px 35px;
+        margin: 20px 0;
         resize: none;
         background: transparent;
         color: var(--fontColorLight2);
@@ -518,6 +533,8 @@ div#postList {
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
+            object-position: top;
+            background-color: #ffffff;
           }
           h5 {
             margin: 0 15px !important;
@@ -606,6 +623,11 @@ div#postList {
             background: rgba(23, 191, 99, 0.1);
             color: rgb(23, 191, 99);
           }
+        }
+      }
+      div#likeIcon {
+        span {
+          width: 72px;
         }
       }
     }
@@ -822,6 +844,8 @@ div#mainLoginPage {
             width: 20px;
             margin-right: 10px;
             object-fit: cover;
+            object-position: top;
+            background-color: #ffffff;
           }
           p {
             margin: 0;
@@ -1078,7 +1102,9 @@ $t: 1.5s;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top;
       cursor: pointer;
+      background-color: #ffffff;
     }
   }
   #main {
@@ -1116,6 +1142,7 @@ $t: 1.5s;
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid #ccc;
+            background-color: #ffffff;
           }
         }
         #namePart {

@@ -164,6 +164,8 @@ div#hiddenNavbar #headerPhoto a img {
   height: 50px;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
 }
 
 div#hiddenNavbar #headerPhoto div i {
@@ -172,7 +174,6 @@ div#hiddenNavbar #headerPhoto div i {
   display: -ms-flexbox;
   display: flex;
   height: 30px;
-  background: var(--backgroundLight);
   border-radius: 50%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -197,7 +198,7 @@ div#hiddenNavbar #headerPhoto div i::after {
 }
 
 div#hiddenNavbar #headerPhoto div i:hover {
-  background-color: #d8d7d7;
+  background: var(--backgroundLight);
 }
 
 div#hiddenNavbar #headerPhoto div #optionsMenu {
@@ -300,13 +301,14 @@ div#searcher {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #ccc;
+  /*   border: 1px solid #ccc; */
   padding: 5px;
   border-radius: 8px;
   position: relative;
   left: 0;
   margin: 0 !important;
-  background: #ffffff;
+  background: var(--backgroundLight);
+  color: var(--fontColorLight2);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
@@ -339,25 +341,29 @@ div#searcher input#searchUser {
   border: none;
   outline: 0;
   font-size: 17px;
-  color: #333333;
-  background: #ffffff;
+  color: var(--fontColorLight2);
+  background: transparent;
   width: 100%;
 }
 
 div#searcher input#searchUser::-webkit-input-placeholder {
-  color: #333333;
+  color: var(--fontColorLight2);
+  font-weight: lighter;
 }
 
 div#searcher input#searchUser:-ms-input-placeholder {
-  color: #333333;
+  color: var(--fontColorLight2);
+  font-weight: lighter;
 }
 
 div#searcher input#searchUser::-ms-input-placeholder {
-  color: #333333;
+  color: var(--fontColorLight2);
+  font-weight: lighter;
 }
 
 div#searcher input#searchUser::placeholder {
-  color: #333333;
+  color: var(--fontColorLight2);
+  font-weight: lighter;
 }
 
 div#searcher #dropdownSearchUsers {
@@ -381,7 +387,7 @@ div#searcher #dropdownSearchUsers #preloaderAjax {
 div#searcher #dropdownSearchUsers div#listaUsuarios {
   display: block;
   position: absolute;
-  width: 100%;
+  width: 360px;
   margin-top: 15px;
   padding: 0;
   border: none;
@@ -446,6 +452,8 @@ div#searcher #dropdownSearchUsers div#listaUsuarios a.dropdown-item #dropImage i
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   border-radius: 50%;
   border: 1px solid #ccc;
 }
@@ -518,15 +526,34 @@ main#mainContainer #containerWrite #top {
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+main#mainContainer #containerWrite #top img {
+  margin: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #ffffff;
 }
 
 main#mainContainer #containerWrite #top textarea {
-  width: 100%;
-  height: auto;
+  width: 90%;
+  height: 100%;
   overflow: hidden;
   border: none;
   outline: 0;
-  padding: 15px 35px 15px 35px;
+  margin: 20px 0;
   resize: none;
   background: transparent;
   color: var(--fontColorLight2);
@@ -681,6 +708,9 @@ div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #ffffff;
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
@@ -817,6 +847,10 @@ div#postList div#postContainer div#shareIcons div#commentIcon i.fa-external-link
 div#postList div#postContainer div#shareIcons div#shareIcon i.fa-external-link-alt.icono:hover::before {
   background: rgba(23, 191, 99, 0.1);
   color: #17bf63;
+}
+
+div#postList div#postContainer div#shareIcons div#likeIcon span {
+  width: 72px;
 }
 
 #notfound {
@@ -1046,6 +1080,9 @@ div#mainLoginPage #left #titlePart a button img {
   margin-right: 10px;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #ffffff;
 }
 
 div#mainLoginPage #left #titlePart a button p {
@@ -1392,7 +1429,10 @@ div#preloaderPage {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   cursor: pointer;
+  background-color: #ffffff;
 }
 
 #containerProfile #main {
@@ -1457,6 +1497,7 @@ div#preloaderPage {
   -o-object-fit: cover;
      object-fit: cover;
   border: 1px solid #ccc;
+  background-color: #ffffff;
 }
 
 #containerProfile #main #left #carta #namePart {

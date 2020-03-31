@@ -70,7 +70,7 @@ foreach ($_SESSION['datos'] as $datos) { ?>
                         <?php echo "<img src=" . $datos['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
                     </a>
                     <div class="btn-group">
-                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Account"></i>
+                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-menu-right" id="optionsMenu">
                             <a href="profile" class="dropdown-item" title="View Profile" id="viewProfile">
                                 <?php echo "<img src=" . $datos['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
