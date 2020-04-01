@@ -509,9 +509,6 @@ main#mainContainer #containerWrite {
           flex: 2;
   margin: 0 10px;
   height: 190px;
-  /* @media (max-width: 768px) {
-      margin: 0;
-    } */
 }
 
 @media (max-width: 1200px) {
@@ -520,7 +517,7 @@ main#mainContainer #containerWrite {
   }
 }
 
-main#mainContainer #containerWrite #top {
+main#mainContainer #containerWrite form#formularioPost #top {
   width: 100%;
   background: var(--panelsBackgroundLight);
   height: 55%;
@@ -536,7 +533,7 @@ main#mainContainer #containerWrite #top {
           align-items: flex-start;
 }
 
-main#mainContainer #containerWrite #top img {
+main#mainContainer #containerWrite form#formularioPost #top img {
   margin: 15px;
   width: 40px;
   height: 40px;
@@ -548,7 +545,7 @@ main#mainContainer #containerWrite #top img {
   background-color: #ffffff;
 }
 
-main#mainContainer #containerWrite #top textarea {
+main#mainContainer #containerWrite form#formularioPost #top textarea {
   width: 90%;
   height: 100%;
   overflow: hidden;
@@ -560,10 +557,10 @@ main#mainContainer #containerWrite #top textarea {
   color: var(--fontColorLight2);
 }
 
-main#mainContainer #containerWrite #bottom {
+main#mainContainer #containerWrite form#formularioPost #bottom {
   width: 100%;
   background: var(--panelsBackgroundLight);
-  height: 45%;
+  padding: 10px 0;
   border-radius: 2px;
   margin-top: 3px;
   display: -webkit-box;
@@ -579,7 +576,7 @@ main#mainContainer #containerWrite #bottom {
           box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -591,7 +588,7 @@ main#mainContainer #containerWrite #bottom div#containerIconsWrite {
   margin-left: 10px;
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -602,35 +599,35 @@ main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite {
   border-radius: 6px;
   cursor: pointer;
   /*  &:hover h6 {
-            color: var(--fontColorLight2);
-          } */
+              color: var(--fontColorLight2);
+            } */
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite:hover {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite:hover {
   background-color: var(--backgroundLight);
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite i::before {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite i::before {
   font-size: 20px;
   color: var(--fontColorLight);
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite h6 {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite h6 {
   margin: 0;
   color: var(--fontColorLight);
 }
 
 @media (max-width: 768px) {
-  main#mainContainer #containerWrite #bottom div#containerIconsWrite .iconsWrite h6 {
+  main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite h6 {
     display: none;
   }
 }
 
-main#mainContainer #containerWrite #bottom div#containerIconsWrite label {
+main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite label {
   margin: 0;
 }
 
-main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPostButton {
+main#mainContainer #containerWrite form#formularioPost #bottom div#publishPostContainer button#addPostButton {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -650,7 +647,7 @@ main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPo
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-main#mainContainer #containerWrite #bottom div#publishPostContainer button#addPostButton i.flaticon-right-arrow::before {
+main#mainContainer #containerWrite form#formularioPost #bottom div#publishPostContainer button#addPostButton i.flaticon-right-arrow::before {
   font-size: 28px;
   color: var(--blueColor);
 }
@@ -778,6 +775,14 @@ div#postList div#postContainer #postImageContainer {
   cursor: pointer;
 }
 
+div#postList div#postContainer #postImageContainer img {
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
+
 div#postList div#postContainer div#shareIcons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -857,7 +862,7 @@ div#postList div#postContainer div#shareIcons div#shareIcon i.fa-external-link-a
 }
 
 div#postList div#postContainer div#shareIcons div#likeIcon span {
-  width: 72px;
+  width: 100px;
 }
 
 #notfound {
@@ -1446,8 +1451,6 @@ div#preloaderPage {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: top;
-     object-position: top;
   cursor: pointer;
   background-color: #ffffff;
 }

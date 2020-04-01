@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('#addPostButton').css('cursor', 'not-allowed');
 
     //Cuando se escribe algo en el textarea de los post
-    $('#postText').keyup(function () {
+    $('#textPost').keyup(function () {
         if ($.trim($(this).val()) == '') {
             $('#addPostButton').attr('disabled', true);
             $('#addPostButton').css('cursor', 'not-allowed');
@@ -68,11 +68,10 @@ $(document).ready(function () {
         }
     });
 
-    //Este es el 'formulario que se envía al servidor'
-    let formularioData = new FormData();
-
     //Si se selecciona alguna foto se ejecuta lo siguiente:
     $('#photoPost').on('change', function () {
+
+        //Obtenemos el nombre de la foto
         let name = document.getElementById("photoPost").files[0].name;
 
         //Si el usuario selecciona una imagen se habilita el botón de publicar foto
@@ -81,6 +80,7 @@ $(document).ready(function () {
             $('#addPostButton').css('cursor', 'pointer');
         }
 
+        //Se comprueba la extensión de la imágen
         let extension = name.split('.').pop().toLowerCase();
         if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
             $(document.body).append($(`
@@ -91,12 +91,12 @@ $(document).ready(function () {
                 </button>
             </div>`));
         }
-        let fileReader = new FileReader();
-        fileReader.readAsDataURL(document.getElementById("photoPost").files[0]);
+
+        //Se comprueba el tamaño de la imágen
         let file = document.getElementById("photoPost").files[0];
         let fileSize = file.size || file.fileSize;
 
-        if (fileSize > 300000) { //3MB
+        if (fileSize > 400000) { //4MB
             $(document.body).append($(`
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <b>Image is so big</b>, please select another.
@@ -104,19 +104,18 @@ $(document).ready(function () {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>`));
-        } else {
-            if (name !== '') {
-                file = '';
-                formularioData.append("photoPost", file);
-            } else {
-                formularioData.append("photoPost", file);
-            }
         }
     });
 
     //Función para añadir post
     $('#addPostButton').click(function () {
-        formularioData.append('postText', $('#postText').val());
+        $('#formularioPost').submit(function (e) { e.preventDefault() })
+        let formularioData = new FormData();
+        let photoPost = $('#photoPost')[0].files[0];
+        let textPost = $('#textPost').val();
+
+        formularioData.append('textPost', textPost);
+        formularioData.append('photoPost', photoPost);
         $.ajax({
             url: "addPost",
             method: "POST",
@@ -125,6 +124,8 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function (data) {
+            console.log(data);
+            /*  console.log('Éxito'); */
             $('#postList').empty();
             getPost();
         });
@@ -150,7 +151,7 @@ $(document).ready(function () {
 
                 //Asignamos verificado y la foto si hay
                 verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
-                photo = item.photoPost !== '' ? item.photoPost : '';
+                photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
                 newDate = new Date(item.datePost);
                 let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
                 let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
@@ -179,7 +180,7 @@ $(document).ready(function () {
                         <p>${item.text}</p>
                     </div>
                     <div id="postImageContainer">
-                            <img src="${photo}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">
+                            ${photo}
                         <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">

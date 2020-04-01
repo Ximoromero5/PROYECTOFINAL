@@ -474,38 +474,29 @@ class Controller
     public function addPost()
     {
         try {
+            $parametros = array(
+                'errores' => array()
+            );
             //Instanciamos clases necesariass
             $model = new Model();
-
-            //Obtenemos el id de quien hace la publicación
             $id = $_SESSION['datos'][0]['id'];
-            $location = null;
-            $text = $_POST['postText'];
+            $postText = $_REQUEST['textPost'];
+            $photoPost = "";
+            $datePost = date("Y-m-d H:i:s");
 
-            //Comprobamos si hay foto de post
-            if (isset($_REQUEST['photoPost'])) {
-                if ($_REQUEST['photoPost'] != '') {
-                    //Recojo foto si hay
-                    $test = explode('.', $_FILES["photoPost"]["name"]);
-                    $extension = end($test);
-                    $name = rand(100, 9999) . '.' . $extension;
-                    $location = Config::$imgPath . $name;
-                    move_uploaded_file($_FILES["photoPost"]["tmp_name"], $location);
-                } else {
-                    $location = '';
-                }
+            /* Getting file name */
+            $photoPost = devuelveImagen('photoPost', Config::$imgPath, $parametros['errores'], Config::$validExtensions);
+
+            if ($photoPost == '' && $postText != '') {
+                $photoPost = "";
             }
 
-            //Formamos un array con los datos
-            $data = array(
-                ':id_user' => $id,
-                ':text' => $text,
-                ':photoPost' => $location,
-                ':datePost' => date('Y-m-d') . ' ' . date("H:i:s", strtotime(date('h:i:sa')))
-            );
-
             //Añadimos el post
-            $model->addPost($data);
+            if ($model->addPost($id, $postText, $photoPost, $datePost)) {
+                echo 'true';
+            } else {
+                echo 'false';
+            }
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');
@@ -513,7 +504,6 @@ class Controller
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
             header('Location: error');
         }
-        /* require __DIR__ . '/templates/home.php'; */
     }
 
     //Visitar el perfil de alguien

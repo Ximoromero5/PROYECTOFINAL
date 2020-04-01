@@ -20,33 +20,35 @@
     <div id="containerWrite">
 
         <!-- Aquí se recogen los datos que escriba el usuario (texto del post, imágen del post, y se controla cuando hace click en publicar) -->
-        <div id="top">
-            <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
-            <textarea placeholder="What are you thinking about?" maxlength="250" name="postText" id="postText" onkeyup="this.style.height=this.scrollHeight+'px';"></textarea>
-            <input type="file" id="photoPost" name="photoPost" class="d-none">
-        </div>
-        <div id="bottom" class="mb-4">
-            <div id="containerIconsWrite">
-                <div class="iconsWrite">
-                    <i class="fas fa-smile m-2 icono"></i>
-                    <h6>Emoji</h6>
-                </div>
-                <label for="photoPost">
+        <form method="POST" enctype="multipart/form-data" id="formularioPost" name="formularioPost">
+            <div id="top">
+                <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
+                <textarea placeholder="What are you thinking about?" maxlength="250" name="textPost" id="textPost"></textarea>
+                <input type="file" id="photoPost" name="photoPost" class="d-none">
+            </div>
+            <div id="bottom" class="mb-4">
+                <div id="containerIconsWrite">
                     <div class="iconsWrite">
-                        <i class="fas fa-camera m-2 icono"></i>
-                        <h6>Photo</h6>
+                        <i class="fas fa-smile m-2 icono"></i>
+                        <h6>Emoji</h6>
                     </div>
-                </label>
-                <div class="iconsWrite">
-                    <i class="fas fa-video m-2 icono"></i>
-                    <h6>Video</h6>
+                    <label for="photoPost">
+                        <div class="iconsWrite">
+                            <i class="fas fa-camera m-2 icono"></i>
+                            <h6>Photo</h6>
+                        </div>
+                    </label>
+                    <div class="iconsWrite">
+                        <i class="fas fa-video m-2 icono"></i>
+                        <h6>Video</h6>
+                    </div>
+                </div>
+                <div id="publishPostContainer">
+                    <button id="addPostButton" name="addPostButton">
+                        <!-- <i class="flaticon-right-arrow"></i> --> Publish</button>
                 </div>
             </div>
-            <div id="publishPostContainer">
-                <button id="addPostButton">
-                    <!-- <i class="flaticon-right-arrow"></i> --> Publish</button>
-            </div>
-        </div>
+        </form>
 
         <!-- MOSTRAR POST -->
         <div class="panel panel-default">

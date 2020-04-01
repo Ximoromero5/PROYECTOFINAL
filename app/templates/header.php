@@ -31,7 +31,7 @@
             <div id="searcherMobileOpen">
                 <i class="flaticon-magnifying-glass"></i>
             </div>
-            
+
             <!-- Buscador de usuarios -->
             <div id="searcher" class="my-3 my-lg-0">
                 <i class="flaticon-magnifying-glass"></i>
@@ -101,6 +101,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/f32dfec8d8.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/XigeTime/FontAwesome-Selector/cdn/vUNSTABLE/faSelectorWidget-vUNSTABLE.min"></script>
         <script src="web/js/app.js"></script>
         <!-- SCRIPTS -->
 

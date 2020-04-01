@@ -153,11 +153,17 @@ class Model extends PDO
     }
 
     //Función para añadir un post //MEJORAR
-    public function addPost($data)
+    public function addPost($id_user, $postText, $photoPost, $datePost)
     {
         $consulta = "INSERT INTO posts (id_user, photoPost, text, datePost) VALUES (:id_user, :photoPost, :text, :datePost)";
         $resultado = $this->conexion->prepare($consulta);
-        $resultado->execute($data);
+        $resultado->bindParam(':id_user', $id_user);
+        $resultado->bindParam(':photoPost', $photoPost);
+        $resultado->bindParam(':text', $postText);
+        $resultado->bindParam(':datePost', $datePost);
+
+        $resultado->execute();
+        return count($resultado->fetchAll()) == 1 ? true : false;
     }
 
     //Función para obtener los post de las personas que sigues

@@ -394,102 +394,101 @@ main#mainContainer {
     @media (max-width: 1200px) {
       margin: 0;
     }
-    /* @media (max-width: 768px) {
-      margin: 0;
-    } */
-    #top {
-      width: 100%;
-      background: var(--panelsBackgroundLight);
-      height: 55%;
-      border-radius: 2px;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      img {
-        margin: 15px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: top;
-        background-color: #ffffff;
-      }
-      textarea {
-        width: 90%;
-        height: 100%;
-        overflow: hidden;
-        border: none;
-        outline: 0;
-        margin: 20px 0;
-        resize: none;
-        background: transparent;
-        color: var(--fontColorLight2);
-      }
-    }
-    #bottom {
-      width: 100%;
-      background: var(--panelsBackgroundLight);
-      height: 45%;
-      border-radius: 2px;
-      margin-top: 3px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-      div#containerIconsWrite {
+    form#formularioPost {
+      #top {
+        width: 100%;
+        background: var(--panelsBackgroundLight);
+        height: 55%;
+        border-radius: 2px;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        position: relative;
         display: flex;
-        flex-basis: 60%;
-        align-items: center;
-        margin-left: 10px;
-        .iconsWrite {
-          display: flex;
-          align-items: center;
-          padding: 10px 16px;
-          border-radius: 6px;
-          &:hover {
-            background-color: var(--backgroundLight);
-          }
-          cursor: pointer;
-          i {
-            &::before {
-              font-size: 20px;
-              color: var(--fontColorLight);
-            }
-          }
-          h6 {
-            margin: 0;
-            color: var(--fontColorLight);
-            @media (max-width: 768px) {
-              display: none;
-            }
-          }
-          /*  &:hover h6 {
-            color: var(--fontColorLight2);
-          } */
+        align-items: flex-start;
+        img {
+          margin: 15px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          object-position: top;
+          background-color: #ffffff;
         }
-        label {
-          margin: 0;
+        textarea {
+          width: 90%;
+          height: 100%;
+          overflow: hidden;
+          border: none;
+          outline: 0;
+          margin: 20px 0;
+          resize: none;
+          background: transparent;
+          color: var(--fontColorLight2);
         }
       }
-      div#publishPostContainer {
-        button#addPostButton {
+      #bottom {
+        width: 100%;
+        background: var(--panelsBackgroundLight);
+        padding: 10px 0;
+        border-radius: 2px;
+        margin-top: 3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        div#containerIconsWrite {
           display: flex;
-          justify-content: center;
-          width: 120px;
-          height: 40px;
-          border-radius: 20px;
-          border: none;
-          background: transparent;
-          outline: 0;
-          margin-right: 20px;
-          background-color: #0a52a3;
-          color: #ffffff;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          i.flaticon-right-arrow {
-            &::before {
-              font-size: 28px;
-              color: var(--blueColor);
+          flex-basis: 60%;
+          align-items: center;
+          margin-left: 10px;
+          .iconsWrite {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 6px;
+            &:hover {
+              background-color: var(--backgroundLight);
+            }
+            cursor: pointer;
+            i {
+              &::before {
+                font-size: 20px;
+                color: var(--fontColorLight);
+              }
+            }
+            h6 {
+              margin: 0;
+              color: var(--fontColorLight);
+              @media (max-width: 768px) {
+                display: none;
+              }
+            }
+            /*  &:hover h6 {
+              color: var(--fontColorLight2);
+            } */
+          }
+          label {
+            margin: 0;
+          }
+        }
+        div#publishPostContainer {
+          button#addPostButton {
+            display: flex;
+            justify-content: center;
+            width: 120px;
+            height: 40px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            outline: 0;
+            margin-right: 20px;
+            background-color: #0a52a3;
+            color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            i.flaticon-right-arrow {
+              &::before {
+                font-size: 28px;
+                color: var(--blueColor);
+              }
             }
           }
         }
@@ -579,6 +578,11 @@ div#postList {
     }
     #postImageContainer {
       cursor: pointer;
+      img {
+        height: 350px;
+        object-fit: cover;
+        object-position: top;
+      }
     }
     div#shareIcons {
       display: flex;
@@ -1117,7 +1121,6 @@ $t: 1.5s;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top;
       cursor: pointer;
       background-color: #ffffff;
     }
