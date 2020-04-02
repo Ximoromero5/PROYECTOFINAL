@@ -3,9 +3,6 @@ $(document).ready(function () {
     //Obtenemos todos los post nada más cargue la página
     getPost();
 
-    //Popover opciones post
-    $('[data-toggle="popover"]').popover();
-
     //Calendario fecha cumpleaños | EN DUDA SI DEJARLO
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
@@ -25,7 +22,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: 'index.php?action=profile',
+            url: 'profile',
             data: {
                 id: id,
                 city: city,
@@ -68,6 +65,9 @@ $(document).ready(function () {
         }
     });
 
+    //Iconos del textarea
+    /*  new EmojiPicker(); */
+
     //Si se selecciona alguna foto se ejecuta lo siguiente:
     $('#photoPost').on('change', function () {
 
@@ -96,7 +96,7 @@ $(document).ready(function () {
         let file = document.getElementById("photoPost").files[0];
         let fileSize = file.size || file.fileSize;
 
-        if (fileSize > 400000) { //4MB
+        if (fileSize > 4000000) { //4MB
             $(document.body).append($(`
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <b>Image is so big</b>, please select another.
@@ -124,8 +124,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function (data) {
-            console.log(data);
-            /*  console.log('Éxito'); */
+            $('#formularioPost')[0].reset();
             $('#postList').empty();
             getPost();
         });
@@ -140,9 +139,10 @@ $(document).ready(function () {
                 action: 'getPost'
             }
         }).done(function (data) {
+
             //Mostramos la información de los post a través de jumbotron
             let datos = JSON.parse(data);
-            let verified, date, photo;
+            let verified, photo, texto;
             let contenedorPost = $('#postList');
 
             //Fecha del post con formato
@@ -152,6 +152,7 @@ $(document).ready(function () {
                 //Asignamos verificado y la foto si hay
                 verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
                 photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
+                texto = item.text != '' ? `<p>${item.text}</p>` : '';
                 newDate = new Date(item.datePost);
                 let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
                 let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
@@ -172,12 +173,12 @@ $(document).ready(function () {
                             </a>
                         </div>
                         <div id="containerDate">
-                            <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?" title="Options" id="popoverOptions"><i class="fas fa-ellipsis-h icono" title="Options"></i></a>
+                            <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a>
                             <small>${day} of ${month} ${hour}:${minute}</small>
                         </div>
                     </div>
-                    <div class="mt-2" id="parrafoTexto">
-                        <p>${item.text}</p>
+                    <div id="parrafoTexto">
+                        ${texto}
                     </div>
                     <div id="postImageContainer">
                             ${photo}
@@ -190,26 +191,46 @@ $(document).ready(function () {
                         </div>
                     </div>
                     <div id="shareIcons">
-                        <div id="shareIcon">
-                            <i class="fas fa-share icono"></i>
-                            <span>Share</span>
+                        <div id="shareIconsContainer">
+                            <div id="shareIcon">
+                                <a href="#0" id="shareButton">
+                                    <i class="fas fa-share icono"></i>
+                                    <span>Share</span>
+                                </a>
+                            </div>
+                            <div id="commentIcon">
+                                <button id="commentButton">
+                                    <i class="far fa-comment icono"></i>
+                                    <span>358</span>
+                                </button>
+                            </div>
+                            <div id="likeIcon">
+                                <button id="${item.id_post}" class="botonDarLike noLiked">
+                                    <i class='far fa-heart icono'></i><span>Like</span>
+                                </button>
+                            </div>  
                         </div>
-                        <div id="commentIcon">
-                            <i class="far fa-comment icono"></i>
-                            <span>358</span>
+                        <div id="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
+                            <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes"></i> likes</h6></span>
                         </div>
-                        <div id="likeIcon">
-                            <i class="far fa-heart icono"></i>
-                            <span>9,453 likes</span>
+                    </div>
+                    <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                            <p>Lorem ipsum</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 `));
             });
-
-            /*  console.log(data); */
+            //Añadimos la función para poder dar like
+            giveLike();
         });
     }
+    //Popover opciones post
+    $('#popoverOptions').popover({ content: "<li class='list-group-item'><i class='fas fa-pencil-alt mr-2'></i>Edit</li><li class='list-group-item'><i class='far fa-trash-alt mr-2'></i>Delete</li>", html: true });
 
     //Follow
     $('#buttonFollow').on('click', function () {
@@ -333,8 +354,7 @@ $(document).ready(function () {
             $(document.documentElement).removeClass('transition');
         }, 500);
     }
-    /*  IMPLEMENTACIÓN DEL TEMA OSCURO */
-
+    /*  FIN IMPLEMENTACIÓN DEL TEMA OSCURO */
 
     //Funcionalidad Mostrar/Ocultar buscador usuarios
     $('#searcherMobileOpen').click(function () {
@@ -350,3 +370,62 @@ $(document).ready(function () {
         $(this).click(function () { $(this).addClass('activeLink'); });
     });
 });
+
+
+/* Función para dar like a un post via ajax  */
+function giveLike() {
+    $('.botonDarLike').each(function (e, item) {
+
+        $.ajax({
+            url: 'checkLike',
+            method: 'POST',
+            data: { id_post: $(item).attr('id') },
+            success: function (data) {
+                let datos = JSON.parse(data);
+                console.log(datos.nLikes[e]['nLikes']);
+                let posts = document.getElementsByClassName('numeroLikes');
+                for (let i = 0; i < posts.length; i++) {
+                    posts[i].innerHTML = datos.nLikes[e]['nLikes'];
+                }
+
+                if (datos.check == "true") {
+                    $(item).removeClass('noLiked');
+                    $(item).addClass('liked');
+                    $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                } else {
+                    $(item).removeClass('liked');
+                    $(item).addClass('noLiked');
+                    $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
+                }
+            }
+        });
+        $(item).click(function (e) {
+            if ($(this).hasClass('noLiked')) {
+                $(this).removeClass('noLiked');
+                $(this).addClass('liked');
+                $.ajax({
+                    url: 'giveLike',
+                    method: 'POST',
+                    data: { id_post: $(this).attr("id") }
+                }).done(function (e) {
+                    if (e == "exito") {
+                        $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                    }
+                });
+            } else if ($(this).hasClass('liked')) {
+                $(this).removeClass('liked');
+                $(this).addClass('noLiked');
+                $.ajax({
+                    url: 'removeLike',
+                    method: 'POST',
+                    data: { id_post: $(this).attr("id") }
+                }).done(function (e) {
+                    if (e == "exito") {
+                        $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
+                    }
+                });
+            }
+        });
+    });
+}
+

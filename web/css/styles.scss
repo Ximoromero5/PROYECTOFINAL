@@ -68,6 +68,7 @@ body {
   }
   a#navbarToggle {
     padding: 10px 0;
+    cursor: pointer;
     i.icono::before {
       font-size: 20px;
       margin: 0;
@@ -81,6 +82,7 @@ body {
   }
   #searcherMobileOpen {
     display: none;
+    cursor: pointer;
     @media (max-width: 800px) {
       display: inline-block;
     }
@@ -241,7 +243,7 @@ div#searcher {
   align-items: center;
   /*   border: 1px solid #ccc; */
   padding: 5px;
-  border-radius: 8px;
+  border-radius: 22px;
   position: relative;
   left: 0;
   margin: 0 !important;
@@ -256,19 +258,15 @@ div#searcher {
     width: 97%;
   }
   i.flaticon-magnifying-glass {
+    margin: 0 10px;
     &::before {
       margin: 0;
-      margin-right: 10px;
       font-size: 17px;
     }
   }
-  i.fa-times-circle {
-    &::before {
-      font-size: 30px;
-      margin: 0;
-      margin-left: 10px;
-      color: #b32b2b;
-    }
+  i#searcherMobileClose {
+    cursor: pointer;
+    margin: 0 10px;
   }
   input#searchUser {
     border: none;
@@ -519,7 +517,7 @@ div#postList {
     div#infoUser {
       display: flex;
       justify-content: space-between;
-      padding: 20px;
+      padding: 8px 20px;
       #userData {
       }
       a#linkProfilePerson {
@@ -586,58 +584,79 @@ div#postList {
     }
     div#shareIcons {
       display: flex;
-      width: 30%;
-      margin-left: 20px;
+      margin: 0 20px;
       align-items: center;
-      div#likeIcon,
-      div#commentIcon,
-      div#shareIcon {
+      justify-content: space-between;
+      #shareIconsContainer {
         display: flex;
-        align-items: center;
-        font-weight: bolder;
-        color: var(--fontColorLight2);
-        i {
-          cursor: pointer;
-          font-size: 18px;
-          width: 30px;
-          height: 30px;
-          line-height: 20px;
-          border-radius: 50%;
-          padding: 6px;
-          transition: all 0.2s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 16px 3px 16px 16px;
-        }
-        i.icono::before {
-          width: 30px;
-          height: 30px;
-          padding: 6px;
-          border-radius: 50%;
-        }
-        div#likeIcon:hover {
-          i.far.fa-heart.icono::before {
-            background: rgba(224, 36, 94, 0.1);
-            color: rgb(224, 36, 94);
+        div#likeIcon,
+        div#commentIcon,
+        div#shareIcon {
+          margin: 10px 0;
+          button,
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            outline: 0;
+            border-radius: 6px;
+            width: 100px;
+            color: var(--fontColorLight2);
+            padding: 10px 0;
+            cursor: pointer;
+            text-decoration: none;
+            &:hover {
+              background-color: var(--backgroundLight);
+            }
+            i {
+              margin-right: 5px;
+            }
+            #iconLikeRed {
+              &::before {
+                color: #f95572;
+                /* #E0245E */
+              }
+            }
           }
-        }
-        i.far.fa-comment.icono:hover {
-          &::before {
-            background: rgba(29, 161, 242, 0.1);
-            color: rgb(29, 161, 242);
+          #commentButton:hover {
+            span {
+              color: rgb(29, 161, 242);
+            }
+            i {
+              &::before {
+                color: rgb(29, 161, 242);
+              }
+            }
           }
-        }
-        i.fa-external-link-alt.icono:hover {
-          &::before {
-            background: rgba(23, 191, 99, 0.1);
-            color: rgb(23, 191, 99);
+          #shareButton:hover {
+            span {
+              color: rgb(23, 191, 99);
+            }
+            i {
+              &::before {
+                color: rgb(23, 191, 99);
+              }
+            }
           }
         }
       }
-      div#likeIcon {
+      #likesCount {
         span {
-          width: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+          i {
+            margin-right: 5px;
+          }
+          h6 {
+            margin: 0;
+          }
         }
       }
     }
@@ -683,7 +702,22 @@ div#postList {
       font-size: 186px;
       font-weight: 200;
       margin: 0px;
-      background: linear-gradient(130deg, #ffa34f, #ff6f68);
+      background: #667db6; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to right,
+        #667db6,
+        #0082c8,
+        #0082c8,
+        #667db6
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to right,
+        #667db6,
+        #0082c8,
+        #0082c8,
+        #667db6
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
@@ -711,10 +745,10 @@ div#postList {
 
   a {
     font-family: "Kanit", sans-serif;
-    color: #ff6f68;
+    color: var(--blueColor);
     font-weight: 200;
     text-decoration: none;
-    border-bottom: 1px dashed #ff6f68;
+    border-bottom: 1px dashed var(--blueColor);
     border-radius: 2px;
   }
 }
@@ -725,7 +759,7 @@ div#postList {
   line-height: 40px;
   width: 40px;
   font-size: 14px;
-  color: #ff6f68;
+  color: var(--blueColor);
   border: 1px solid #efefef;
   border-radius: 50%;
   margin: 3px;
@@ -734,8 +768,8 @@ div#postList {
 
   &:hover {
     color: #fff;
-    background-color: #ff6f68;
-    border-color: #ff6f68;
+    background-color: var(--blueColor);
+    border-color: var(--blueColor);
   }
 }
 
@@ -1267,4 +1301,12 @@ $t: 1.5s;
   top: 0;
   width: 100%;
   z-index: 999;
+}
+
+//Estilos botón close modal
+button.close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  outline: 0;
 }

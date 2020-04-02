@@ -15,6 +15,13 @@
 <main id="mainContainer">
     <aside id="leftContainer" class="d-none d-xl-block">
         <p>Session ID: <?php echo $_SESSION['datos'][0]['id']; ?></p>
+        <p> <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a></p>
+        <!-- AddToAny BEGIN -->
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+        </div>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- AddToAny END -->
     </aside>
     <!-- Contenedor para escribir un post -->
     <div id="containerWrite">
@@ -23,12 +30,12 @@
         <form method="POST" enctype="multipart/form-data" id="formularioPost" name="formularioPost">
             <div id="top">
                 <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
-                <textarea placeholder="What are you thinking about?" maxlength="250" name="textPost" id="textPost"></textarea>
+                <textarea placeholder="What are you thinking about?" maxlength="250" name="textPost" id="textPost" data-emoji-picker="true"></textarea>
                 <input type="file" id="photoPost" name="photoPost" class="d-none">
             </div>
             <div id="bottom" class="mb-4">
                 <div id="containerIconsWrite">
-                    <div class="iconsWrite">
+                    <div class="iconsWrite" id="iconSelector">
                         <i class="fas fa-smile m-2 icono"></i>
                         <h6>Emoji</h6>
                     </div>

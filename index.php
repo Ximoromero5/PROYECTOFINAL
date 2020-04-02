@@ -19,7 +19,10 @@ $map = array(
     'addPost' => array('controller' => 'Controller', 'action' => 'addPost', 'acceso' => 1),
     'getPost' => array('controller' => 'Controller', 'action' => 'getPost', 'acceso' => 1),
     'user' => array('controller' => 'Controller', 'action' => 'user', 'acceso' => 1),
-    'header' => array('controller' => 'Controller', 'action' => 'header', 'acceso' => 1)
+    'header' => array('controller' => 'Controller', 'action' => 'header', 'acceso' => 1),
+    'giveLike' => array('controller' => 'Controller', 'action' => 'giveLike', 'acceso' => 1),
+    'removeLike' => array('controller' => 'Controller', 'action' => 'removeLike', 'acceso' => 1),
+    'checkLike' => array('controller' => 'Controller', 'action' => 'checkLike', 'acceso' => 1),
 );
 
 if (isset($_GET['action'])) {

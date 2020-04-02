@@ -607,4 +607,42 @@ class Controller
             header('Location: error');
         }
     }
+
+    //Función para dar like
+    public function giveLike()
+    {
+        $model = new Model();
+        $id = $_SESSION['datos'][0]['id'];
+        $id_post = $_REQUEST['id_post'];
+
+        if ($model->giveLike($id_post, $id)) {
+            echo "exito";
+        } else {
+            echo "fallo";
+        }
+    }
+    public function checkLike()
+    {
+        $model = new Model();
+        $id = $_SESSION['datos'][0]['id'];
+        $id_post = $_REQUEST['id_post'];
+
+        if ($model->checkLike($id_post, $id)) {
+            echo json_encode(array('check' => 'true', 'nLikes' => $model->countLikes()));
+        } else {
+            echo json_encode(array('check' => 'false', 'nLikes' => $model->countLikes()));
+        }
+    }
+    public function removeLike()
+    {
+        $model = new Model();
+        $id = $_SESSION['datos'][0]['id'];
+        $id_post = $_REQUEST['id_post'];
+
+        if ($model->removeLike($id_post, $id)) {
+            echo "exito";
+        } else {
+            echo "fallo";
+        }
+    }
 }

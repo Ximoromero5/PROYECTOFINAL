@@ -169,7 +169,7 @@ class Model extends PDO
     //Función para obtener los post de las personas que sigues
     public function getPost($idSesion)
     {
-        $consulta = "SELECT * FROM posts INNER JOIN users ON users.id = posts.id_user LEFT JOIN follower ON follower.sender_id = posts.id_user WHERE follower.receiver_id = '$idSesion' OR posts.id_user = '$idSesion' GROUP BY posts.id ORDER BY posts.id DESC";
+        $consulta = "SELECT * FROM posts INNER JOIN users ON users.id = posts.id_user LEFT JOIN follower ON follower.sender_id = posts.id_user WHERE follower.receiver_id = '$idSesion' OR posts.id_user = '$idSesion' GROUP BY posts.id_post ORDER BY posts.id_post DESC";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 
@@ -238,6 +238,47 @@ class Model extends PDO
     public function searchUser($username)
     {
         $consulta = "SELECT * FROM users WHERE username LIKE '%" . $username . "%'";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+
+        return $resultado->fetchAll();
+    }
+
+    //Función para dar like a un post
+    public function giveLike($id_post, $id_user)
+    {
+        //Esta consulta permite insertar un like en la tabla de likepost sin que se repita
+        $consulta = "INSERT INTO postlike (id_user, id_post) SELECT $id_user, $id_post FROM posts WHERE EXISTS (SELECT id_post FROM posts WHERE id_post = $id_post) AND NOT EXISTS (SELECT id FROM postlike WHERE id_user = $id_user AND id_post = $id_post) LIMIT 1";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+        $count = $resultado->rowCount();
+
+        return $count == 1 ? true : false;
+    }
+    public function checkLike($id_post, $id_user)
+    {
+        $consulta = "SELECT id FROM postlike WHERE id_user = $id_user AND id_post = $id_post";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+        $count = $resultado->rowCount();
+
+        return $count == 1 ? true : false;
+    }
+
+    //Función para quitar un like
+    public function removeLike($id_post, $id_user)
+    {
+        $consulta = "DELETE FROM postlike WHERE id_user = $id_user AND id_post = $id_post";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+        $count = $resultado->rowCount();
+
+        return $count == 1 ? true : false;
+    }
+
+    public function countLikes()
+    {
+        $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post GROUP BY posts.id_post";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 
