@@ -1,4 +1,7 @@
 $(function () {
+    //Añadimos el foco a los primeros input al cargar la página
+    $('#usernameLogin').focus();
+    $('#username').focus();
 
     /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
     $("form#registerForm").validate({

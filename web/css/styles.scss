@@ -656,6 +656,7 @@ div#postList {
           }
           h6 {
             margin: 0;
+            color: var(--fontColorLight2);
           }
         }
       }
@@ -1012,6 +1013,13 @@ label[id$="-error"] {
   border-color: #5cb85c !important;
   border-bottom-color: #5cb85c !important;
 }
+i#checkIconRegister {
+  position: absolute;
+  bottom: 18px;
+  right: 12px;
+  color: #5cb85c;
+  display: none;
+}
 
 //MENSAJE DE ERROR DEL LADO SERVIDOR PERSONALIZADO
 .alert.alert-danger {
@@ -1063,7 +1071,7 @@ label[id$="-error"] {
           outline: 0;
           border: 1px solid #ccc;
           border-radius: 3px;
-          padding: 0 15px;
+          padding: 0 40px 0 15px;
           border-bottom: 2px solid #ccc;
         }
         button {

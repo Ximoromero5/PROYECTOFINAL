@@ -382,13 +382,17 @@ function giveLike() {
             data: { id_post: $(item).attr('id') },
             success: function (data) {
                 let datos = JSON.parse(data);
-                console.log(datos.nLikes[e]['nLikes']);
-                let posts = document.getElementsByClassName('numeroLikes');
-                for (let i = 0; i < posts.length; i++) {
-                    posts[i].innerHTML = datos.nLikes[e]['nLikes'];
+                console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]}`);
+                console.log(`ID de post: ${$(item).attr('id')}`);
+
+                if (datos[1][e][0] == $(item).attr('id')) {
+                    $('.numeroLikes').eq(e).html(datos[1][e][1]);
+                    /* console.log($('.numeroLikes').text()); */
+                } else {
+                    console.log(false);
                 }
 
-                if (datos.check == "true") {
+                if (datos[0] == "true") {
                     $(item).removeClass('noLiked');
                     $(item).addClass('liked');
                     $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
@@ -401,6 +405,8 @@ function giveLike() {
         });
         $(item).click(function (e) {
             if ($(this).hasClass('noLiked')) {
+                //Sumamos uno al contador de likes
+
                 $(this).removeClass('noLiked');
                 $(this).addClass('liked');
                 $.ajax({

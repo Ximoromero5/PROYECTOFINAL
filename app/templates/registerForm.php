@@ -25,14 +25,17 @@
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" placeholder="Username" id="username" name="username">
+                    <i class="fas fa-check-circle" id="checkIconRegister"></i>
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" placeholder="Email" id="email" name="email">
+                    <i class="fas fa-check-circle" id="checkIconRegister"></i>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" placeholder="Password" id="password" name="password">
+                    <i class="fas fa-check-circle" id="checkIconRegister"></i>
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender</label>

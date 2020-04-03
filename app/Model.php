@@ -278,7 +278,7 @@ class Model extends PDO
 
     public function countLikes()
     {
-        $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post GROUP BY posts.id_post";
+        $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post GROUP BY posts.id_post DESC";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 

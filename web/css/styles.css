@@ -912,6 +912,7 @@ div#postList div#postContainer div#shareIcons #likesCount span i {
 
 div#postList div#postContainer div#shareIcons #likesCount span h6 {
   margin: 0;
+  color: var(--fontColorLight2);
 }
 
 #notfound {
@@ -1307,6 +1308,14 @@ label[id$="-error"] {
   border-bottom-color: #5cb85c !important;
 }
 
+i#checkIconRegister {
+  position: absolute;
+  bottom: 18px;
+  right: 12px;
+  color: #5cb85c;
+  display: none;
+}
+
 .alert.alert-danger {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1391,7 +1400,7 @@ label[id$="-error"] {
   outline: 0;
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 0 15px;
+  padding: 0 40px 0 15px;
   border-bottom: 2px solid #ccc;
 }
 

@@ -627,10 +627,10 @@ class Controller
         $id = $_SESSION['datos'][0]['id'];
         $id_post = $_REQUEST['id_post'];
 
-        if ($model->checkLike($id_post, $id)) {
-            echo json_encode(array('check' => 'true', 'nLikes' => $model->countLikes()));
+        if ($model->checkLike($id_post, $id) == true) {
+            echo json_encode(array('true', $model->countLikes()));
         } else {
-            echo json_encode(array('check' => 'false', 'nLikes' => $model->countLikes()));
+            echo json_encode(array('false', $model->countLikes()));
         }
     }
     public function removeLike()
