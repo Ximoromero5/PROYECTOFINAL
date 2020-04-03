@@ -54,17 +54,18 @@ body {
 //HEADER
 .navbar-expand-lg {
   background-color: var(--panelsBackgroundLight);
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  justify-content: space-between;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   position: relative;
   top: 0;
   width: 100%;
   z-index: 999;
-  padding: 0.8rem 1rem;
+  /* padding: 0.8rem 1rem; */
   .navbar-collapse {
-    @media (min-width: 992px) {
+    /*    @media (min-width: 992px) {
       flex-basis: 100% !important;
-    }
+    } */
+    flex-grow: 0;
   }
   a#navbarToggle {
     padding: 10px 0;
@@ -95,22 +96,20 @@ body {
 .imagen {
   width: 70%;
 }
-/* .icono {
-  font-size: 30px;
-} */
+
 .profilePhoto {
   width: 55px;
   height: auto;
 }
 
 div#hiddenNavbar {
-  justify-content: space-between;
+  justify-content: flex-end;
+  flex-basis: 30%;
   ul.navbar-nav {
-    justify-content: space-evenly;
     margin: 0 20px;
-    @media (max-width: 768px) {
+    /*   @media (max-width: 768px) {
       width: 100%;
-    }
+    } */
     @media (max-width: 992px) {
       margin: 0;
     }
@@ -121,12 +120,21 @@ div#hiddenNavbar {
         align-items: center;
         color: var(--fontColorLight2);
         font-family: "Lato", sans-serif;
-        /*  font-weight: bold; */
         i {
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          padding: 24px;
+          cursor: pointer;
+          transition: all 0.1s;
           &::before {
-            @media (min-width: 992px) {
-              display: none;
-            }
+            font-size: 20px;
+          }
+          &:hover {
+            background: var(--backgroundLight);
           }
         }
       }
@@ -136,8 +144,8 @@ div#hiddenNavbar {
     a {
       text-decoration: none;
       img {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         object-fit: cover;
         object-position: top;
         background-color: #fff;
@@ -237,16 +245,20 @@ div#hiddenNavbar {
   color: var(--blueColor) !important;
 }
 
+//Clase para cuando el foco está en el input search
+.activeSearch {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
 //Buscador usuarios header
 div#searcher {
   display: flex;
   align-items: center;
-  /*   border: 1px solid #ccc; */
+  flex-basis: 40%;
   padding: 5px;
   border-radius: 22px;
   position: relative;
-  left: 0;
-  margin: 0 !important;
+  left: 180px;
   background: var(--backgroundLight);
   color: var(--fontColorLight2);
   transition: all 0.2s;
@@ -297,7 +309,7 @@ div#searcher {
     div#listaUsuarios {
       display: block;
       position: absolute;
-      width: 360px;
+      width: 100%;
       margin-top: 15px;
       padding: 0;
       border: none;
@@ -360,6 +372,9 @@ div#searcher {
       }
     }
   }
+}
+input#searchUser:focus {
+  background-color: red;
 }
 
 //Clase especifica que se aplica al buscador de usuarios al presionar el botón de buscar de fuera
@@ -1317,4 +1332,20 @@ button.close {
   right: 10px;
   top: 5px;
   outline: 0;
+}
+
+//Test
+.animate {
+  animation: animation 0.3s;
+}
+
+@keyframes animation {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+  }
 }

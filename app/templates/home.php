@@ -14,7 +14,7 @@
 <!-- Preloader de la página -->
 <main id="mainContainer">
     <aside id="leftContainer" class="d-none d-xl-block">
-        <p>Session ID: <?php echo $_SESSION['datos'][0]['id']; ?></p>
+        <p id="pruebaXimo">Session ID: <?php echo $_SESSION['datos'][0]['id']; ?></p>
         <p> <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a></p>
         <!-- AddToAny BEGIN -->
         <div class="a2a_kit a2a_kit_size_32 a2a_default_style">

@@ -33,7 +33,7 @@
             </div>
 
             <!-- Buscador de usuarios -->
-            <div id="searcher" class="my-3 my-lg-0">
+            <div id="searcher">
                 <i class="flaticon-magnifying-glass"></i>
                 <input class="nav-item" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Searcher...">
                 <div class="dropdown" id="dropdownSearchUsers"></div>
@@ -43,18 +43,17 @@
             <!--  Menú horizontal -->
             <div class="collapse navbar-collapse" id="hiddenNavbar">
                 <ul class="navbar-nav" id="horizontalMenu">
+                  <!--   <li class="nav-item mb-2 mb-lg-0">
+                        <a class="nav-link" href="home"><i class="fas fa-home"></i></a>
+                    </li> -->
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="home">
-                            <i class="flaticon-home icono mr-2"></i>Home</a>
+                        <a class="nav-link" href="#0"><i class="fas fa-user-friends"></i></a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"> <i class="flaticon-user icono mr-2"></i> People</a>
+                        <a class="nav-link" href="#0"><i class="fas fa-comment-dots"></i></a>
                     </li>
                     <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"> <i class="flaticon-speech-bubble icono mr-2"></i> Messaging</a>
-                    </li>
-                    <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"> <i class="flaticon-alarm icono mr-2"></i> Notifications</a>
+                        <a class="nav-link" href="#0"><i class="fas fa-bell"></i></a>
                     </li>
                 </ul>
                 <div class="mr-4" id="headerPhoto">

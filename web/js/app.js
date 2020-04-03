@@ -185,7 +185,7 @@ $(document).ready(function () {
                         <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
-                                    <img src="${photo}" alt="" class="w-100 h-100">
+                                    <img src="${$(photo).attr('src')}" alt="" class="w-100 h-100">
                                 </div>
                             </div>
                         </div>
@@ -211,7 +211,7 @@ $(document).ready(function () {
                             </div>  
                         </div>
                         <div id="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
-                            <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes"></i> likes</h6></span>
+                            <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes animate" id="numeroLikeCount"></i> likes</h6></span>
                         </div>
                     </div>
                     <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
@@ -366,10 +366,16 @@ $(document).ready(function () {
 
     //Cambiar color links menú
     $('#horizontalMenu li a').each(function () {
-        $(this).removeClass('activeLink');
-        $(this).click(function () { $(this).addClass('activeLink'); });
+        if ((window.location.pathname.indexOf($(this).attr('href'))) > -1) {
+            $(this).addClass('activeLink');
+        }
     });
-});
+
+    //Añadir clase active searcher
+    $('#searchUser').focus(function () { $('#searcher').addClass('activeSearch') });
+    $('#searchUser').focusout(function () { $('#searcher').removeClass('activeSearch') });
+
+}); //Fin document.ready
 
 
 /* Función para dar like a un post via ajax  */
@@ -405,8 +411,11 @@ function giveLike() {
         });
         $(item).click(function (e) {
             if ($(this).hasClass('noLiked')) {
-                //Sumamos uno al contador de likes
 
+                //Sumamos uno al contador de likes
+                let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
+                nLike++;
+                $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
                 $(this).removeClass('noLiked');
                 $(this).addClass('liked');
                 $.ajax({
@@ -419,6 +428,11 @@ function giveLike() {
                     }
                 });
             } else if ($(this).hasClass('liked')) {
+
+                //Sumamos uno al contador de likes
+                let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
+                nLike--;
+                $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
                 $(this).removeClass('liked');
                 $(this).addClass('noLiked');
                 $.ajax({
