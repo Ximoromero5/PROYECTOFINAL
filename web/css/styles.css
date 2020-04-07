@@ -55,6 +55,8 @@ nav#menu {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
+  z-index: 999;
+  /* box-shadow: rgba(0, 0, 0, 0.9) 0px 1px 2px 0px, rgba(0, 0, 0, 0.9) 0px 0px 2px 0px; */
 }
 
 @media (max-width: 768px) {
@@ -112,6 +114,7 @@ nav#menu div#searchBarContainer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 
 nav#menu div#searchBarContainer #searchBar {
@@ -128,6 +131,7 @@ nav#menu div#searchBarContainer #searchBar {
           align-items: center;
   border-radius: 30px;
   background: var(--backgroundLight);
+  z-index: 1;
 }
 
 nav#menu div#searchBarContainer #searchBar #searchIcon {
@@ -149,7 +153,7 @@ nav#menu div#searchBarContainer #searchBar #searchIcon {
 }
 
 nav#menu div#searchBarContainer #searchBar #searchUser {
-  width: 85%;
+  width: 88%;
   height: 100%;
   font-size: 16px;
   border: none;
@@ -172,6 +176,49 @@ nav#menu div#searchBarContainer #searchBar #searchUser::-ms-input-placeholder {
 
 nav#menu div#searchBarContainer #searchBar #searchUser::placeholder {
   color: var(--fontColorLight);
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList {
+  position: absolute;
+  top: 0;
+  width: 90%;
+  min-height: 60px;
+  max-height: 430px;
+  overflow: auto;
+  border-radius: 3px;
+  background: var(--panelsBackgroundLight);
+  z-index: 0;
+  margin-top: 2px;
+  padding-top: 60px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
+  display: none;
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList #emptyContainer {
+  border-radius: 3px;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList #emptyContainer i {
+  padding: 10px;
+  color: var(--fontColorLight);
+  font-size: 14px;
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList #emptyContainer p {
+  margin: 0;
+  color: var(--fontColorLight2);
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList #emptyContainer:hover {
+  background: var(--backgroundLight);
+}
+
+nav#menu div#searchBarContainer #searchBarContainerList.show {
+  display: block !important;
 }
 
 nav#menu div#mainMenu {
@@ -277,6 +324,8 @@ nav#menu div#mainMenu ul#horizontalMenu li#profileSection div.dropdown-menu.show
   -ms-flex-pack: distribute;
       justify-content: space-around;
   background: var(--panelsBackgroundLight);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
 }
 
 nav#menu div#mainMenu ul#horizontalMenu li#profileSection div.dropdown-menu.show .dropdown-item {
@@ -362,11 +411,6 @@ nav#menu div#mainMenu ul#horizontalMenu li#profileSection div.dropdown-menu.show
 /* FIN ESTILOS DEL HEADER NAVIGATION */
 .activeLink {
   color: var(--blueColor) !important;
-}
-
-.activeSearch {
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 main#mainContainer {

@@ -27,6 +27,7 @@
                     <input type="text" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Searcher...">
                     <div class="dropdown" id="dropdownSearchUsers"></div>
                 </div>
+                <div id="searchBarContainerList"></div>
             </div>
 
             <!--  Menú horizontal -->
