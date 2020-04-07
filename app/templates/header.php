@@ -5,90 +5,85 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="web/css/font/flaticon.css">
         <link rel="stylesheet" type="text/css" href="<?php echo 'web/css/' . Config::$dbCss ?>">
         <title>Home</title>
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light">
-
-            <!-- Icono para mostrar el menú en vista móvil -->
-            <a class="navbar-toggler border-0" id="navbarToggle" data-toggle="collapse" data-target="#hiddenNavbar" aria-controls="hiddenNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars icono"></i>
-            </a>
+        <nav id="menu">
 
             <!-- Icono principal -->
-            <div class="ml-4" id="logoContainer">
-                <a class="navbar-brand" href="home">
-                    <!-- <img src="web/images/linkedin.png" alt="" width="35" height="35"> -->
-                    <h4>logo.</h4>
+            <div id="logoContainer">
+                <a href="home">
+                    <h4>facebook.</h4>
                 </a>
             </div>
 
-            <div id="searcherMobileOpen">
-                <i class="flaticon-magnifying-glass"></i>
-            </div>
-
             <!-- Buscador de usuarios -->
-            <div id="searcher">
-                <i class="flaticon-magnifying-glass"></i>
-                <input class="nav-item" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Searcher...">
-                <div class="dropdown" id="dropdownSearchUsers"></div>
-                <i class="flaticon-close" id="searcherMobileClose"></i>
+            <div id="searchBarContainer">
+                <div id="searchBar">
+                    <i class="fas fa-search" id="searchIcon"></i>
+                    <input type="text" id="searchUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Searcher...">
+                    <div class="dropdown" id="dropdownSearchUsers"></div>
+                </div>
             </div>
 
             <!--  Menú horizontal -->
-            <div class="collapse navbar-collapse" id="hiddenNavbar">
-                <ul class="navbar-nav" id="horizontalMenu">
-                  <!--   <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="home"><i class="fas fa-home"></i></a>
-                    </li> -->
-                    <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"><i class="fas fa-user-friends"></i></a>
+            <div id="mainMenu">
+                <ul id="horizontalMenu">
+                    <li id="home">
+                        <!-- Este icono solo está visible en modo móvil -->
+                        <a href="home"><i class="fas fa-home"></i></a>
                     </li>
-                    <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"><i class="fas fa-comment-dots"></i></a>
+                    <li id="friends">
+                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Friends"><i class="fas fa-user-friends"></i></a>
                     </li>
-                    <li class="nav-item mb-2 mb-lg-0">
-                        <a class="nav-link" href="#0"><i class="fas fa-bell"></i></a>
+                    <li>
+                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="fas fa-comment"></i></a>
                     </li>
-                </ul>
-                <div class="mr-4" id="headerPhoto">
-                    <a href="profile">
-                        <?php echo "<img src=" . $_SESSION['datos'][0]['photo'] . " class='profilePhoto mr-2 rounded-circle'>" ?>
-                    </a>
-                    <div class="btn-group">
-                        <i class="fas fa-chevron-down dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                        <div class="dropdown-menu dropdown-menu-right" id="optionsMenu">
-                            <a href="profile" class="dropdown-item" title="View Profile" id="viewProfile">
-                                <?php echo "<img src=" . $_SESSION['datos'][0]['photo'] . " class='mr-2 rounded-circle' width='40' height='40'> " ?>
-                                <div>
-                                    <h6><?php echo $_SESSION['datos'][0]['firstName'] . $_SESSION['datos'][0]['lastName'] ?></h6>
-                                    <small>View your Profile</small>
-                                </div>
+                    <li>
+                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Notifications"><i class="fas fa-bell"></i></a>
+                    </li>
+                    <li id="settings">
+                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></a>
+                    </li>
+                    <li id="profileSection">
+                        <div class="dropdown">
+                            <a href="#0" class="dropdown-toggle" id="profile" data-toggle="dropdown">
+                                <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
                             </a>
-                            <a href="" class="dropdown-item" title="Configuration" id="containerDropdown"> <i class="flaticon-gear"></i>
-                                <h6>Configuration</h6>
-                            </a>
-                            <label for="checkDarkTheme" id="checkDarkThemeContainer">
-                                <div class="dropdown-item" id="containerDropdown">
+
+                            <!-- Menú de opciones -->
+                            <div class="dropdown-menu" aria-labelledby="profile">
+                                <a href="profile" class="dropdown-item" id="dropdownProfile">
+                                    <div class="dropdownProfile_interior">
+                                        <img src="<?php echo $_SESSION['datos'][0]['photo']; ?>" alt="">
+                                        <div>
+                                            <h6><?php echo $_SESSION['datos'][0]['firstName'] . " " . $_SESSION['datos'][0]['lastName']; ?></h6>
+                                            <small>View your Profile</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#0" class="dropdown-item">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <h6>Configuration</h6>
+                                </a>
+                                <label for="checkDarkTheme" id="checkDarkThemeContainer" class="dropdown-item">
                                     <i class="fas fa-moon"></i>
                                     <h6>Dark Mode</h6>
-                                    <label class="switch ml-3">
+                                    <label class="switch">
                                         <input type="checkbox" id="checkDarkTheme">
                                         <span class="slider round"></span>
                                     </label>
-                                </div>
-                            </label>
-                            <a href="closeSesion" class="dropdown-item" title="Log Out" id="containerDropdown"> <i class="flaticon-logout"></i>
-                                <h6>Log Out</h6>
-                            </a>
+                                </label>
+                                <a href="closeSesion" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>
+                                    <h6>Log Out</h6>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
@@ -97,6 +92,7 @@
 
         <!-- SCRIPTS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/f32dfec8d8.js" crossorigin="anonymous"></script>

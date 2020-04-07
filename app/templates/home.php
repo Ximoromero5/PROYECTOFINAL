@@ -14,14 +14,16 @@
 <!-- Preloader de la página -->
 <main id="mainContainer">
     <aside id="leftContainer" class="d-none d-xl-block">
-        <p id="pruebaXimo">Session ID: <?php echo $_SESSION['datos'][0]['id']; ?></p>
-        <p> <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a></p>
+        <!-- <p id="pruebaXimo">Session ID: <?php echo $_SESSION['datos'][0]['id']; ?></p>
+        <p> <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a></p> -->
         <!-- AddToAny BEGIN -->
-        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+        <!--       <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
             <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
         </div>
-        <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <script async src="https://static.addtoany.com/menu/page.js"></script> -->
         <!-- AddToAny END -->
+        <h1>Title of sidebar</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum omnis sapiente nemo dolorem animi facilis reprehenderit fugiat molestiae dolore debitis. Cupiditate placeat odit blanditiis et praesentium eaque a sint sed.</p>
     </aside>
     <!-- Contenedor para escribir un post -->
     <div id="containerWrite">
@@ -66,6 +68,7 @@
         <!-- MOSTRAR POST -->
     </div>
     <aside id="rightContainer" class="d-none d-xl-block">
+        <h1>Title of sidebar</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos amet quia necessitatibus consequatur doloremque qui fuga deleniti aperiam ducimus beatae quas excepturi voluptates a nam, magnam dolorem omnis consequuntur inventore!</p>
     </aside>
 </main>

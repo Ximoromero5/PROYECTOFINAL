@@ -557,7 +557,7 @@ class Controller
                 $model->unfollow($sender_id, $receiver_id);
             }
 
-            echo json_encode($parametros['userPosts']);
+            /* echo json_encode($parametros['userPosts']); */
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');

@@ -3,6 +3,9 @@ $(document).ready(function () {
     //Obtenemos todos los post nada más cargue la página
     getPost();
 
+    //Iniciar los tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
     //Calendario fecha cumpleaños | EN DUDA SI DEJARLO
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
@@ -216,9 +219,11 @@ $(document).ready(function () {
                     </div>
                     <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
-                            <p>Lorem ipsum</p>
+                            <div class="modal-content p-5">
+                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                <input type="text" placeholder="Search user" class="form-control">
+                                <hr>
+                                <ul class="list-group likedUsersList"></ul>
                             </div>
                         </div>
                     </div>
@@ -356,14 +361,6 @@ $(document).ready(function () {
     }
     /*  FIN IMPLEMENTACIÓN DEL TEMA OSCURO */
 
-    //Funcionalidad Mostrar/Ocultar buscador usuarios
-    $('#searcherMobileOpen').click(function () {
-        $('#searcher').addClass('openSearcherClass');
-    });
-    $('#searcherMobileClose').click(function () {
-        $('#searcher').removeClass('openSearcherClass');
-    });
-
     //Cambiar color links menú
     $('#horizontalMenu li a').each(function () {
         if ((window.location.pathname.indexOf($(this).attr('href'))) > -1) {
@@ -372,8 +369,8 @@ $(document).ready(function () {
     });
 
     //Añadir clase active searcher
-    $('#searchUser').focus(function () { $('#searcher').addClass('activeSearch') });
-    $('#searchUser').focusout(function () { $('#searcher').removeClass('activeSearch') });
+    $('#searchUser').focus(function () { $('#searchBar').addClass('activeSearch') });
+    $('#searchUser').focusout(function () { $('#searchBar').removeClass('activeSearch') });
 
 }); //Fin document.ready
 
@@ -388,12 +385,20 @@ function giveLike() {
             data: { id_post: $(item).attr('id') },
             success: function (data) {
                 let datos = JSON.parse(data);
-                console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]}`);
-                console.log(`ID de post: ${$(item).attr('id')}`);
+                let nameLiked = datos[1][e][2];
+                let nameLikedPost = String(nameLiked).split("|");
 
                 if (datos[1][e][0] == $(item).attr('id')) {
+                    console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
+                    $('.likedUsersList').html($(`<a href="index.php?action=user&person=${nameLikedPost}"><li class="list-group-item">${nameLikedPost.reverse()}</li></a>`));
+                }
+
+                /*  console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]} Personas liked: ${datos[1][e][2]}`);
+                 console.log(`ID de post: ${$(item).attr('id')}`); */
+
+                //Asignamos el número de likes al post
+                if (datos[1][e][0] == $(item).attr('id')) {
                     $('.numeroLikes').eq(e).html(datos[1][e][1]);
-                    /* console.log($('.numeroLikes').text()); */
                 } else {
                     console.log(false);
                 }
