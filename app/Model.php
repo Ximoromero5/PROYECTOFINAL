@@ -185,6 +185,15 @@ class Model extends PDO
         return $resultado->fetchAll();
     }
 
+    //Función que obtiene los datos de un usuario especifico mediante el username
+    public function getPostUser($id_user)
+    {
+        $consulta = "SELECT * FROM posts WHERE id_user = '$id_user'";
+        $resultado = $this->conexion->query($consulta);
+
+        return $resultado->fetchAll();
+    }
+
     //Función que comprueba si se está siguiendo a la persona, para poner un botón u otro
     public function checkFollow($sender_id, $receiver_id)
     {
@@ -218,10 +227,29 @@ class Model extends PDO
         return $count == 1 ? true : false;
     }
 
-    //Función para buscar usuarios
-    public function searchUser($username)
+    //Función para contar el número de seguidos
+    public function countFollowing()
     {
-        $consulta = "SELECT * FROM users WHERE username LIKE '%" . $username . "%'";
+        $consulta = "SELECT users.id, COUNT(follower.id_follower) AS nFollowing, GROUP_CONCAT(users.username SEPARATOR '|') AS nameFollower FROM users LEFT JOIN follower ON follower.receiver_id = users.id GROUP BY users.id DESC";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+
+        return $resultado->fetchAll();
+    }
+    //Función para contar el número de seguidores 
+    public function countFollowers()
+    {
+        $consulta = "SELECT users.id, COUNT(follower.id_follower) AS nFollowers, GROUP_CONCAT(users.username SEPARATOR '|') AS nameFollower FROM users LEFT JOIN follower ON follower.sender_id = users.id GROUP BY users.id DESC";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+
+        return $resultado->fetchAll();
+    }
+
+    //Función para buscar usuarios
+    public function searchUser($text)
+    {
+        $consulta = "SELECT * FROM users WHERE username LIKE '%" . $text . "%' OR firstName LIKE '%" . $text . "%' OR lastName LIKE '%" . $text . "%'";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 

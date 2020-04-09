@@ -67,8 +67,8 @@
                         <p class="card-text" id="parrafoDescripcion"><?php echo $row['description'] ?></p>
                     </div>
                     <div class="card-footer text-center">
-                        <span class="mr-3"><b><?php echo $row['numberFollowing'] ?></b> Following</span>
-                        <span><b><?php echo $row['numberFollowers'] ?></b> Followers</span>
+                        <span class="mr-3"><b></b> Following</span>
+                        <span><b></b> Followers</span>
                     </div>
                 </div>
             </div>

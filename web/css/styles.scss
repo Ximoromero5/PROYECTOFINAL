@@ -97,6 +97,7 @@ nav#menu {
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 99;
     #searchBar {
       background: transparent;
       width: 85%;
@@ -1085,51 +1086,13 @@ i#checkIconRegister {
 }
 /* END LOGIN PAGE STYLES */
 
-/* Estilos preloader de la página */
-div#preloaderPage {
-  position: fixed;
-  z-index: 999;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: var(--panelsBackgroundLight);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-$d: 2em;
-$t: 1.5s;
-
-.dot {
-  background: var(--fontColorLight2);
-  color: var(--panelsBackgroundLight);
-  &,
-  &:after {
-    display: inline-block;
-    width: $d;
-    height: $d;
-    border-radius: 50%;
-    animation: a $t calc(((var(--i) + var(--o, 0)) / var(--n) - 1) *#{$t}) infinite;
-  }
-
-  &:after {
-    --o: 1;
-    background: currentcolor;
-    content: "";
+.modal-content {
+  border: none;
+  border-radius: 6px;
+  img {
+    border-radius: 6px;
   }
 }
-
-@keyframes a {
-  0%,
-  50% {
-    transform: scale(0);
-  }
-}
-
-/* Estilos preloader de la página */
 
 /* ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
 #containerProfile {
@@ -1152,12 +1115,12 @@ $t: 1.5s;
     }
     #left {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       flex: 1;
       background: transparent;
       padding: 30px;
       margin-left: 20px;
-      max-height: 600px;
       @media (max-width: 768px) {
         padding: 0;
       }
@@ -1249,6 +1212,46 @@ $t: 1.5s;
             .following {
               margin-right: 20px;
             }
+          }
+        }
+      }
+      div#containerProfilePhotos {
+        width: 100%;
+        background: var(--panelsBackgroundLight);
+        height: 390px;
+        border-radius: 10px;
+        padding: 7px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 70px;
+        .top {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+          a {
+            text-decoration: none;
+            color: var(--fontColorLight2);
+            margin: 10px;
+            &:hover {
+              text-decoration: underline;
+            }
+            h6 {
+              color: var(--blueColor);
+            }
+          }
+        }
+        .bottom {
+          width: 100%;
+          border-radius: 4px;
+          img {
+            width: 100px;
+            height: 100px;
+            margin: 4px;
+            border-radius: 3px;
+            object-fit: cover;
+            object-position: center;
+            cursor: pointer;
           }
         }
       }

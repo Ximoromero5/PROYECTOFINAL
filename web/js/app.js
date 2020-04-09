@@ -429,7 +429,7 @@ $(document).ready(function () {
 
     function checkFollow() {
         $.urlParam = function (name) {
-            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             return results[1] || 0;
         }
 
@@ -442,6 +442,21 @@ $(document).ready(function () {
                 person: $.urlParam('person')
             }
         }).done(function (data) {
+
+            //Asignamos los seguidores
+            $(data.nFollowers).each(function (e, item) {
+                if (item[0] === data.id) {
+                    $('.numeroSeguidores').html(item.nFollowers);
+                }
+            });
+
+            //Asignamos las personas seguidas
+            $(data.nFollowing).each(function (e, item) {
+                if (item[0] === data.id) {
+                    $('.numeroSiguiendo').html(item.nFollowing);
+                }
+            });
+
             if (data.success == '1') {
                 console.log('UNFOLLOW BUTTON');
                 $('#containerFollowButton').append($(`<button class="unfollowButton" id="${data.id}">Unfollow <i class="fas fa-user-slash"></i></button>`));
@@ -467,6 +482,7 @@ $(document).ready(function () {
                         id_user: id_user
                     }
                 }).done(function (data) {
+
                     $('#containerFollowButton').html($(`<button class="unfollowButton" id="${id_user}">Unfollow <i class="fas fa-user-slash"></i></button>`));
                     unfollow();
                 });

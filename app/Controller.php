@@ -510,14 +510,17 @@ class Controller
         try {
             $model = new Model();
             $datosUser = []; //Recojo los datos del usuario mediante el username en un array
+            $postsUser = [];
 
             //Obtenemos el username del usuario que estamos visitando
             if (isset($_GET['person'])) {
                 if ($model->userExists($_GET['person'])) {
                     $username = $_GET['person'];
                     $datosUser = $model->getInfoUser($username);
+                    $postsUser = $model->getPostUser($datosUser[0]['id']);
                 } else {
                     $datosUser = "The user doesn't exist";
+                    $postsUser = "No post";
                 }
             }
         } catch (Exception $e) {
@@ -543,7 +546,7 @@ class Controller
         $datosUser = $model->getInfoUser($username);
         $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
         $idUserProfile = $datosUser[0]['id']; //Id persona a la que estamos visitando
-        echo json_encode($model->checkFollow($idUserProfile, $sesionId) ? array('success' => 1, 'id' => $idUserProfile) : array('success' => 0, 'id' => $idUserProfile));
+        echo json_encode($model->checkFollow($idUserProfile, $sesionId) ? array('success' => 1, 'id' => $idUserProfile, 'nFollowing' => $model->countFollowing(), 'nFollowers' => $model->countFollowers()) : array('success' => 0, 'id' => $idUserProfile, 'nFollowing' => $model->countFollowing(), 'nFollowers' => $model->countFollowers()));
     }
 
     //Función para seguir a alguien
