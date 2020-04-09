@@ -230,46 +230,14 @@ $(document).ready(function () {
                 </div>
                 `));
             });
+
             //Añadimos la función para poder dar like
             giveLike();
         });
     }
+
     //Popover opciones post
     $('#popoverOptions').popover({ content: "<li class='list-group-item'><i class='fas fa-pencil-alt mr-2'></i>Edit</li><li class='list-group-item'><i class='far fa-trash-alt mr-2'></i>Delete</li>", html: true });
-
-    //Follow
-    $('#buttonFollow').on('click', function () {
-        let sender_id = $(this).data('sender_id');
-        let action = $(this).data('action');
-        $.ajax({
-            url: 'index.php?action=peopleProfile',
-            method: 'POST',
-            data: { sender_id: sender_id, action: action },
-            success: function (data) {
-                let nFollowers = Number($('#followers').text());
-                nFollowers++;
-                $('#followers').text(nFollowers);
-                $('#buttonFollow').replaceWith('<button name="unfollowButton" class="btn btn-danger" data-action="unfollow" data-sender_id="' + sender_id + '" id="buttonUnfollow">Unfollow <i class="fas fa-user-minus ml-1"></i></button>');
-            }
-        });
-    });
-
-    //Unfollow
-    $('#buttonUnfollow').on('click', function () {
-        let sender_id = $(this).data('sender_id');
-        let action = $(this).data('action');
-        $.ajax({
-            url: 'index.php?action=peopleProfile',
-            method: 'POST',
-            data: { sender_id: sender_id, action: action },
-            success: function (data) {
-                let nFollowers = Number($('#followers').text());
-                nFollowers--;
-                $('#followers').text(nFollowers);
-                $('#buttonUnfollow').replaceWith('<button name="followButton" class="btn btn-primary" data-action="follow" data-sender_id="' + sender_id + '" id="buttonFollow">Follow <i class="fas fa-user-plus ml-1"></i></button>');
-            }
-        });
-    });
 
     //Buscar usuarios
     $('#searchUser').keyup(function () {
@@ -380,85 +348,151 @@ $(document).ready(function () {
         }
     });
 
-}); //Fin document.ready
+    /* Función para dar like a un post via ajax  */
+    function giveLike() {
+        $('.botonDarLike').each(function (e, item) {
 
+            $.ajax({
+                url: 'checkLike',
+                method: 'POST',
+                data: { id_post: $(item).attr('id') },
+                success: function (data) {
+                    let datos = JSON.parse(data);
+                    let nameLiked = datos[1][e][2];
+                    let nameLikedPost = String(nameLiked).split("|");
 
-/* Función para dar like a un post via ajax  */
-function giveLike() {
-    $('.botonDarLike').each(function (e, item) {
-
-        $.ajax({
-            url: 'checkLike',
-            method: 'POST',
-            data: { id_post: $(item).attr('id') },
-            success: function (data) {
-                let datos = JSON.parse(data);
-                let nameLiked = datos[1][e][2];
-                let nameLikedPost = String(nameLiked).split("|");
-
-                if (datos[1][e][0] == $(item).attr('id')) {
-                    console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
-                    $('.likedUsersList').html($(`<a href="index.php?action=user&person=${nameLikedPost}"><li class="list-group-item">${nameLikedPost.reverse()}</li></a>`));
-                }
-
-                /*  console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]} Personas liked: ${datos[1][e][2]}`);
-                 console.log(`ID de post: ${$(item).attr('id')}`); */
-
-                //Asignamos el número de likes al post
-                if (datos[1][e][0] == $(item).attr('id')) {
-                    $('.numeroLikes').eq(e).html(datos[1][e][1]);
-                } else {
-                    console.log(false);
-                }
-
-                if (datos[0] == "true") {
-                    $(item).removeClass('noLiked');
-                    $(item).addClass('liked');
-                    $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
-                } else {
-                    $(item).removeClass('liked');
-                    $(item).addClass('noLiked');
-                    $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
-                }
-            }
-        });
-        $(item).click(function (e) {
-            if ($(this).hasClass('noLiked')) {
-
-                //Sumamos uno al contador de likes
-                let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
-                nLike++;
-                $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
-                $(this).removeClass('noLiked');
-                $(this).addClass('liked');
-                $.ajax({
-                    url: 'giveLike',
-                    method: 'POST',
-                    data: { id_post: $(this).attr("id") }
-                }).done(function (e) {
-                    if (e == "exito") {
-                        $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                    if (datos[1][e][0] == $(item).attr('id')) {
+                        console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
+                        $('.likedUsersList').html($(`<a href="index.php?action=user&person=${nameLikedPost}"><li class="list-group-item">${nameLikedPost.reverse()}</li></a>`));
                     }
-                });
-            } else if ($(this).hasClass('liked')) {
 
-                //Sumamos uno al contador de likes
-                let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
-                nLike--;
-                $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
-                $(this).removeClass('liked');
-                $(this).addClass('noLiked');
-                $.ajax({
-                    url: 'removeLike',
-                    method: 'POST',
-                    data: { id_post: $(this).attr("id") }
-                }).done(function (e) {
-                    if (e == "exito") {
+                    /*  console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]} Personas liked: ${datos[1][e][2]}`);
+                     console.log(`ID de post: ${$(item).attr('id')}`); */
+                    console.log('NÚMERO DE LIKES: ' + datos[1][e]['nLikes']);
+                    //Asignamos el número de likes al post
+                    if (datos[1][e][0] == $(item).attr('id')) {
+                        $('.numeroLikes').eq(e).html(datos[1][e]['nLikes']);
+                    } else {
+                        console.log(false);
+                    }
+
+                    if (datos[0] == "true") {
+                        $(item).removeClass('noLiked');
+                        $(item).addClass('liked');
+                        $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                    } else {
+                        $(item).removeClass('liked');
+                        $(item).addClass('noLiked');
                         $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
                     }
-                });
-            }
-        });
-    });
-}
+                }
+            });
+            $(item).click(function (e) {
+                if ($(this).hasClass('noLiked')) {
 
+                    //Sumamos uno al contador de likes
+                    let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
+                    nLike++;
+                    $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
+                    $(this).removeClass('noLiked');
+                    $(this).addClass('liked');
+                    $.ajax({
+                        url: 'giveLike',
+                        method: 'POST',
+                        data: { id_post: $(this).attr("id") }
+                    }).done(function (e) {
+                        if (e == "exito") {
+                            $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                        }
+                    });
+                } else if ($(this).hasClass('liked')) {
+
+                    //Restamos uno al contador de likes
+                    let nLike = Number($(this).parent().parent().next().find('#numeroLikeCount').text());
+                    nLike--;
+                    $(this).parent().parent().next().find('#numeroLikeCount').text(nLike);
+                    $(this).removeClass('liked');
+                    $(this).addClass('noLiked');
+                    $.ajax({
+                        url: 'removeLike',
+                        method: 'POST',
+                        data: { id_post: $(this).attr("id") }
+                    }).done(function (e) {
+                        if (e == "exito") {
+                            $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    function checkFollow() {
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+
+        //Check button follow users
+        $.ajax({
+            url: 'checkFollow',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                person: $.urlParam('person')
+            }
+        }).done(function (data) {
+            if (data.success == '1') {
+                console.log('UNFOLLOW BUTTON');
+                $('#containerFollowButton').append($(`<button class="unfollowButton" id="${data.id}">Unfollow <i class="fas fa-user-slash"></i></button>`));
+            } else {
+                console.log('FOLLOW BUTTON');
+                $('#containerFollowButton').append($(`<button class="followButton" id="${data.id}">Follow <i class="fas fa-user-plus"></i></button>`));
+            }
+            follow();
+            unfollow();
+        });
+    }
+    checkFollow();
+
+    //Follow users
+    function follow() {
+        $('.followButton').each(function () {
+            $(this).click(function () {
+                let id_user = $(this).attr('id');
+                $.ajax({
+                    url: 'follow',
+                    method: 'POST',
+                    data: {
+                        id_user: id_user
+                    }
+                }).done(function (data) {
+                    $('#containerFollowButton').html($(`<button class="unfollowButton" id="${id_user}">Unfollow <i class="fas fa-user-slash"></i></button>`));
+                    unfollow();
+                });
+            });
+        });
+    }
+
+
+    //Unfollow users
+    function unfollow() {
+        $('.unfollowButton').each(function () {
+            $(this).click(function () {
+                let id_user = $(this).attr('id');
+                $.ajax({
+                    url: 'unfollow',
+                    method: 'POST',
+                    data: {
+                        id_user: id_user
+                    }
+                }).done(function (data) {
+                    $('#containerFollowButton').html($(`<button class="followButton" id="${id_user}">Follow <i class="fas fa-user-plus"></i></button>`));
+                    follow();
+                });
+            });
+        });
+    }
+
+
+}); //Fin document.ready

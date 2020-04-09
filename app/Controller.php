@@ -14,11 +14,9 @@ class Controller
                 $parametros = array(
                     'datos' => array()
                 );
-                foreach ($_SESSION['datos'] as $key) {
 
-                    //GET POSTS
-                    $parametros['datos'] =  $model->getPost($key['id']);
-                }
+                //GET POSTS
+                $parametros['datos'] =  $model->getPost($_SESSION['datos'][0]['id']);
             } catch (Exception $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
                 header('Location: error');
@@ -510,54 +508,18 @@ class Controller
     public function user()
     {
         try {
-            $parametros = array(
-                'datos' => array(),
-                'botonFollow' => '',
-                'error' => '',
-                'userPosts' => array()
-            );
-
-            if (isset($_GET['person'])) {
-                $username = $_GET['person'];
-            }
-
-            if (isset($_REQUEST['sender_id'])) {
-                $sender_id = $_REQUEST['sender_id'];
-            }
-
-            //Recojemos el idSender y el reciver ENVIADOS POR AJAX
-            foreach ($_SESSION['datos'] as $datoSesion) {
-                $receiver_id = $datoSesion['id'];
-            }
-
             $model = new Model();
+            $datosUser = []; //Recojo los datos del usuario mediante el username en un array
 
-            if (count($model->getInfoUser($username)) == 1) {
-                $parametros['datos'] = $model->getInfoUser($username);
-            }
-            foreach ($parametros['datos'] as $dato) {
-                if ($model->followButton($dato['id'], $receiver_id) > 0) {
-                    $parametros['botonFollow'] = '
-                    <button name="followButton" class="btn btn-danger" data-action="unfollow" data-sender_id="' . $dato['id'] . '" id="buttonUnfollow">Unfollow <i class="fas fa-user-minus ml-1"></i></button>
-                ';
+            //Obtenemos el username del usuario que estamos visitando
+            if (isset($_GET['person'])) {
+                if ($model->userExists($_GET['person'])) {
+                    $username = $_GET['person'];
+                    $datosUser = $model->getInfoUser($username);
                 } else {
-                    $parametros['botonFollow'] = '
-                <button name="followButton" class="btn btn-primary" data-action="follow" data-sender_id="' . $dato['id'] . '" id="buttonFollow">Follow <i class="fas fa-user-plus ml-1"></i></button>
-                ';
+                    $datosUser = "The user doesn't exist";
                 }
-
-                //Enviamos los post del usuario con el id
-                $parametros['userPosts'] = $model->getUserData($dato['id']);
             }
-
-            if ($_REQUEST['action'] == 'follow') {
-                $model->follow($sender_id, $receiver_id);
-            }
-            if ($_REQUEST['action'] == 'unfollow') {
-                $model->unfollow($sender_id, $receiver_id);
-            }
-
-            /* echo json_encode($parametros['userPosts']); */
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');
@@ -566,6 +528,40 @@ class Controller
             header('Location: error');
         }
         require __DIR__ . '/templates/user.php';
+    }
+
+    //Función que comprueba el botón de follow que poner
+    public function checkFollow()
+    {
+        $model = new Model();
+        $sesionId = null;
+        $idUserProfile = null;
+        $datosUser = []; //Recojo los datos del usuario mediante el username en un array
+
+        //Obtenemos el username del usuario que estamos visitando
+        $username = $_REQUEST['person'];
+        $datosUser = $model->getInfoUser($username);
+        $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
+        $idUserProfile = $datosUser[0]['id']; //Id persona a la que estamos visitando
+        echo json_encode($model->checkFollow($idUserProfile, $sesionId) ? array('success' => 1, 'id' => $idUserProfile) : array('success' => 0, 'id' => $idUserProfile));
+    }
+
+    //Función para seguir a alguien
+    public function follow()
+    {
+        $model = new Model();
+        $id_user = $_REQUEST['id_user'];
+        $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
+        echo $model->follow($id_user, $sesionId) ? 'exito' : 'fallo';
+    }
+
+    //Función para dejar de seguir a alguien
+    public function unfollow()
+    {
+        $model = new Model();
+        $id_user = $_REQUEST['id_user'];
+        $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
+        echo $model->unfollow($id_user, $sesionId) ? 'exito' : 'fallo';
     }
 
     //Buscar en usuario
@@ -588,7 +584,6 @@ class Controller
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
             header('Location: error');
         }
-        /* require __DIR__ . '/templates/header.php'; */
     }
 
     //Función para recibir los post con Ajax

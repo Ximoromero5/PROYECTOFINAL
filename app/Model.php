@@ -185,53 +185,37 @@ class Model extends PDO
         return $resultado->fetchAll();
     }
 
-    //MEJORAR
-    public function followButton($sender_id, $receiver_id)
+    //Función que comprueba si se está siguiendo a la persona, para poner un botón u otro
+    public function checkFollow($sender_id, $receiver_id)
     {
         $consulta = "SELECT * FROM follower WHERE sender_id = '$sender_id' AND receiver_id = '$receiver_id'";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
         $count = $resultado->rowCount();
 
-        return $count;
+        return $count == 1 ? true : false;
     }
 
-    //MEJORAR
+    //Función para seguir a alguien
     public function follow($sender, $receiver)
     {
         $consulta = "INSERT INTO follower (sender_id, receiver_id) VALUES ('$sender', '$receiver')";
         $resultado = $this->conexion->prepare($consulta);
-        if ($resultado->execute()) {
+        $resultado->execute();
+        $count = $resultado->rowCount();
 
-            //Sumar uno seguidor
-            $subConsulta = "UPDATE users SET numberFollowers = numberFollowers + 1 WHERE id = '$sender'";
-            $resultado = $this->conexion->prepare($subConsulta);
-            $resultado->execute();
-
-            //Sumar uno a siguiendo
-            $subConsultaDos = "UPDATE users SET numberFollowing = numberFollowing + 1 WHERE id = '$receiver'";
-            $resultado = $this->conexion->prepare($subConsultaDos);
-            $resultado->execute();
-        }
+        return $count == 1 ? true : false;
     }
 
-    //MEJORAR
+    //Función para dejar de seguir a alguien
     public function unfollow($sender, $receiver)
     {
         $consulta = "DELETE FROM follower WHERE sender_id = '$sender' AND receiver_id = '$receiver'";
         $resultado = $this->conexion->prepare($consulta);
-        if ($resultado->execute()) {
+        $resultado->execute();
+        $count = $resultado->rowCount();
 
-            //Restar uno seguidor
-            $subConsulta = "UPDATE users SET numberFollowers = numberFollowers - 1 WHERE id = '$sender'";
-            $resultado = $this->conexion->prepare($subConsulta);
-            $resultado->execute();
-
-            //Restar uno a siguiendo
-            $subConsultaDos = "UPDATE users SET numberFollowing = numberFollowing - 1 WHERE id = '$receiver'";
-            $resultado = $this->conexion->prepare($subConsultaDos);
-            $resultado->execute();
-        }
+        return $count == 1 ? true : false;
     }
 
     //Función para buscar usuarios
@@ -255,6 +239,8 @@ class Model extends PDO
 
         return $count == 1 ? true : false;
     }
+
+    //Función para asignar los likes a cada post
     public function checkLike($id_post, $id_user)
     {
         $consulta = "SELECT id FROM postlike WHERE id_user = $id_user AND id_post = $id_post";
@@ -276,6 +262,7 @@ class Model extends PDO
         return $count == 1 ? true : false;
     }
 
+    //Función para contar el número de likes
     public function countLikes()
     {
         $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes, GROUP_CONCAT(users.username SEPARATOR '|') AS nameLiked FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post LEFT JOIN users ON postlike.id_user = users.id GROUP BY posts.id_post DESC";
