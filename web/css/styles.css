@@ -653,7 +653,13 @@ main#mainContainer aside#rightContainer {
   text-align: center;
 }
 
-div#postList div#postContainer {
+#panelPrivateUsers {
+  position: relative;
+  bottom: 70px;
+}
+
+div#postList div#postContainer,
+div#postListPrivateUser div#postContainer {
   font-size: 2vh;
   background-color: var(--panelsBackgroundLight);
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -663,7 +669,8 @@ div#postList div#postContainer {
   padding: 0;
 }
 
-div#postList div#postContainer div#infoUser {
+div#postList div#postContainer div#infoUser,
+div#postListPrivateUser div#postContainer div#infoUser {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -673,12 +680,14 @@ div#postList div#postContainer div#infoUser {
   padding: 8px 20px;
 }
 
-div#postList div#postContainer div#infoUser a#linkProfilePerson {
+div#postList div#postContainer div#infoUser a#linkProfilePerson,
+div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson {
   color: var(--fontColorLight2);
   margin: 0;
 }
 
-div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost {
+div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost,
+div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -687,7 +696,8 @@ div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost
           align-items: center;
 }
 
-div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img {
+div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img,
+div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -698,17 +708,20 @@ div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost
   background-color: #ffffff;
 }
 
-div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
+div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5,
+div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
   margin: 0 15px !important;
 }
 
-div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img {
+div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img,
+div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img {
   width: 20px;
   height: 20px;
   margin-left: 3px;
 }
 
-div#postList div#postContainer div#infoUser div#containerDate {
+div#postList div#postContainer div#infoUser div#containerDate,
+div#postListPrivateUser div#postContainer div#infoUser div#containerDate {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -725,7 +738,8 @@ div#postList div#postContainer div#infoUser div#containerDate {
   color: var(--fontColorLight2);
 }
 
-div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions {
+div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions,
+div#postListPrivateUser div#postContainer div#infoUser div#containerDate a#popoverOptions {
   outline: 0;
   cursor: pointer;
   margin-bottom: 10px;
@@ -746,23 +760,25 @@ div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions {
   transition: all 0.2s ease;
 }
 
-div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions:hover {
+div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions:hover,
+div#postListPrivateUser div#postContainer div#infoUser div#containerDate a#popoverOptions:hover {
   background-color: var(--backgroundLight);
 }
 
-div#postList div#postContainer #parrafoTexto {
+div#postList div#postContainer #parrafoTexto,
+div#postListPrivateUser div#postContainer #parrafoTexto {
   padding: 0 20px;
-}
-
-div#postList div#postContainer #parrafoTexto p {
   color: var(--fontColorLight2);
+  margin: 10px 0;
 }
 
-div#postList div#postContainer #postImageContainer {
+div#postList div#postContainer #postImageContainer,
+div#postListPrivateUser div#postContainer #postImageContainer {
   cursor: pointer;
 }
 
-div#postList div#postContainer #postImageContainer img {
+div#postList div#postContainer #postImageContainer img,
+div#postListPrivateUser div#postContainer #postImageContainer img {
   height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -770,7 +786,8 @@ div#postList div#postContainer #postImageContainer img {
      object-position: top;
 }
 
-div#postList div#postContainer div#shareIcons {
+div#postList div#postContainer div#shareIcons,
+div#postListPrivateUser div#postContainer div#shareIcons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -783,7 +800,8 @@ div#postList div#postContainer div#shareIcons {
           justify-content: space-between;
 }
 
-div#postList div#postContainer div#shareIcons #shareIconsContainer {
+div#postList div#postContainer div#shareIcons #shareIconsContainer,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -791,7 +809,10 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer {
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon {
   margin: 10px 0;
 }
 
@@ -800,7 +821,13 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -826,7 +853,13 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button:hover,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a:hover,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button:hover,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a:hover {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a:hover {
   background-color: var(--backgroundLight);
 }
 
@@ -835,7 +868,13 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button i,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a i,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button i,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a i {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button i,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a i {
   margin-right: 5px;
 }
 
@@ -844,36 +883,55 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button #iconLikeRed::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a #iconLikeRed::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button #iconLikeRed::before,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a #iconLikeRed::before {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button #iconLikeRed::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a #iconLikeRed::before {
   color: #f95572;
   /* #E0245E */
 }
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover span,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span {
   color: #1da1f2;
 }
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover i::before,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before {
   color: #1da1f2;
 }
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover span,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span {
   color: #17bf63;
 }
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover i::before,
-div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before {
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover i::before,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before {
   color: #17bf63;
 }
 
-div#postList div#postContainer div#shareIcons #likesCount span {
+div#postList div#postContainer div#shareIcons #likesCount span,
+div#postListPrivateUser div#postContainer div#shareIcons #likesCount span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -885,21 +943,110 @@ div#postList div#postContainer div#shareIcons #likesCount span {
           justify-content: center;
 }
 
-div#postList div#postContainer div#shareIcons #likesCount span:hover {
+div#postList div#postContainer div#shareIcons #likesCount span:hover,
+div#postListPrivateUser div#postContainer div#shareIcons #likesCount span:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-div#postList div#postContainer div#shareIcons #likesCount span i {
+div#postList div#postContainer div#shareIcons #likesCount span i,
+div#postListPrivateUser div#postContainer div#shareIcons #likesCount span i {
   margin-right: 5px;
 }
 
-div#postList div#postContainer div#shareIcons #likesCount span h6 {
+div#postList div#postContainer div#shareIcons #likesCount span h6,
+div#postListPrivateUser div#postContainer div#shareIcons #likesCount span h6 {
   margin: 0;
   color: var(--fontColorLight2);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+div#postList div#postContainer #commentBox,
+div#postListPrivateUser div#postContainer #commentBox {
+  background: transparent;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  display: none;
+}
+
+div#postList div#postContainer #commentBox .top,
+div#postListPrivateUser div#postContainer #commentBox .top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div#postList div#postContainer #commentBox .top img,
+div#postListPrivateUser div#postContainer #commentBox .top img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField {
+  background: var(--backgroundLight);
+  width: 50%;
+  height: 35px;
+  border-radius: 22px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField input,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input {
+  background: transparent;
+  border: none;
+  height: 100%;
+  width: 70%;
+  outline: 0;
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField input::-webkit-input-placeholder,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::-webkit-input-placeholder {
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField input:-ms-input-placeholder,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input:-ms-input-placeholder {
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField input::-ms-input-placeholder,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::-ms-input-placeholder {
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField input::placeholder,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::placeholder {
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField i,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField i {
+  color: var(--fontColorLight2);
+  cursor: pointer;
+}
+
+div#postList div#postContainer .commentBox.show,
+div#postListPrivateUser div#postContainer .commentBox.show {
+  display: block !important;
 }
 
 #notfound {
@@ -1479,9 +1626,6 @@ i#checkIconRegister {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;

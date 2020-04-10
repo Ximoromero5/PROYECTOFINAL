@@ -188,7 +188,7 @@ class Model extends PDO
     //Función que obtiene los datos de un usuario especifico mediante el username
     public function getPostUser($id_user)
     {
-        $consulta = "SELECT * FROM posts WHERE id_user = '$id_user'";
+        $consulta = "SELECT * FROM posts WHERE id_user = '$id_user' ORDER BY datePost DESC";
         $resultado = $this->conexion->query($consulta);
 
         return $resultado->fetchAll();

@@ -483,7 +483,12 @@ main#mainContainer {
 }
 
 //Container con todos los posts para mostrar
-div#postList {
+#panelPrivateUsers {
+  position: relative;
+  bottom: 70px;
+}
+div#postList,
+div#postListPrivateUser {
   div#postContainer {
     font-size: 2vh;
     background-color: var(--panelsBackgroundLight);
@@ -547,9 +552,8 @@ div#postList {
     }
     #parrafoTexto {
       padding: 0 20px;
-      p {
-        color: var(--fontColorLight2);
-      }
+      color: var(--fontColorLight2);
+      margin: 10px 0;
     }
     #postImageContainer {
       cursor: pointer;
@@ -638,6 +642,51 @@ div#postList {
           }
         }
       }
+    }
+    #commentBox {
+      background: transparent;
+      padding: 20px;
+      border-top: 1px solid #ccc;
+      display: none;
+      .top {
+        display: flex;
+        align-items: center;
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+        #commentaryField {
+          background: var(--backgroundLight);
+          width: 50%;
+          height: 35px;
+          border-radius: 22px;
+          align-items: center;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          input {
+            background: transparent;
+            border: none;
+            height: 100%;
+            width: 70%;
+            outline: 0;
+            color: var(--fontColorLight2);
+            &::placeholder {
+              color: var(--fontColorLight2);
+            }
+          }
+          i {
+            color: var(--fontColorLight2);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .commentBox.show {
+      display: block !important;
     }
   }
 }
@@ -1116,7 +1165,6 @@ i#checkIconRegister {
     #left {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       flex: 1;
       background: transparent;
       padding: 30px;

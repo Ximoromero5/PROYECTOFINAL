@@ -125,10 +125,105 @@ if ($datos['username'] != $_SESSION['username']) { ?>
                 </div>
 
                 <!-- Aquí van los post del usuario del que estamos viendo el perfil -->
-                <div class="panel panel-default">
+                <div class="panel panel-default" id="panelPrivateUsers">
                     <div class="panel-body">
                         <div id="postListPrivateUser">
 
+                            <!-- Contenedor de los post -->
+                            <?php
+                            if (empty($postsUser)) {
+                                echo "<h4 class='text-center'><b>@" . $datos['username'] . "</b> haven't posted any posts yet.</h4><br><p class='text-center'>When you do, your multimedia content will appear here.</p>";
+                            } else {
+
+                                foreach ($postsUser as $datosPost) :
+                                    $photo = $datosPost['photoPost'] != '' ? '<img src="' . $datosPost['photoPost'] . '" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">' : '';
+                                    $texto = $datosPost['text'] != '' ? $datosPost['text'] : '';
+                            ?>
+                                    <div class="jumbotron" id="postContainer">
+                                        <div id="infoUser">
+                                            <div id="userData">
+                                                <a href="index.php?action=user&person=<?php echo $datosPost['username'] ?>" id="linkProfilePerson">
+                                                    <div id="userInfoPost">
+                                                        <img src="<?php echo $datos['photo'] ?>" alt="">
+                                                        <div>
+                                                            <h5><?php echo $datos['firstName'] . " " . $datos['lastName'] . " " . $verified ?></h5>
+                                                            <small class="ml-3">Web Developer Front End</small>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div id="containerDate">
+                                                <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a>
+                                                <small></small>
+                                            </div>
+                                        </div>
+                                        <div id="parrafoTexto">
+                                            <?php echo $texto; ?>
+                                        </div>
+                                        <div id="postImageContainer">
+                                            <?php echo $photo; ?>
+                                            <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <img src="<?php echo $datosPost['photoPost'] ?>" alt="" class="w-100 h-100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="shareIcons">
+                                            <div id="shareIconsContainer">
+                                                <div id="shareIcon">
+                                                    <a href="#0" id="shareButton">
+                                                        <i class="fas fa-share icono"></i>
+                                                        <span>Share</span>
+                                                    </a>
+                                                </div>
+                                                <div id="commentIcon">
+                                                    <button id="commentButton">
+                                                        <i class="far fa-comment icono"></i>
+                                                        <span>358</span>
+                                                    </button>
+                                                </div>
+                                                <div id="likeIcon">
+                                                    <button id="${item.id_post}" class="botonDarLike noLiked">
+                                                        <i class='far fa-heart icono'></i><span>Like</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
+                                                <span><i class='fas fa-heart icono' id='iconLikeRed'></i>
+                                                    <h6><i class="numeroLikes animate" id="numeroLikeCount"></i> likes</h6>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id='commentBox' class="commentBox">
+                                            <div class='top'>
+                                                <img src='<?php echo $_SESSION['datos'][0]['photo'] ?>' alt=''>
+                                                <div id='commentaryField'>
+                                                    <input type='text' placeholder='Write a commentary...'>
+                                                    <div>
+                                                        <i class="fas fa-smile-wink"></i>
+                                                        <i class="fas fa-camera"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='bottom'>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content p-5">
+                                                    <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                                    <input type="text" placeholder="Search user" class="form-control">
+                                                    <hr>
+                                                    <ul class="list-group likedUsersList"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- Fin contenedor post -->
+                            <?php endforeach;
+                            } ?>
                         </div>
                     </div>
                 </div>

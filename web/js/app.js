@@ -135,6 +135,7 @@ $(document).ready(function () {
 
     //Función para obtener los post de las personas a las que sigues y de ti mismo.
     function getPost() {
+
         $.ajax({
             url: 'index.php',
             method: "GET",
@@ -215,6 +216,21 @@ $(document).ready(function () {
                         </div>
                         <div id="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
                             <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes animate" id="numeroLikeCount"></i> likes</h6></span>
+                        </div>
+                    </div>
+                    <div id='commentBox'>
+                        <div class='top'>
+                            <img src='${item.photo}' alt=''>
+                            <div id='commentaryField'>
+                                <input type='text' placeholder='Write a commentary...'>
+                                <div>
+                                    <i class="fas fa-smile-wink"></i>
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='bottom'>
+                    
                         </div>
                     </div>
                     <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
@@ -511,4 +527,10 @@ $(document).ready(function () {
     }
 
 
+    //Mostrar caja de comentarios en los post
+    $('#commentIcon').click(function () {
+        $(this).parent().parent().parent().find('.commentBox').each(function () {
+            $(this).toggleClass('show');
+        })
+    });
 }); //Fin document.ready
