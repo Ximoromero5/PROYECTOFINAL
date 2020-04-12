@@ -539,10 +539,13 @@ class Controller
         $model = new Model();
         $sesionId = null;
         $idUserProfile = null;
+        $username = null;
         $datosUser = []; //Recojo los datos del usuario mediante el username en un array
 
         //Obtenemos el username del usuario que estamos visitando
-        $username = $_REQUEST['person'];
+        if (isset($_REQUEST['person'])) {
+            $username = $_REQUEST['person'];
+        }
         $datosUser = $model->getInfoUser($username);
         $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
         $idUserProfile = $datosUser[0]['id']; //Id persona a la que estamos visitando
@@ -564,6 +567,7 @@ class Controller
         $model = new Model();
         $id_user = $_REQUEST['id_user'];
         $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
+        $model->unSeeNotification($sesionId);
         echo $model->unfollow($id_user, $sesionId) ? 'exito' : 'fallo';
     }
 
@@ -619,6 +623,7 @@ class Controller
             echo "fallo";
         }
     }
+
     public function checkLike()
     {
         $model = new Model();
@@ -631,6 +636,7 @@ class Controller
             echo json_encode(array('false', $model->countLikes()));
         }
     }
+
     public function removeLike()
     {
         $model = new Model();
@@ -641,6 +647,47 @@ class Controller
             echo "exito";
         } else {
             echo "fallo";
+        }
+    }
+
+    public function checkNotification()
+    {
+        $model = new Model();
+
+        if (isset($_REQUEST['view'])) {
+            if ($_REQUEST['view'] != '') {
+                $model->seeNotification($_SESSION['datos'][0]['id']);
+            }
+
+            $output = '';
+            if ($model->checkNotification($_SESSION['datos'][0]['id']) === false) {
+                $output .= '
+                <li>
+                    <a href="#0" class="text-bold text-italic">No notification found!</a>
+                </li>
+            ';
+            } else {
+                foreach ($model->checkNotification($_SESSION['datos'][0]['id']) as $data) {
+                    $userData = $model->getDataUser($data['receiver_id']);
+                    foreach ($userData as $userData) {
+                        $output .= '
+                    <li class="dropdown-item">
+                        <a href="index.php?action=user&person=' . $userData['username'] . '">
+                            <img src="' . $userData['photo'] . '"><strong>@' . $userData['username'] . '</strong><small> has started to follow you.</small>
+                        </a>
+                    </li>
+                    ';
+                    }
+                }
+            }
+            $count = $model->checkUnseen($_SESSION['datos'][0]['id']);
+
+            $data = array(
+                'notificacion' => $output,
+                'unseen' => $count
+            );
+
+            echo json_encode($data);
         }
     }
 }

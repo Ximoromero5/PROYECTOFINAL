@@ -2,6 +2,9 @@ $(document).ready(function () {
 
     //Obtenemos todos los post nada más cargue la página
     getPost();
+    setInterval(function () {
+        getPost();
+    }, 5000);
 
     //Iniciar los tooltips
     $('[data-toggle="tooltip"]').tooltip();
@@ -146,23 +149,25 @@ $(document).ready(function () {
 
             //Mostramos la información de los post a través de jumbotron
             let datos = JSON.parse(data);
-            let verified, photo, texto;
             let contenedorPost = $('#postList');
+            let contenedor = $('<div></div>');
+            if (datos != '') {
+                let verified, photo, texto;
 
-            //Fecha del post con formato
-            let newDate = "";
-            $.each(datos, function (e, item) {
+                //Fecha del post con formato
+                let newDate = "";
+                $.each(datos, function (e, item) {
 
-                //Asignamos verificado y la foto si hay
-                verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
-                photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
-                texto = item.text != '' ? `<p>${item.text}</p>` : '';
-                newDate = new Date(item.datePost);
-                let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
-                let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
+                    //Asignamos verificado y la foto si hay
+                    verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
+                    photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
+                    texto = item.text != '' ? `<p>${item.text}</p>` : '';
+                    newDate = new Date(item.datePost);
+                    let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+                    let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
 
-                //Añadimos cada uno de los post que haya con formato html
-                contenedorPost.append($(`
+                    //Añadimos cada uno de los post que haya con formato html
+                    $(contenedor).append($(`
                 <div class="jumbotron" id="postContainer">
                     <div id="infoUser">
                         <div id="userData">
@@ -202,8 +207,8 @@ $(document).ready(function () {
                                     <span>Share</span>
                                 </a>
                             </div>
-                            <div id="commentIcon">
-                                <button id="commentButton">
+                            <div id="commentIcon" class="commentIcon">
+                                <button id="commentButton" class='commentButton'>
                                     <i class="far fa-comment icono"></i>
                                     <span>358</span>
                                 </button>
@@ -214,11 +219,11 @@ $(document).ready(function () {
                                 </button>
                             </div>  
                         </div>
-                        <div id="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
+                        <div id="likesCount" class="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
                             <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes animate" id="numeroLikeCount"></i> likes</h6></span>
                         </div>
                     </div>
-                    <div id='commentBox'>
+                    <div id='commentBox' class="commentBox">
                         <div class='top'>
                             <img src='${item.photo}' alt=''>
                             <div id='commentaryField'>
@@ -245,15 +250,18 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `));
-            });
-
+                });
+            } else {
+                $(contenedor).append(`<div class="text-center"><h5>Oh, wow! <br>It seems you still don't follow anyone, discover new people.</h5><a href="#0" class="btn btn-primary rounded-pill">Discover People</a></div>`);
+            }
+            $(contenedorPost).html($(contenedor));
             //Añadimos la función para poder dar like
             giveLike();
         });
     }
 
     //Popover opciones post
-    $('#popoverOptions').popover({ content: "<li class='list-group-item'><i class='fas fa-pencil-alt mr-2'></i>Edit</li><li class='list-group-item'><i class='far fa-trash-alt mr-2'></i>Delete</li>", html: true });
+    $('.popoverOptions').popover({ content: "<li class='list-group-item'><i class='fas fa-pencil-alt mr-2'></i>Edit</li><li class='list-group-item'><i class='far fa-trash-alt mr-2'></i>Delete</li>", html: true });
 
     //Buscar usuarios
     $('#searchUser').keyup(function () {
@@ -371,23 +379,25 @@ $(document).ready(function () {
             $.ajax({
                 url: 'checkLike',
                 method: 'POST',
-                data: { id_post: $(item).attr('id') },
+                data: { id_post: $(this).attr('id') },
                 success: function (data) {
                     let datos = JSON.parse(data);
                     let nameLiked = datos[1][e][2];
                     let nameLikedPost = String(nameLiked).split("|");
 
-                    if (datos[1][e][0] == $(item).attr('id')) {
-                        console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
-                        $('.likedUsersList').html($(`<a href="index.php?action=user&person=${nameLikedPost}"><li class="list-group-item">${nameLikedPost.reverse()}</li></a>`));
-                    }
+                    /*  if (datos[1][e][0] == $(item).attr('id')) {
+                         console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
+                         $('.likedUsersList').html($(`<a href="index.php?action=user&person=${nameLikedPost}"><li class="list-group-item">${nameLikedPost.reverse()}</li></a>`));
+                     } */
 
-                    /*  console.log(`Nº Post: ${datos[1][e][0]}: Likes: ${datos[1][e][1]} Personas liked: ${datos[1][e][2]}`);
-                     console.log(`ID de post: ${$(item).attr('id')}`); */
-                    console.log('NÚMERO DE LIKES: ' + datos[1][e]['nLikes']);
-                    //Asignamos el número de likes al post
-                    if (datos[1][e][0] == $(item).attr('id')) {
-                        $('.numeroLikes').eq(e).html(datos[1][e]['nLikes']);
+                    console.log(`Id de cada post: ${$(item).attr('id')}`);
+                    console.log(`Id devuelto de ajax: ${datos[1][e]['id_post']} NÚMERO: ${datos[1][e][1]}`);
+
+                    //Asignamos el número de likes al post (Esta parte funciona al revés, pero bien)
+                    if ($(datos[1][e][0]).eq($(item).attr('id'))) {
+                        $('.numeroLikes').each(function (f, item) {
+                            $(item).html(datos[1][f][1]);
+                        })
                     } else {
                         console.log(false);
                     }
@@ -403,6 +413,8 @@ $(document).ready(function () {
                     }
                 }
             });
+
+            //Parte dar like
             $(item).click(function (e) {
                 if ($(this).hasClass('noLiked')) {
 
@@ -444,18 +456,22 @@ $(document).ready(function () {
     }
 
     function checkFollow() {
-        $.urlParam = function (name) {
-            let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            return results[1] || 0;
+
+        //Función para obtener un valor especifico de la URL
+        function getUrlVars() {
+            let vars = {};
+            let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
         }
 
-        //Check button follow users
         $.ajax({
             url: 'checkFollow',
             method: 'POST',
             dataType: 'json',
             data: {
-                person: $.urlParam('person')
+                person: getUrlVars()['person']
             }
         }).done(function (data) {
 
@@ -498,7 +514,6 @@ $(document).ready(function () {
                         id_user: id_user
                     }
                 }).done(function (data) {
-
                     $('#containerFollowButton').html($(`<button class="unfollowButton" id="${id_user}">Unfollow <i class="fas fa-user-slash"></i></button>`));
                     unfollow();
                 });
@@ -527,10 +542,48 @@ $(document).ready(function () {
     }
 
 
-    //Mostrar caja de comentarios en los post
-    $('#commentIcon').click(function () {
-        $(this).parent().parent().parent().find('.commentBox').each(function () {
-            $(this).toggleClass('show');
-        })
+    function showCommentBox() {
+        console.log('showCommentBox');
+        //Mostrar caja de comentarios en los post
+        $('.commentIcon').each(function () {
+            $(this).click(function () {
+                $(this).parent().parent().parent().find('.commentBox').each(function () {
+                    $(this).toggleClass('show');
+                });
+            });
+        });
+
+        /*  $('.commentButton').each(function () {
+             $(this).clik(function () {
+                 alert('f');
+             })
+         }) */
+    }
+    showCommentBox();
+
+
+    function loadUnseenNotification(view = '') {
+        $.ajax({
+            url: 'checkNotification',
+            method: 'POST',
+            data: { view: view },
+            dataType: 'json'
+        }).done(function (data) {
+            $('#listaNotificaciones').html(data.notificacion);
+            if (data.unseen > 0) {
+                $('#pildoraNotificacion').html(data.unseen);
+            }
+        });
+    }
+
+    loadUnseenNotification();
+
+    $('#notificationLink').click(function () {
+        $('#pildoraNotificacion').hide();
+        loadUnseenNotification('yes');
     });
+
+    setInterval(function () {
+        loadUnseenNotification();
+    }, 5000);
 }); //Fin document.ready

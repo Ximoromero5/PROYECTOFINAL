@@ -43,8 +43,9 @@
                     <li>
                         <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="fas fa-comment"></i></a>
                     </li>
-                    <li>
-                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Notifications"><i class="fas fa-bell"></i></a>
+                    <li class="dropdown">
+                        <a href="#0" data-toggle="dropdown" data-placement="bottom" title="Notifications" class="dropdown-toggle" id="notificationLink"><i class="fas fa-bell"></i><span class="badge badge-primary badge-pill" id="pildoraNotificacion"></span></a>
+                        <ul class="dropdown-menu pull-left" id="listaNotificaciones"></ul>
                     </li>
                     <li id="settings">
                         <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></a>

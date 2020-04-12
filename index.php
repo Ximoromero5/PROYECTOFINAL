@@ -25,7 +25,8 @@ $map = array(
     'checkLike' => array('controller' => 'Controller', 'action' => 'checkLike', 'acceso' => 1),
     'checkFollow' => array('controller' => 'Controller', 'action' => 'checkFollow', 'acceso' => 1),
     'follow' => array('controller' => 'Controller', 'action' => 'follow', 'acceso' => 1),
-    'unfollow' => array('controller' => 'Controller', 'action' => 'unfollow', 'acceso' => 1)
+    'unfollow' => array('controller' => 'Controller', 'action' => 'unfollow', 'acceso' => 1),
+    'checkNotification' => array('controller' => 'Controller', 'action' => 'checkNotification', 'acceso' => 1)
 );
 
 if (isset($_GET['action'])) {

@@ -153,7 +153,7 @@ if ($datos['username'] != $_SESSION['username']) { ?>
                                                 </a>
                                             </div>
                                             <div id="containerDate">
-                                                <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a>
+                                                <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" class="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a>
                                                 <small></small>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@ if ($datos['username'] != $_SESSION['username']) { ?>
                                                         <span>Share</span>
                                                     </a>
                                                 </div>
-                                                <div id="commentIcon">
+                                                <div id="commentIcon" class="commentIcon">
                                                     <button id="commentButton">
                                                         <i class="far fa-comment icono"></i>
                                                         <span>358</span>

@@ -299,4 +299,39 @@ class Model extends PDO
 
         return $resultado->fetchAll();
     }
+
+    //Función para
+    public function checkNotification($id_sesion)
+    {
+        $consulta = "SELECT * FROM follower WHERE sender_id = '$id_sesion' ORDER BY id_follower DESC LIMIT 5";
+        $resultado = $this->conexion->query($consulta);
+        $count = $resultado->rowCount();
+
+        if ($count == 1) {
+            return $resultado->fetchAll();
+        } else {
+            return false;
+        }
+    }
+
+    public function checkUnseen($id_sesion)
+    {
+        $consulta = "SELECT * FROM follower WHERE follow_status = 0 AND sender_id = '$id_sesion'";
+        $resultado = $this->conexion->query($consulta);
+        $count = $resultado->rowCount();
+
+        return $count;
+    }
+
+    public function seeNotification($id_sesion)
+    {
+        $consulta = "UPDATE follower SET follow_status = 1 WHERE sender_id = '$id_sesion'";
+        $resultado = $this->conexion->query($consulta);
+    }
+
+    public function unSeeNotification($id_sesion)
+    {
+        $consulta = "UPDATE follower SET follow_status = 0 WHERE sender_id = '$id_sesion'";
+        $resultado = $this->conexion->query($consulta);
+    }
 }

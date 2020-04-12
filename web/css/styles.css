@@ -335,6 +335,78 @@ nav#menu div#mainMenu ul#horizontalMenu li a:hover {
   background: var(--backgroundLight);
 }
 
+nav#menu div#mainMenu ul#horizontalMenu li a#notificationLink {
+  position: relative;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li a#notificationLink::after {
+  display: none;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li a#notificationLink span {
+  font-size: 10px;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones {
+  margin: 0;
+  padding: 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 16px 0px, rgba(0, 0, 0, 0.05) 0px 0px 4px 0px;
+  color: var(--fontColorLight2);
+  background: var(--panelsBackgroundLight);
+  border-radius: 3px;
+  top: 10px !important;
+  left: -40px !important;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li {
+  padding: 10px;
+  background: transparent;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li:hover {
+  background: var(--backgroundLight);
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li a:hover {
+  background: transparent;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li a img {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li a strong {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li a small {
+  font-size: 13px !important;
+}
+
 nav#menu div#mainMenu ul#horizontalMenu li a#profile img {
   width: 40px;
   height: 40px;
