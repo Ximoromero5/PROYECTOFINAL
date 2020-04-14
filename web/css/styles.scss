@@ -589,8 +589,9 @@ div#postListPrivateUser {
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
-        color: var(--fontColorLight2);
-        a#popoverOptions {
+        color: var(--fontColorLight2) !important;
+        span#popoverOptions {
+          color: var(--fontColorLight2) !important;
           outline: 0;
           cursor: pointer;
           margin-bottom: 10px;
@@ -604,6 +605,7 @@ div#postListPrivateUser {
           transition: all 0.2s ease;
           &:hover {
             background-color: var(--backgroundLight);
+            text-decoration: none !important;
           }
         }
       }
@@ -746,6 +748,9 @@ div#postListPrivateUser {
     .commentBox.show {
       display: block !important;
     }
+  }
+  #noPostText {
+    color: var(--fontColorLight2);
   }
 }
 

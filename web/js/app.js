@@ -2,9 +2,9 @@ $(document).ready(function () {
 
     //Obtenemos todos los post nada más cargue la página
     getPost();
-    setInterval(function () {
+    /* setInterval(function () {
         getPost();
-    }, 5000);
+    }, 5000); */
 
     //Iniciar los tooltips
     $('[data-toggle="tooltip"]').tooltip();
@@ -138,12 +138,31 @@ $(document).ready(function () {
 
     //Función para obtener los post de las personas a las que sigues y de ti mismo.
     function getPost() {
+        function getUrlVars() {
+            let vars = {};
+            let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        let action = '', person;
+
+        //Si no estamos en el perfil de alguien se mostrarán los post tanto de las personas a las que sigues como los tuyos propios
+        if (getUrlVars()['person'] == undefined) {
+            action = 'getPost';
+        } else {
+            //Si estamos en el perfil de alguien solo se muestran los post de esa persona
+            action = 'getPostUser';
+            person = getUrlVars()['person'];
+        }
 
         $.ajax({
             url: 'index.php',
             method: "GET",
             data: {
-                action: 'getPost'
+                action: action,
+                person: person
             }
         }).done(function (data) {
 
@@ -181,8 +200,8 @@ $(document).ready(function () {
                                 </div>
                             </a>
                         </div>
-                        <div id="containerDate">
-                            <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" id="popoverOptions"><i class="fas fa-ellipsis-h icono"></i></a>
+                        <div id="containerDate">    
+                            <span id="popoverOptions" data-toggle="popover" data-html="true" data-content="<li class='list-group-item'><i class='fas fa-link mr-2'></i>Copy post link</li>"><i class="fas fa-ellipsis-h"></i></span>
                             <small>${day} of ${month} ${hour}:${minute}</small>
                         </div>
                     </div>
@@ -250,15 +269,29 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `));
+
+                    //Ponemos las fotos en mostar fotos
+
+                    if (item.photoPost === '') {
+                        $('#containerProfilePhotos .bottom').html('<h4>No photos</h4>');
+                    } else {
+                        $('#containerProfilePhotos .bottom').append(`<img src='${item.photoPost}'>`);
+                    }
                 });
             } else {
-                $(contenedor).append(`<div class="text-center"><h5>Oh, wow! <br>It seems you still don't follow anyone, discover new people.</h5><a href="#0" class="btn btn-primary rounded-pill">Discover People</a></div>`);
+                $(contenedor).append(`<div class="text-center" id="noPostText"><h5>Oh, wow! It seems that there is still no content to display, discover new people.</h5><a href="#0" class="btn btn-primary rounded-pill">Discover People</a></div>`);
             }
             $(contenedorPost).html($(contenedor));
+
             //Añadimos la función para poder dar like
             giveLike();
+
+            //Activamos los popovers
+            $('[data-toggle="popover"]').popover();
+            showCommentBox();
         });
     }
+
 
     //Popover opciones post
     $('.popoverOptions').popover({ content: "<li class='list-group-item'><i class='fas fa-pencil-alt mr-2'></i>Edit</li><li class='list-group-item'><i class='far fa-trash-alt mr-2'></i>Delete</li>", html: true });
@@ -456,7 +489,6 @@ $(document).ready(function () {
     }
 
     function checkFollow() {
-
         //Función para obtener un valor especifico de la URL
         function getUrlVars() {
             let vars = {};
@@ -496,6 +528,7 @@ $(document).ready(function () {
                 console.log('FOLLOW BUTTON');
                 $('#containerFollowButton').append($(`<button class="followButton" id="${data.id}">Follow <i class="fas fa-user-plus"></i></button>`));
             }
+
             follow();
             unfollow();
         });
@@ -543,7 +576,6 @@ $(document).ready(function () {
 
 
     function showCommentBox() {
-        console.log('showCommentBox');
         //Mostrar caja de comentarios en los post
         $('.commentIcon').each(function () {
             $(this).click(function () {
@@ -552,12 +584,6 @@ $(document).ready(function () {
                 });
             });
         });
-
-        /*  $('.commentButton').each(function () {
-             $(this).clik(function () {
-                 alert('f');
-             })
-         }) */
     }
     showCommentBox();
 
@@ -586,4 +612,11 @@ $(document).ready(function () {
     setInterval(function () {
         loadUnseenNotification();
     }, 5000);
+
+
+
+    //Iniciar los popovers
+    $('[data-toggle="popover"]').popover();
+
+
 }); //Fin document.ready

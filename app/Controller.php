@@ -14,9 +14,6 @@ class Controller
                 $parametros = array(
                     'datos' => array()
                 );
-
-                //GET POSTS
-                $parametros['datos'] =  $model->getPost($_SESSION['datos'][0]['id']);
             } catch (Exception $e) {
                 error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
                 header('Location: error');
@@ -510,17 +507,14 @@ class Controller
         try {
             $model = new Model();
             $datosUser = []; //Recojo los datos del usuario mediante el username en un array
-            $postsUser = [];
 
             //Obtenemos el username del usuario que estamos visitando
             if (isset($_GET['person'])) {
                 if ($model->userExists($_GET['person'])) {
                     $username = $_GET['person'];
                     $datosUser = $model->getInfoUser($username);
-                    $postsUser = $model->getPostUser($datosUser[0]['id']);
                 } else {
                     $datosUser = "The user doesn't exist";
-                    $postsUser = "No post";
                 }
             }
         } catch (Exception $e) {
@@ -531,6 +525,35 @@ class Controller
             header('Location: error');
         }
         require __DIR__ . '/templates/user.php';
+    }
+
+    public function getPostUser()
+    {
+        try {
+            $model = new Model();
+            $datosUser = array();
+            $postsUser = array();
+
+            //Obtenemos el username del usuario que estamos visitando
+            if (isset($_REQUEST['person'])) {
+                if ($model->userExists($_REQUEST['person'])) {
+                    $username = $_REQUEST['person'];
+                    $datosUser = $model->getInfoUser($username);
+                    $postsUser = $model->getPostUser($datosUser[0]['id']);
+                } else {
+                    $datosUser = "The user doesn't exist";
+                    $postsUser = "No post";
+                }
+            }
+
+            echo json_encode($postsUser);
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
+            header('Location: error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+            header('Location: error');
+        }
     }
 
     //Función que comprueba el botón de follow que poner

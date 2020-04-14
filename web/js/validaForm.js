@@ -33,6 +33,14 @@ $(function () {
             gender: "Please enter your gender."
         },
         submitHandler: function (form) {
+            $(document.body).after(`
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Registration completed!</strong> You will be redirected in a few seconds.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `);
             form.submit();
         }
     });

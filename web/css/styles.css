@@ -807,11 +807,12 @@ div#postListPrivateUser div#postContainer div#infoUser div#containerDate {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  color: var(--fontColorLight2);
+  color: var(--fontColorLight2) !important;
 }
 
-div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions,
-div#postListPrivateUser div#postContainer div#infoUser div#containerDate a#popoverOptions {
+div#postList div#postContainer div#infoUser div#containerDate span#popoverOptions,
+div#postListPrivateUser div#postContainer div#infoUser div#containerDate span#popoverOptions {
+  color: var(--fontColorLight2) !important;
   outline: 0;
   cursor: pointer;
   margin-bottom: 10px;
@@ -832,9 +833,10 @@ div#postListPrivateUser div#postContainer div#infoUser div#containerDate a#popov
   transition: all 0.2s ease;
 }
 
-div#postList div#postContainer div#infoUser div#containerDate a#popoverOptions:hover,
-div#postListPrivateUser div#postContainer div#infoUser div#containerDate a#popoverOptions:hover {
+div#postList div#postContainer div#infoUser div#containerDate span#popoverOptions:hover,
+div#postListPrivateUser div#postContainer div#infoUser div#containerDate span#popoverOptions:hover {
   background-color: var(--backgroundLight);
+  text-decoration: none !important;
 }
 
 div#postList div#postContainer #parrafoTexto,
@@ -1119,6 +1121,11 @@ div#postListPrivateUser div#postContainer #commentBox .top #commentaryField i {
 div#postList div#postContainer .commentBox.show,
 div#postListPrivateUser div#postContainer .commentBox.show {
   display: block !important;
+}
+
+div#postList #noPostText,
+div#postListPrivateUser #noPostText {
+  color: var(--fontColorLight2);
 }
 
 #notfound {
