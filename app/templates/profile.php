@@ -131,6 +131,5 @@
         </div>
     </div>
 <?php } ?>
-<?php $contenido = ob_get_clean();
-$contenido2 = ob_get_clean() ?>
+<?php $contenido = ob_get_clean(); ?>
 <?php include 'header.php' ?>

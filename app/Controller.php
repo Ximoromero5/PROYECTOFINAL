@@ -9,18 +9,6 @@ class Controller
     public function home()
     {
         if (isset($_SESSION['username'])) {
-            try {
-                $model = new Model();
-                $parametros = array(
-                    'datos' => array()
-                );
-            } catch (Exception $e) {
-                error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-                header('Location: error');
-            } catch (Error $e) {
-                error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-                header('Location: error');
-            }
             require __DIR__ . '/templates/home.php';
         } else {
             header('Location: login');
@@ -541,8 +529,8 @@ class Controller
                     $datosUser = $model->getInfoUser($username);
                     $postsUser = $model->getPostUser($datosUser[0]['id']);
                 } else {
-                    $datosUser = "The user doesn't exist";
-                    $postsUser = "No post";
+                    $datosUser = array('success' => 0);
+                    $postsUser = "User not exists";
                 }
             }
 
@@ -590,7 +578,7 @@ class Controller
         $model = new Model();
         $id_user = $_REQUEST['id_user'];
         $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
-        $model->unSeeNotification($sesionId);
+        /*   $model->unSeeNotification($sesionId); */
         echo $model->unfollow($id_user, $sesionId) ? 'exito' : 'fallo';
     }
 
@@ -680,29 +668,31 @@ class Controller
         if (isset($_REQUEST['view'])) {
             if ($_REQUEST['view'] != '') {
                 $model->seeNotification($_SESSION['datos'][0]['id']);
-            }
+            } else {
 
-            $output = '';
-            if ($model->checkNotification($_SESSION['datos'][0]['id']) === false) {
-                $output .= '
+                $output = '';
+                if ($model->checkNotification($_SESSION['datos'][0]['id']) === false) {
+                    $output .= '
                 <li>
                     <a href="#0" class="text-bold text-italic">No notification found!</a>
                 </li>
             ';
-            } else {
-                foreach ($model->checkNotification($_SESSION['datos'][0]['id']) as $data) {
-                    $userData = $model->getDataUser($data['receiver_id']);
-                    foreach ($userData as $userData) {
-                        $output .= '
+                } else {
+                    foreach ($model->checkNotification($_SESSION['datos'][0]['id']) as $data) {
+                        $userData1 = $model->getDataUser($data['receiver_id']); //Obtenemos los datos de la persona que nos sigue (receiver_id)
+                        foreach ($userData1 as $userData) {
+                            $output .= '
                     <li class="dropdown-item">
                         <a href="index.php?action=user&person=' . $userData['username'] . '">
                             <img src="' . $userData['photo'] . '"><strong>@' . $userData['username'] . '</strong><small> has started to follow you.</small>
                         </a>
                     </li>
                     ';
+                        }
                     }
                 }
             }
+
             $count = $model->checkUnseen($_SESSION['datos'][0]['id']);
 
             $data = array(
@@ -712,5 +702,21 @@ class Controller
 
             echo json_encode($data);
         }
+    }
+
+    //Función para insertar comentarios
+    public function getComments()
+    {
+        $model = new Model();
+        $id_post = $_REQUEST['id_post'];
+        echo json_encode($model->getComments($id_post));
+    }
+    //Función para insertar comentarios
+    public function insertComment()
+    {
+        $model = new Model();
+        $id_post = $_REQUEST['id_post'];
+        $text = $_REQUEST['text'];
+        echo json_encode($model->insertComment($_SESSION['datos'][0]['id'], $id_post, $text));
     }
 }

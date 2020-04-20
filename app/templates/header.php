@@ -48,9 +48,6 @@
                         <a href="#0" data-toggle="dropdown" data-placement="bottom" title="Notifications" class="dropdown-toggle" id="notificationLink"><i class="fas fa-bell"></i><span class="badge badge-primary badge-pill" id="pildoraNotificacion"></span></a>
                         <ul class="dropdown-menu pull-left" id="listaNotificaciones"></ul>
                     </li>
-                    <li id="settings">
-                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></a>
-                    </li>
                     <li id="profileSection">
                         <div class="dropdown">
                             <a href="#0" class="dropdown-toggle" id="profile" data-toggle="dropdown">
@@ -69,7 +66,7 @@
                                     </div>
                                 </a>
                                 <a href="#0" class="dropdown-item">
-                                    <i class="fas fa-sliders-h"></i>
+                                    <i class="fas fa-cog"></i>
                                     <h6>Configuration</h6>
                                 </a>
                                 <label for="checkDarkTheme" id="checkDarkThemeContainer" class="dropdown-item">

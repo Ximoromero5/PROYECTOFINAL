@@ -6,6 +6,7 @@
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum omnis sapiente nemo dolorem animi facilis reprehenderit fugiat molestiae dolore debitis. Cupiditate placeat odit blanditiis et praesentium eaque a sint sed.</p>
         <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
     </aside>
+
     <!-- Contenedor para escribir un post -->
     <div id="containerWrite">
 

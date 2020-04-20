@@ -322,13 +322,6 @@ nav#menu {
           display: block;
         }
       }
-      li#settings {
-        i {
-          &::after {
-            display: none !important;
-          }
-        }
-      }
       li#profileSection {
         div.dropdown-menu.show {
           width: 230px;
@@ -393,7 +386,7 @@ nav#menu {
           }
         }
       }
-      li#profileSection,
+      /*  li#profileSection, */
       li#friends {
         @media (max-width: 768px) {
           display: none !important;
@@ -539,7 +532,11 @@ main#mainContainer {
     text-align: center;
   }
 }
-
+.panel.panel-default {
+  @media (max-width: 768px) {
+    margin-bottom: 70px;
+  }
+}
 //Container con todos los posts para mostrar
 #panelPrivateUsers {
   position: relative;
@@ -577,8 +574,8 @@ div#postListPrivateUser {
           h5 {
             margin: 0 15px !important;
             img {
-              width: 20px;
-              height: 20px;
+              width: 14px;
+              height: 14px;
               margin-left: 3px;
             }
           }
@@ -741,6 +738,33 @@ div#postListPrivateUser {
           i {
             color: var(--fontColorLight2);
             cursor: pointer;
+          }
+        }
+      }
+      #commentPost {
+        display: flex;
+        margin-top: 15px;
+        .top {
+          img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            object-position: top;
+            background-color: #ffffff;
+          }
+        }
+        .bottom {
+          padding: 15px;
+          border-radius: 15px;
+          background-color: var(--backgroundLight);
+          color: var(--fontColorLight2);
+          b {
+            margin: 10px 0;
+          }
+          p {
+            margin: 0;
           }
         }
       }
@@ -1264,8 +1288,8 @@ i#checkIconRegister {
           margin: 80px 0 30px 0;
           text-align: center;
           #verifiedCheck {
-            width: 20px;
-            height: 20px;
+            width: 14px;
+            height: 14px;
             margin-left: 6px;
           }
           h3 {

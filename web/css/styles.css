@@ -296,6 +296,7 @@ nav#menu div#mainMenu ul#horizontalMenu {
           justify-content: space-evenly;
   margin: 0;
   padding: 0;
+  /*  li#profileSection, */
 }
 
 @media (max-width: 768px) {
@@ -433,10 +434,6 @@ nav#menu div#mainMenu ul#horizontalMenu li#home {
   }
 }
 
-nav#menu div#mainMenu ul#horizontalMenu li#settings i::after {
-  display: none !important;
-}
-
 nav#menu div#mainMenu ul#horizontalMenu li#profileSection div.dropdown-menu.show {
   width: 230px;
   height: 250px;
@@ -531,7 +528,6 @@ nav#menu div#mainMenu ul#horizontalMenu li#profileSection div.dropdown-menu.show
 }
 
 @media (max-width: 768px) {
-  nav#menu div#mainMenu ul#horizontalMenu li#profileSection,
   nav#menu div#mainMenu ul#horizontalMenu li#friends {
     display: none !important;
   }
@@ -725,6 +721,12 @@ main#mainContainer aside#rightContainer {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .panel.panel-default {
+    margin-bottom: 70px;
+  }
+}
+
 #panelPrivateUsers {
   position: relative;
   bottom: 70px;
@@ -787,8 +789,8 @@ div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#u
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   margin-left: 3px;
 }
 
@@ -1116,6 +1118,45 @@ div#postList div#postContainer #commentBox .top #commentaryField i,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField i {
   color: var(--fontColorLight2);
   cursor: pointer;
+}
+
+div#postList div#postContainer #commentBox #commentPost,
+div#postListPrivateUser div#postContainer #commentBox #commentPost {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 15px;
+}
+
+div#postList div#postContainer #commentBox #commentPost .top img,
+div#postListPrivateUser div#postContainer #commentBox #commentPost .top img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  background-color: #ffffff;
+}
+
+div#postList div#postContainer #commentBox #commentPost .bottom,
+div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom {
+  padding: 15px;
+  border-radius: 15px;
+  background-color: var(--backgroundLight);
+  color: var(--fontColorLight2);
+}
+
+div#postList div#postContainer #commentBox #commentPost .bottom b,
+div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom b {
+  margin: 10px 0;
+}
+
+div#postList div#postContainer #commentBox #commentPost .bottom p,
+div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom p {
+  margin: 0;
 }
 
 div#postList div#postContainer .commentBox.show,
@@ -1757,8 +1798,8 @@ i#checkIconRegister {
 }
 
 #containerProfile #main #left #carta #namePart #verifiedCheck {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   margin-left: 6px;
 }
 

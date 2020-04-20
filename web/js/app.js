@@ -246,14 +246,15 @@ $(document).ready(function () {
                         <div class='top'>
                             <img src='${item.photo}' alt=''>
                             <div id='commentaryField'>
-                                <input type='text' placeholder='Write a commentary...'>
+                                <input type='text' placeholder='Write a commentary...' class='cajaComentarios' id='${item.id_post}'>
                                 <div>
                                     <i class="fas fa-smile-wink"></i>
                                     <i class="fas fa-camera"></i>
+                                    <button class='addCommentaryButton'><i class="fas fa-arrow-right"></i></button>
                                 </div>
                             </div>
                         </div>
-                        <div class='bottom'>
+                        <div class='bottom' id='${item.id_post}'>
                     
                         </div>
                     </div>
@@ -271,13 +272,18 @@ $(document).ready(function () {
                 `));
 
                     //Ponemos las fotos en mostar fotos
-
                     if (item.photoPost === '') {
                         $('#containerProfilePhotos .bottom').html('<h4>No photos</h4>');
                     } else {
                         $('#containerProfilePhotos .bottom').append(`<img src='${item.photoPost}'>`);
                     }
+
+                    getComments(item.id_post);
                 });
+
+                showCommentBox();
+
+
             } else {
                 $(contenedor).append(`<div class="text-center" id="noPostText"><h5>Oh, wow! It seems that there is still no content to display, discover new people.</h5><a href="#0" class="btn btn-primary rounded-pill">Discover People</a></div>`);
             }
@@ -548,6 +554,9 @@ $(document).ready(function () {
                     }
                 }).done(function (data) {
                     $('#containerFollowButton').html($(`<button class="unfollowButton" id="${id_user}">Unfollow <i class="fas fa-user-slash"></i></button>`));
+                    let nSeguidores = Number($('#followers .followers .numeroSeguidores').text());
+                    nSeguidores++;
+                    $('#followers .followers .numeroSeguidores').text(nSeguidores);
                     unfollow();
                 });
             });
@@ -568,6 +577,9 @@ $(document).ready(function () {
                     }
                 }).done(function (data) {
                     $('#containerFollowButton').html($(`<button class="followButton" id="${id_user}">Follow <i class="fas fa-user-plus"></i></button>`));
+                    let nSeguidores = Number($('#followers .followers .numeroSeguidores').text());
+                    nSeguidores--;
+                    $('#followers .followers .numeroSeguidores').text(nSeguidores);
                     follow();
                 });
             });
@@ -584,8 +596,9 @@ $(document).ready(function () {
                 });
             });
         });
+        insertComment();
     }
-    showCommentBox();
+
 
 
     function loadUnseenNotification(view = '') {
@@ -618,5 +631,65 @@ $(document).ready(function () {
     //Iniciar los popovers
     $('[data-toggle="popover"]').popover();
 
+    //Función para obtener los comentarios
+    function getComments(id_post) {
+        $.ajax({
+            url: 'getComments',
+            method: 'POST',
+            data: {
+                id_post: id_post
+            }
+        }).done(function (data) {
+            let datos = JSON.parse(data);
+
+            $('.commentBox .bottom').each(function (e, item) {
+                if ($(this).attr('id') == id_post) {
+                    let contenedor = $('<div></div>');
+
+                    $(contenedor).append(`
+                            <div id='commentPost'>
+                                <div class='top'>
+                                    <img src='${datos[e].photo}'>
+                                </div>
+                                <div class='bottom'>
+                                    <b>${datos[e].firstName} ${datos[e].lastName}</b>
+                                    <p>${datos[e].text}</p>
+                                </div>
+                            </div>
+                        `);
+
+                    $(item).html(contenedor);
+                }
+            });
+        });
+    }
+
+    //Función para insertar los comentarios
+    function insertComment() {
+
+        $('button.addCommentaryButton').each(function () {
+            $(this).click(function () {
+
+                let text = $(this).parent().prev().val();
+                let id_post = $(this).parent().prev().attr('id');
+
+                if (text != '') {
+                    $.ajax({
+                        url: 'insertComment',
+                        method: 'POST',
+                        data: {
+                            id_post: id_post,
+                            text: text
+                        }
+                    }).done(function () {
+                        getComments(id_post);
+                    });
+                } else {
+                    alert('Rellena el campo');
+                }
+            });
+        });
+
+    }
 
 }); //Fin document.ready

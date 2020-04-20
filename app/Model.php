@@ -307,7 +307,7 @@ class Model extends PDO
         $resultado = $this->conexion->query($consulta);
         $count = $resultado->rowCount();
 
-        if ($count == 1) {
+        if ($count > 0) {
             return $resultado->fetchAll();
         } else {
             return false;
@@ -333,5 +333,27 @@ class Model extends PDO
     {
         $consulta = "UPDATE follower SET follow_status = 0 WHERE sender_id = '$id_sesion'";
         $resultado = $this->conexion->query($consulta);
+    }
+
+    //Función para insertar un comentario de un post
+    public function insertComment($id_user, $id_post, $text)
+    {
+        $consulta = "INSERT INTO comments (id_user, id_post, text) VALUES (?, ?, ?)";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->bindParam(1, $id_user);
+        $resultado->bindParam(2, $id_post);
+        $resultado->bindParam(3, $text);
+        $resultado->execute();
+        $count = $resultado->rowCount();
+
+        return $count > 0 ? true : false;
+    }
+
+    public function getComments($id_post)
+    {
+        $consulta = "SELECT * FROM comments INNER JOIN users ON comments.id_post = '$id_post' AND comments.id_user = users.id";
+        $resultado = $this->conexion->query($consulta);
+
+        return $resultado->fetchAll();
     }
 }
