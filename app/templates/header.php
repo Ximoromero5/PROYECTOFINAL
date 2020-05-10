@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+        <link type="text/css" rel="stylesheet" href="web/css/lightGallery.css">
         <link rel="stylesheet" type="text/css" href="<?php echo 'web/css/' . Config::$dbCss ?>">
         <title>Home</title>
     </head>
@@ -39,14 +40,18 @@
                         <a href="home"><i class="fas fa-home"></i></a>
                     </li>
                     <li id="friends">
-                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Friends"><i class="fas fa-user-friends"></i></a>
+                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Followers"><i class="fas fa-user-friends"></i></a>
                     </li>
                     <li>
-                        <a href="#0" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="fas fa-comment"></i></a>
+                        <a href="chat" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="fas fa-envelope"></i></a>
                     </li>
                     <li class="dropdown">
                         <a href="#0" data-toggle="dropdown" data-placement="bottom" title="Notifications" class="dropdown-toggle" id="notificationLink"><i class="fas fa-bell"></i><span class="badge badge-primary badge-pill" id="pildoraNotificacion"></span></a>
-                        <ul class="dropdown-menu pull-left" id="listaNotificaciones"></ul>
+                        <ul class="dropdown-menu pull-left" id="listaNotificaciones">
+                            <li>
+                                <p>Notifications</p>
+                            </li>
+                        </ul>
                     </li>
                     <li id="profileSection">
                         <div class="dropdown">
@@ -96,7 +101,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/f32dfec8d8.js" crossorigin="anonymous"></script>
+        <script src="web/js/jquery.mousewheel.min.js"></script>
+        <script src="web/js/picturefill.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.14/js/lightgallery-all.min.js" integrity="sha256-0q70xbZ3GMwdiseCj/wfChJhq/3wzpNdgZinlSxSw14=" crossorigin="anonymous"></script>
         <script src="web/js/app.js"></script>
+        <script src="https://unpkg.com/lazysizes@4.0.1/lazysizes.js"></script>
         <!-- SCRIPTS -->
 
     </body>

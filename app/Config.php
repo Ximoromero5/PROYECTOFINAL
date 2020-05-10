@@ -7,9 +7,9 @@ class Config
     static public $dbUser = "root";
     static public $dbPassword = "";
     static public $dbCss = "styles.css";
-    static public $defaultImage = "web/images/0.png";
-    static public $defaultCoverImage = "web/images/defaultCover.jpg";
-    static public $validExtensions = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
+    static public $defaultImage = "web/images/web/0.png";
+    static public $defaultCoverImage = "web/images/web/defaultCover.jpg";
+    static public $validExtensions = ["image/jpeg", "image/gif", "image/png", "image/jpg", "video/mp4"];
     static public $imgPath = 'web/images/';
 
     //Google login

@@ -19,7 +19,7 @@
                 <p>Log in with</p>
                 <a href="<?php echo $parametros['loginButton']; ?>">
                     <button type="button" id="google-button" title="Google Log In">
-                        <img src="web/images/google.png" alt="">
+                        <img src="web/images/web/google.png" alt="">
                         <p>Log in with Google</p>
                     </button>
                 </a>
@@ -37,15 +37,17 @@
                     <label for="usernameLogin">Username</label>
                     <input type="text" placeholder="Enter your username" id="usernameLogin" name="username" value="<?php echo isset($_COOKIE['userCookie']) ? $_COOKIE['userCookie'] : '' ?>" required>
                     <div class="invalid-feedback">
-                        The user field is required.
+                        The username field is required.
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="passwordLogin">Password</label>
-                    <input type="password" placeholder="Enter your password" id="passwordLogin" name="password" value="<?php echo isset($_COOKIE['passwordCookie']) ? $_COOKIE['passwordCookie'] : '' ?>" required>
-                    <i class="fas fa-eye" id="passwordEye"></i>
-                    <div class="invalid-feedback">
-                        The user field is required.
+                    <div id="contenedorClaveLogin">
+                        <input type="password" placeholder="Enter your password" id="passwordLogin" name="password" value="<?php echo isset($_COOKIE['passwordCookie']) ? $_COOKIE['passwordCookie'] : '' ?>" required>
+                        <i class="fas fa-eye" id="passwordEye"></i>
+                        <div class="invalid-feedback" id="invalidFeed">
+                            The password field is required.
+                        </div>
                     </div>
                 </div>
                 <div class="forgot">
@@ -67,7 +69,7 @@
         </div>
         <div id="right" class="d-none d-xl-block">
             <div id="imageContainer">
-                <img src="web/images/right3.jpg" alt="">
+                <img src="web/images/web/right3.jpg" alt="">
             </div>
         </div>
     </div>

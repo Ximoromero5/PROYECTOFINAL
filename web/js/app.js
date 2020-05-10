@@ -1,15 +1,198 @@
 $(document).ready(function () {
 
     //Obtenemos todos los post nada más cargue la página
-    getPost();
-    /* setInterval(function () {
-        getPost();
-    }, 5000); */
+
+    //Función para obtener los post de las personas a las que sigues y de ti mismo.
+    let limit = 5;
+    let start = 0;
+    let status = 'inactive';
+
+    function getPost(limit, start) {
+        function getUrlVars() {
+            let vars = {};
+            let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        let action = '', person;
+
+        //Si no estamos en el perfil de alguien se mostrarán los post tanto de las personas a las que sigues como los tuyos propios
+        if (getUrlVars()['person'] == undefined) {
+            action = 'getPost';
+        } else {
+            //Si estamos en el perfil de alguien solo se muestran los post de esa persona
+            action = 'getPostUser';
+            person = getUrlVars()['person'];
+        }
+
+        $.ajax({
+            url: 'index.php',
+            method: "GET",
+            data: {
+                action: action,
+                person: person,
+                limit: limit,
+                start: start
+            },
+            cache: false
+        }).done(function (data) {
+
+            //Mostramos la información de los post a través de jumbotron
+            let datos = JSON.parse(data);
+            let contenedorPost = $('#postList');
+            let contenedor = $('<div></div>');
+            if (datos != '') {
+                let name, verified, photo, texto, position;
+
+                //Fecha del post con formato
+                let newDate = "";
+                $.each(datos, function (e, item) {
+
+                    //Asignamos verificado y la foto si hay
+                    verified = item.verified == 1 ? "<img src='web/images/web/check.png'>" : "";
+                    name = item.firstName != '' && item.lastName != '' ? `<h5>${item.firstName} ${item.lastName} ${verified}</h5>` : `<h5>@${item.username} ${verified}</h5>`;
+                    photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100 h-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
+                    texto = item.text != '' ? `<p>${item.text}</p>` : '';
+                    position = item.position != '' ? `<small class="ml-3">${item.position}</small>` : '';
+                    newDate = new Date(item.datePost);
+                    let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+                    let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
+
+                    //Añadimos cada uno de los post que haya con formato html
+                    $(contenedor).append($(`
+                <div class="jumbotron" id="postContainer">
+                    <div id="infoUser">
+                        <div id="userData">
+                                <a href="index.php?action=user&person=${item.username}" id="linkProfilePerson">
+                                <div id="userInfoPost">
+                                    <img src="${item.photo}" class="lazyload" alt="">
+                                    <div>
+                                        ${name} 
+                                        ${position}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="containerDate">    
+                            <span id="popoverOptions" data-toggle="popover" data-html="true" data-content="<li class='list-group-item'><i class='fas fa-link mr-2'></i>Copy post link</li>"><i class="fas fa-ellipsis-h"></i></span>
+                            <small>${day} of ${month} ${hour}:${minute}</small>
+                        </div>
+                    </div>
+                    <div id="parrafoTexto">
+                        ${texto}
+                    </div>
+                    <div id="postImageContainer">
+                            ${photo}
+                        <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                ${photo}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="shareIcons">
+                        <div id="shareIconsContainer">
+                        <div id="likeIcon">
+                                <button id="${item.id_post}" class="botonDarLike noLiked">
+                                    <i class='far fa-heart icono'></i><span><div id="likesCount" class="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
+                                    <span>57</span>
+                                </button>
+                            </div>
+                            <div id="commentIcon" class="commentIcon">
+                                <button id="commentButton" class='commentButton'>
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>32</span>
+                                </button>
+                            </div>  
+                            <div id="shareIcon">
+                                <a href="#0" id="shareButton">
+                                    <i class="far fa-share-square"></i>
+                                    <span>18</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='commentBox' class="commentBox">
+                        <div class='top'>
+                            <img src='${item.photo}' alt=''>
+                            <div id='commentaryField'>
+                                <input type='text' placeholder='Write a commentary...' class='cajaComentarios' id='${item.id_post}'>
+                                <div id='commentIcons'>
+                                    <i class="fas fa-smile-wink"></i>
+                                    <i class="fas fa-camera"></i>
+                                    <button class='addCommentaryButton'><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='bottom' id='${item.id_post}'>
+                    
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content p-5">
+                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                <input type="text" placeholder="Search user" class="form-control">
+                                <hr>
+                                <ul class="list-group likedUsersList"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `));
+
+                    if (item.photoPost == '') {
+                        $('#containerProfilePhotos .bottom').append('');
+                    } else {
+                        $('#containerProfilePhotos .bottom #lightgallery').append(`<a href='${item.photoPost}'><img src='${item.photoPost}'></a>`);
+                    }
+
+                    /*  getComments(item.id_post); */
+
+                });
+
+                $(contenedor).append(`<h6 class="m-4 text-center" id="loadingMessage">loading...</h6>`);
+                status = 'inactive';
+            } else {
+                $(contenedor).append(`<div class="text-center" id="noPostText"><h5>Oh, wow! It seems that there is still no content to display, discover new people.</h5><a href="#0">Discover People</a></div>`);
+                status = 'active';
+            }
+
+            //Añadimos la función para poder dar like
+            /*       giveLike(); */
+
+            //Activamos los popovers
+            $('[data-toggle="popover"]').popover();
+            /*       showCommentBox(); */
+
+            $(contenedorPost).append($(contenedor));
+        });
+    }
+    //Obtenemos los post dependiendo de si la persona hace scroll (5 post cada en cada petición)
+    if (status == 'inactive') {
+        status = 'active';
+        getPost(limit, start);
+    }
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() > $("#postList").height() && status == 'inactive') {
+            setTimeout(() => {
+                $('#loadingMessage').remove();
+            }, 1100);
+            status = 'active';
+            start = start + limit;
+            setTimeout(function () {
+                getPost(limit, start);
+            }, 1000);
+        }
+    });
 
     //Iniciar los tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-    //Calendario fecha cumpleaños | EN DUDA SI DEJARLO
+    //Calendario fecha cumpleaños 
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
         format: 'yyyy-mm-dd'
@@ -37,20 +220,16 @@ $(document).ready(function () {
                 firstName: firstName,
                 lastName: lastName,
                 description: description
-            },
-            success: function (data) {
-                $('#parrafoDescripcion').text(description);
-                $('#names').text(`${firstName} ${lastName}`);
-                $('.errores').after("<div class='alert alert-success' id='success'>Your profile has been updated successfully!</div>");
-                setInterval(() => {
-                    $('#success').fadeOut(function () {
-                        $(this).remove();
-                    });
-                }, 3000);
-            },
-            error: function () {
-                console.log('Error al enviar los datos!');
             }
+        }).done(function (data) {
+            $('#parrafoDescripcion').text(description);
+            $('#names').text(`${firstName} ${lastName}`);
+            $('.errores').after("<div class='alert alert-success' id='success'>Your profile has been updated successfully!</div>");
+            setInterval(() => {
+                $('#success').fadeOut(function () {
+                    $(this).remove();
+                });
+            }, 3000);
         });
     });
 
@@ -84,6 +263,7 @@ $(document).ready(function () {
         if (name !== '') {
             $('#addPostButton').attr('disabled', false);
             $('#addPostButton').css('cursor', 'pointer');
+            $('#addPostButton').css('background', 'rgb(10,116,236)');
         }
 
         //Se comprueba la extensión de la imágen
@@ -132,171 +312,10 @@ $(document).ready(function () {
         }).done(function (data) {
             $('#formularioPost')[0].reset();
             $('#postList').empty();
-            getPost();
+            getPost(5, 0);
         });
     });
 
-    //Función para obtener los post de las personas a las que sigues y de ti mismo.
-    function getPost() {
-        function getUrlVars() {
-            let vars = {};
-            let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-                vars[key] = value;
-            });
-            return vars;
-        }
-
-        let action = '', person;
-
-        //Si no estamos en el perfil de alguien se mostrarán los post tanto de las personas a las que sigues como los tuyos propios
-        if (getUrlVars()['person'] == undefined) {
-            action = 'getPost';
-        } else {
-            //Si estamos en el perfil de alguien solo se muestran los post de esa persona
-            action = 'getPostUser';
-            person = getUrlVars()['person'];
-        }
-
-        $.ajax({
-            url: 'index.php',
-            method: "GET",
-            data: {
-                action: action,
-                person: person
-            }
-        }).done(function (data) {
-
-            //Mostramos la información de los post a través de jumbotron
-            let datos = JSON.parse(data);
-            let contenedorPost = $('#postList');
-            let contenedor = $('<div></div>');
-            if (datos != '') {
-                let verified, photo, texto;
-
-                //Fecha del post con formato
-                let newDate = "";
-                $.each(datos, function (e, item) {
-
-                    //Asignamos verificado y la foto si hay
-                    verified = item.verified == 1 ? "<img src='web/images/check.png'>" : "";
-                    photo = item.photoPost !== '' ? `<img src="${item.photoPost}" class="w-100" data-toggle="modal" data-target="#modalProfilePhoto">` : '';
-                    texto = item.text != '' ? `<p>${item.text}</p>` : '';
-                    newDate = new Date(item.datePost);
-                    let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
-                    let [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(newDate);
-
-                    //Añadimos cada uno de los post que haya con formato html
-                    $(contenedor).append($(`
-                <div class="jumbotron" id="postContainer">
-                    <div id="infoUser">
-                        <div id="userData">
-                                <a href="index.php?action=user&person=${item.username}" id="linkProfilePerson">
-                                <div id="userInfoPost">
-                                    <img src="${item.photo}" alt="">
-                                    <div>
-                                        <h5>${item.firstName} ${item.lastName} ${verified}</h5>
-                                        <small class="ml-3">Web Developer Front End</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div id="containerDate">    
-                            <span id="popoverOptions" data-toggle="popover" data-html="true" data-content="<li class='list-group-item'><i class='fas fa-link mr-2'></i>Copy post link</li>"><i class="fas fa-ellipsis-h"></i></span>
-                            <small>${day} of ${month} ${hour}:${minute}</small>
-                        </div>
-                    </div>
-                    <div id="parrafoTexto">
-                        ${texto}
-                    </div>
-                    <div id="postImageContainer">
-                            ${photo}
-                        <div class="modal fade" id="modalProfilePhoto" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <img src="${$(photo).attr('src')}" alt="" class="w-100 h-100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="shareIcons">
-                        <div id="shareIconsContainer">
-                            <div id="shareIcon">
-                                <a href="#0" id="shareButton">
-                                    <i class="fas fa-share icono"></i>
-                                    <span>Share</span>
-                                </a>
-                            </div>
-                            <div id="commentIcon" class="commentIcon">
-                                <button id="commentButton" class='commentButton'>
-                                    <i class="far fa-comment icono"></i>
-                                    <span>358</span>
-                                </button>
-                            </div>
-                            <div id="likeIcon">
-                                <button id="${item.id_post}" class="botonDarLike noLiked">
-                                    <i class='far fa-heart icono'></i><span>Like</span>
-                                </button>
-                            </div>  
-                        </div>
-                        <div id="likesCount" class="likesCount" data-toggle="modal" data-target="#modalViewPersonsLiked">
-                            <span><i class='fas fa-heart icono' id='iconLikeRed'></i><h6><i class="numeroLikes animate" id="numeroLikeCount"></i> likes</h6></span>
-                        </div>
-                    </div>
-                    <div id='commentBox' class="commentBox">
-                        <div class='top'>
-                            <img src='${item.photo}' alt=''>
-                            <div id='commentaryField'>
-                                <input type='text' placeholder='Write a commentary...' class='cajaComentarios' id='${item.id_post}'>
-                                <div>
-                                    <i class="fas fa-smile-wink"></i>
-                                    <i class="fas fa-camera"></i>
-                                    <button class='addCommentaryButton'><i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='bottom' id='${item.id_post}'>
-                    
-                        </div>
-                    </div>
-                    <div class="modal fade" id="modalViewPersonsLiked" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content p-5">
-                                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
-                                <input type="text" placeholder="Search user" class="form-control">
-                                <hr>
-                                <ul class="list-group likedUsersList"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `));
-
-                    //Ponemos las fotos en mostar fotos
-                    if (item.photoPost === '') {
-                        $('#containerProfilePhotos .bottom').html('<h4>No photos</h4>');
-                    } else {
-                        $('#containerProfilePhotos .bottom').append(`<img src='${item.photoPost}'>`);
-                    }
-
-                    getComments(item.id_post);
-                });
-
-                showCommentBox();
-
-
-            } else {
-                $(contenedor).append(`<div class="text-center" id="noPostText"><h5>Oh, wow! It seems that there is still no content to display, discover new people.</h5><a href="#0" class="btn btn-primary rounded-pill">Discover People</a></div>`);
-            }
-            $(contenedorPost).html($(contenedor));
-
-            //Añadimos la función para poder dar like
-            giveLike();
-
-            //Activamos los popovers
-            $('[data-toggle="popover"]').popover();
-            showCommentBox();
-        });
-    }
 
 
     //Popover opciones post
@@ -323,7 +342,7 @@ $(document).ready(function () {
 
                     $.each(datos, function (e, item) {
                         if (item.verified == 1) {
-                            verified = '<img src="web/images/check.png" id="verifiedCheck">';
+                            verified = '<img src="web/images/web/check.png" id="verifiedCheck">';
                         }
                         if (item.username != '') {
                             output.append($(`<a href='index.php?action=user&person=${item.username}' class='dropdown-item'><div id='dropImage'><img src='${item.photo}' alt=''></div><div id='dropName'><h6>${item.firstName}${verified}</h6><p>@${item.username}</p></div></a>`));
@@ -418,11 +437,12 @@ $(document).ready(function () {
             $.ajax({
                 url: 'checkLike',
                 method: 'POST',
-                data: { id_post: $(this).attr('id') },
+                data: { id_post: $(item).attr('id') },
                 success: function (data) {
+
                     let datos = JSON.parse(data);
-                    let nameLiked = datos[1][e][2];
-                    let nameLikedPost = String(nameLiked).split("|");
+                    /*         let nameLiked = datos[1][e][2];
+                            let nameLikedPost = String(nameLiked).split("|"); */
 
                     /*  if (datos[1][e][0] == $(item).attr('id')) {
                          console.log(`ID: ${datos[1][e][0]} ID2: ${$(item).attr('id')}`);
@@ -432,11 +452,12 @@ $(document).ready(function () {
                     console.log(`Id de cada post: ${$(item).attr('id')}`);
                     console.log(`Id devuelto de ajax: ${datos[1][e]['id_post']} NÚMERO: ${datos[1][e][1]}`);
 
+
                     //Asignamos el número de likes al post (Esta parte funciona al revés, pero bien)
                     if ($(datos[1][e][0]).eq($(item).attr('id'))) {
                         $('.numeroLikes').each(function (f, item) {
                             $(item).html(datos[1][f][1]);
-                        })
+                        });
                     } else {
                         console.log(false);
                     }
@@ -444,11 +465,11 @@ $(document).ready(function () {
                     if (datos[0] == "true") {
                         $(item).removeClass('noLiked');
                         $(item).addClass('liked');
-                        $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                        $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>57</span>");
                     } else {
                         $(item).removeClass('liked');
                         $(item).addClass('noLiked');
-                        $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
+                        $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>57</span>");
                     }
                 }
             });
@@ -469,7 +490,7 @@ $(document).ready(function () {
                         data: { id_post: $(this).attr("id") }
                     }).done(function (e) {
                         if (e == "exito") {
-                            $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>Like</span>");
+                            $(item).html("<i class='fas fa-heart icono' id='iconLikeRed'></i><span>57</span>");
                         }
                     });
                 } else if ($(this).hasClass('liked')) {
@@ -486,7 +507,7 @@ $(document).ready(function () {
                         data: { id_post: $(this).attr("id") }
                     }).done(function (e) {
                         if (e == "exito") {
-                            $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>Like</span>");
+                            $(item).html("<i class='far fa-heart icono' id='iconLike'></i><span>57</span>");
                         }
                     });
                 }
@@ -691,5 +712,51 @@ $(document).ready(function () {
         });
 
     }
+    $('#options a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
 
+    //Clase active para el menú del perfil del user session
+    $('#menuProfile li').each(function () {
+        $(this).click(function () {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+
+    //Función para cambiar entre pestañas del perfil
+    $('#menuProfile li').each(function () {
+        $(this).click(function () {
+            if ($('#informationButton').hasClass('active')) {
+                $('#containerImages').removeClass('activeContainer');
+                $('#containerFriends').removeClass('activeContainer');
+                $('#containerInformation').addClass('activeContainer');
+            } else if ($('#friendsButton').hasClass('active')) {
+                $('#containerImages').removeClass('activeContainer');
+                $('#containerInformation').removeClass('activeContainer');
+                $('#containerFriends').addClass('activeContainer');
+            } else if ($('#imagesButton').hasClass('active')) {
+                $('#containerInformation').removeClass('activeContainer');
+                $('#containerFriends').removeClass('activeContainer');
+                $('#containerImages').addClass('activeContainer');
+            } else {
+                $('#containerInformation').addClass('activeContainer');
+                $('#containerFriends').removeClass('activeContainer');
+                $('#containerImages').removeClass('activeContainer');
+            }
+        })
+    });
+
+    //Galería de fotos
+    $(document).ready(function () {
+        $("#lightgallery").lightGallery();
+    });
+
+    //Delete post profile
+    $('.deletePostButton').each(function () {
+        $(this).click(function () {
+            alert('d');
+        })
+    })
 }); //Fin document.ready

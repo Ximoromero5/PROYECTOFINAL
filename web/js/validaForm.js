@@ -33,14 +33,6 @@ $(function () {
             gender: "Please enter your gender."
         },
         submitHandler: function (form) {
-            $(document.body).after(`
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Registration completed!</strong> You will be redirected in a few seconds.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            `);
             form.submit();
         }
     });
@@ -50,20 +42,17 @@ $(function () {
         $('#username').hasClass('error') ? $('#username').addClass('invalid') : $('#username').removeClass('invalid');
         $('#email').hasClass('error') ? $('#email').addClass('invalid') : $('#email').removeClass('invalid');
         $('#password').hasClass('error') ? $('#password').addClass('invalid') : $('#password').removeClass('invalid');
-        $('#gender').hasClass('error') ? $('#gender').addClass('invalid') : $('#gender').removeClass('invalid');
+        $('#gender').hasClass('error') ? $('#genderField').addClass('invalid') : $('#genderField').removeClass('invalid');
     });
 
     //Poner en verde los campos que sean correctos cuando se escribe
-    $('#username').keyup(function () {
-        $('#username').attr('aria-invalid') == 'false' ? $('#username').addClass('valid') : console.log('Inválido');
-    });
-
-    /* VALIDACIÓN DEL FORMULARIO DE REGISTRO */
+    /*     $('#username').keyup(function () {
+            $('#username').attr('aria-invalid') == 'false' ? $('#username').addClass('valid') : console.log('Inválido');
+        }); */
 
     /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
     let usernameLogin = $('#usernameLogin'), passwordLogin = $('#passwordLogin');
     let forms = document.getElementsByClassName('needs-validation');
-    /*  $(passwordLogin).keyup(function () { $(this).val() != '' ? $('#passwordEye').css('bottom', '15px') : $('#passwordEye').css('bottom', '38px'); }) */
 
     Array.prototype.filter.call(forms, function (formulario) {
         formulario.addEventListener('submit', function (e) {
@@ -75,7 +64,7 @@ $(function () {
                 }
                 if (passwordLogin.val() === '') {
                     e.preventDefault();
-                    $(passwordLogin).addClass('invalid');
+                    $('#contenedorClaveLogin').addClass('invalid');
                 }
                 /* $(passwordLogin).hasClass('invalid') ? $('#passwordEye').css('bottom', '40px') : $('#passwordEye').css('bottom', '15px'); */
             }
@@ -83,12 +72,6 @@ $(function () {
             formulario.classList.add('was-validated');
         });
     });
-
-    $(passwordLogin).keyup(function () {
-        $('#passwordEye').css('bottom', '15px !important');
-    });
-
-    /* VALIDACIÓN DEL FORMULARIO DE LOGIN */
 
     //Funcionalidad de ver la contraseña en el login
     $('#passwordEye').click(function () {

@@ -1,3 +1,4 @@
+<title><?php echo $datosUser[0]['username'] . ' | Profile' ?></title>
 <?php ob_start();
 
 $datos = [];
@@ -5,6 +6,10 @@ $datos = [];
 if (isset($datosUser[0])) {
     $datos = $datosUser[0];
 }
+
+?>
+
+<?php
 
 //Si el usuario existe
 if ($datosUser[0] != 0) {
@@ -15,7 +20,7 @@ if ($datosUser[0] != 0) {
     $verified = $datos['verified'] == '1' ? '<img src="web/images/check.png" id="verifiedCheck">' : '';
 
     //Si el usuario buscado no es el usuario que tiene la sesión
-    if ($datos['username'] != $_SESSION['username']) { ?>
+    if ($datos['username'] != $_SESSION['datos'][0]['username']) { ?>
 
         <div id="containerProfile">
             <header>
@@ -51,7 +56,6 @@ if ($datosUser[0] != 0) {
                         <div id="namePart">
                             <h3><?php echo $datos['firstName'] . " " . $datos['lastName'] . $verified ?></h3>
                             <p>@<?php echo $datos['username']; ?></p>
-                            <h6>Web Developer Back-end</h6>
                         </div>
                         <div id="information">
                             <?php if ($datos['city'] != '') { ?>
@@ -60,13 +64,13 @@ if ($datosUser[0] != 0) {
                                     <p><b><?php echo $datos['city']; ?></b></p>
                                 </div>
                             <?php } ?>
-                            <div class="joined">
-                                <i class="fas fa-calendar-alt"></i>
-                                <p>Joined on: <b><?php echo $joined; ?></b></p>
-                            </div>
                             <div class="birthday">
                                 <i class="fas fa-birthday-cake"></i>
                                 <p>Date of birth: <b><?php echo $birthday; ?></b></p>
+                            </div>
+                            <div class="joined">
+                                <i class="fas fa-envelope-open-text"></i>
+                                <a href="mailto:<?php echo $datos['email']; ?>" target="_blank"><?php echo $datos['email']; ?></a>
                             </div>
                             <div id="followers">
                                 <div class="following">
@@ -86,52 +90,85 @@ if ($datosUser[0] != 0) {
                     </div>
                     <div id="containerProfilePhotos">
                         <div class="top">
-                            <a href="#0">
-                                <h5>Photos</h5>
-                            </a>
-                            <a href="#0">
-                                <h6>View all</h6>
-                            </a>
+                            <h5>Photos</h5>
                         </div>
-                        <div class="bottom"></div>
+                        <div class="bottom">
+                            <div id="lightgallery">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="center">
                     <div id="top">
-                        <ul id="options">
-                            <li>
-                                <i class="fas fa-id-badge"></i>
-                                <h6>about</h6>
+                        <ul id="options" class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li title="Posts">
+                                <a href="#pills-post" id="postPill" class="active">Posts</i></a>
                             </li>
-                            <li>
-                                <i class="fas fa-user-friends"></i>
-                                <h6>friends</h6>
+                            <li title="About">
+                                <a href="#pills-information" id="aboutPill">Information</i></a>
                             </li>
-                            <li>
-                                <i class="fas fa-images"></i>
-                                <h6>photos</h6>
+                            <li title="Followers">
+                                <a href="#pills-followers" id="friendsPill">Followers</a>
                             </li>
-                            <li>
-                                <i class="fas fa-ellipsis-v"></i>
+                            <li title="Message">
+                                <a href="#0"><i class="fas fa-envelope"></i>Message</a>
+                            </li>
+                            <li title="Settings">
+                                <a href="#0"><i class="fas fa-ellipsis-v"></i></a>
                             </li>
                         </ul>
                         <div id="containerFollowButton"></div>
                     </div>
 
-                    <!-- Aquí van los post del usuario del que estamos viendo el perfil -->
-                    <div class="panel panel-default" id="panelPrivateUsers">
-                        <div class="panel-body">
-                            <div id="postList"></div>
+                    <div class="tab-content" id="tablaPrivateUsers">
+                        <div class="tab-pane fade show active" id="pills-post" role="tabpanel" aria-labelledby="postPill">
+
+                            <!-- Aquí se muestran los post -->
+                            <div class="panel panel-default" id="panelPrivateUsers">
+                                <div class="panel-body">
+                                    <h3>Publications</h3>
+                                    <div id="postList"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- MOSTRAR POST -->
-                </div>
-                <div id="right" class="d-none d-xl-block">
-
-                    <!-- Aquí va la una carta que de momento no hace nada -->
-                    <div class="card">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum, id distinctio autem nesciunt perferendis culpa, quae perspiciatis, voluptate nemo ad vitae quia voluptatum ratione veniam itaque natus nam eius.
+                        <div class="tab-pane fade" id="pills-information" role="tabpanel" aria-labelledby="aboutPill">
+                            <h3>Information</h3>
+                            <ul>
+                                <?php if ($datos['position'] != '') { ?>
+                                    <li>
+                                        <i class="fas fa-briefcase"></i>
+                                        <p> <?php echo $datos['position']; ?></p>
+                                    </li>
+                                <?php } ?>
+                                <li>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <p><b>joined</b> <?php echo $joined; ?></p>
+                                </li>
+                                <?php if ($datos['status'] != '') { ?>
+                                    <li>
+                                        <i class="fas fa-heart"></i>
+                                        <p><?php echo $datos['status'] ?></p>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($datos['link'] != '') { ?>
+                                    <li>
+                                        <i class="fas fa-link"></i>
+                                        <a href="<?php echo $datos['link'] ?>" target="_blank"><?php echo $datos['link'] ?></a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($datos['description'] != '') { ?>
+                                    <li class="description">
+                                        <h6>Description</h6>
+                                        <p>
+                                            <?php echo $datos['description']; ?>
+                                        </p>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="friendsPill">
+                            <h3>Followers</h3>
+                        </div>
                     </div>
                 </div>
             </div>

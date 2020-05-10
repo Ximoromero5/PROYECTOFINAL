@@ -29,7 +29,8 @@ $map = array(
     'checkNotification' => array('controller' => 'Controller', 'action' => 'checkNotification', 'acceso' => 1),
     'getPostUser' => array('controller' => 'Controller', 'action' => 'getPostUser', 'acceso' => 1),
     'getComments' => array('controller' => 'Controller', 'action' => 'getComments', 'acceso' => 1),
-    'insertComment' => array('controller' => 'Controller', 'action' => 'insertComment', 'acceso' => 1)
+    'insertComment' => array('controller' => 'Controller', 'action' => 'insertComment', 'acceso' => 1),
+    'chat' => array('controller' => 'Controller', 'action' => 'chat', 'acceso' => 1)
 );
 
 if (isset($_GET['action'])) {

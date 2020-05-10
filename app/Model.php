@@ -71,6 +71,7 @@ class Model extends PDO
         return $resultado->fetchAll();
     }
 
+
     //Función que inserta el token para recuperar la contraseña
     public function insertPasswordRecovery($id, $email, $token)
     {
@@ -143,6 +144,7 @@ class Model extends PDO
 
         return $resultado->fetchAll();
     }
+
     //Función que obtiene los datos de un usuario especifico mediante el username
     public function getUserData($id_user)
     {
@@ -152,7 +154,7 @@ class Model extends PDO
         return $resultado->fetchAll();
     }
 
-    //Función para añadir un post //MEJORAR
+    //Función para añadir un post
     public function addPost($id_user, $postText, $photoPost, $datePost)
     {
         $consulta = "INSERT INTO posts (id_user, photoPost, text, datePost) VALUES (:id_user, :photoPost, :text, :datePost)";
@@ -167,28 +169,27 @@ class Model extends PDO
     }
 
     //Función para obtener los post de las personas que sigues
-    public function getPost($idSesion)
+    public function getPost($idSesion, $start, $limit)
     {
-        $consulta = "SELECT * FROM posts INNER JOIN users ON users.id = posts.id_user LEFT JOIN follower ON follower.sender_id = posts.id_user WHERE follower.receiver_id = '$idSesion' OR posts.id_user = '$idSesion' GROUP BY posts.id_post ORDER BY posts.id_post DESC";
+        $consulta = "SELECT * FROM posts INNER JOIN users ON users.id = posts.id_user LEFT JOIN follower ON follower.sender_id = posts.id_user WHERE follower.receiver_id = '$idSesion' OR posts.id_user = '$idSesion' GROUP BY posts.datePost ORDER BY posts.datePost DESC LIMIT $start, $limit";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 
         return $resultado->fetchAll();
     }
 
-    //Función que obtiene los datos de un usuario especifico mediante el username
-    public function getInfoUser($username)
+    //Función que obtiene los datos de un usuario especifico mediante el id
+    public function getPostUser($id_user, $start = 0, $limit = 5)
     {
-        $consulta = "SELECT * FROM users WHERE username = '$username'";
+        $consulta = "SELECT * FROM posts INNER JOIN users ON posts.id_user = '$id_user' AND users.id = '$id_user' ORDER BY datePost DESC LIMIT $start, $limit";
         $resultado = $this->conexion->query($consulta);
 
         return $resultado->fetchAll();
     }
-
-    //Función que obtiene los datos de un usuario especifico mediante el id
-    public function getPostUser($id_user)
+    //Función que obtiene los datos de un usuario especifico mediante el username
+    public function getInfoUser($username)
     {
-        $consulta = "SELECT * FROM posts INNER JOIN users ON posts.id_user = '$id_user' AND users.id = '$id_user' ORDER BY datePost DESC";
+        $consulta = "SELECT * FROM users WHERE username = '$username'";
         $resultado = $this->conexion->query($consulta);
 
         return $resultado->fetchAll();
@@ -259,7 +260,7 @@ class Model extends PDO
     //Función para dar like a un post
     public function giveLike($id_post, $id_user)
     {
-        //Esta consulta permite insertar un like en la tabla de likepost sin que se repita
+        //Esta consulta permite insertar un like en la tabla de like post sin que se repita
         $consulta = "INSERT INTO postlike (id_user, id_post) SELECT $id_user, $id_post FROM posts WHERE EXISTS (SELECT id_post FROM posts WHERE id_post = $id_post) AND NOT EXISTS (SELECT id FROM postlike WHERE id_user = $id_user AND id_post = $id_post) LIMIT 1";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
@@ -293,7 +294,7 @@ class Model extends PDO
     //Función para contar el número de likes
     public function countLikes()
     {
-        $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes, GROUP_CONCAT(users.username SEPARATOR '|') AS nameLiked FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post LEFT JOIN users ON postlike.id_user = users.id GROUP BY posts.id_post DESC";
+        $consulta = "SELECT posts.id_post, COUNT(postlike.id) AS nLikes, GROUP_CONCAT(users.username SEPARATOR '|') AS nameLiked FROM posts LEFT JOIN postlike ON postlike.id_post = posts.id_post LEFT JOIN users ON postlike.id_user = users.id GROUP BY posts.id_post ASC";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->execute();
 
@@ -355,5 +356,26 @@ class Model extends PDO
         $resultado = $this->conexion->query($consulta);
 
         return $resultado->fetchAll();
+    }
+
+    //Función para borrar post 
+    public function deletePost($id_post, $idSesion)
+    {
+        $consulta = "DELETE FROM posts WHERE id_post = '$id_post' AND id_user = '$idSesion'";
+        $resultado = $this->conexion->query($consulta);
+
+        return $resultado->rowCount() == 1 ? true : false;
+    }
+
+    public function details($id_user, $position, $link, $status)
+    {
+        $consulta = "UPDATE users SET position = ?, link = ?, status= ? WHERE id = '$id_user'";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->bindParam(1, $position);
+        $resultado->bindParam(2, $link);
+        $resultado->bindParam(3, $status);
+        $resultado->execute();
+
+        return $resultado->rowCount() == 1 ? true : false;
     }
 }

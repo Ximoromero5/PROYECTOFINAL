@@ -9,13 +9,13 @@
 </head>
 
 <body class="d-flex" style="min-height: 100vh">
+
     <div class="container d-flex flex-column align-items-center m-auto">
         <div class="errores">
-            <?php echo $parametros['mensaje'] != '' ? "<div class='alert alert-danger' role='danger'>" . $parametros['mensaje'] . "</div>" : '' ?>
-            <?php echo $parametros['exito'] != '' ? "<div class='alert alert-success' role='danger'>" . $parametros['exito'] . "</div>" : '' ?>
+            <?php echo $parametros['mensaje'] != '' ? $parametros['mensaje'] : '' ?>
         </div>
         <h2>Reset your password</h2>
-        <form method="POST" action="index.php?action=forgotPassword" class="d-flex flex-column align-items-center w-100">
+        <form method="POST" action="forgotPassword" class="d-flex flex-column align-items-center w-100">
             <div class="form-group col-md-4">
                 <label for="field1">Email address</label>
                 <input type="email" class="form-control" id="field1" aria-describedby="emailHelp" placeholder="Enter email" name="email">

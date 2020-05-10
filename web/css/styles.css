@@ -46,8 +46,10 @@ body {
 
 /* ESTILOS DEL HEADER NAVIGATION */
 nav#menu {
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 65px;
+  height: 60px;
   background: var(--panelsBackgroundLight);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -61,8 +63,8 @@ nav#menu {
 
 @media (max-width: 768px) {
   nav#menu {
-    position: fixed;
-    bottom: 0;
+    bottom: 0 !important;
+    top: 91%;
   }
 }
 
@@ -121,7 +123,7 @@ nav#menu div#searchBarContainer {
 nav#menu div#searchBarContainer #searchBar {
   background: transparent;
   width: 85%;
-  height: 60%;
+  height: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -148,7 +150,7 @@ nav#menu div#searchBarContainer #searchBar #searchIcon {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--fontColorLight);
   padding: 20px;
 }
@@ -314,7 +316,7 @@ nav#menu div#mainMenu ul#horizontalMenu li {
 nav#menu div#mainMenu ul#horizontalMenu li a {
   text-decoration: none;
   color: var(--fontColorLight2);
-  padding: 20px;
+  padding: 23px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -332,6 +334,10 @@ nav#menu div#mainMenu ul#horizontalMenu li a {
   transition: all 0.2s;
 }
 
+nav#menu div#mainMenu ul#horizontalMenu li a i {
+  font-size: 16px;
+}
+
 nav#menu div#mainMenu ul#horizontalMenu li a:hover {
   background: var(--backgroundLight);
 }
@@ -345,10 +351,10 @@ nav#menu div#mainMenu ul#horizontalMenu li a#notificationLink::after {
 }
 
 nav#menu div#mainMenu ul#horizontalMenu li a#notificationLink span {
-  font-size: 10px;
+  font-size: 8px;
   position: absolute;
-  left: 20px;
-  bottom: 20px;
+  left: 24px;
+  bottom: 24px;
 }
 
 nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones {
@@ -360,7 +366,7 @@ nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones {
   background: var(--panelsBackgroundLight);
   border-radius: 3px;
   top: 10px !important;
-  left: -40px !important;
+  left: -55px !important;
 }
 
 nav#menu div#mainMenu ul#horizontalMenu li ul#listaNotificaciones li {
@@ -558,6 +564,7 @@ main#mainContainer #containerWrite {
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
+  width: 50% !important;
   margin: 0 10px;
   height: 190px;
 }
@@ -568,11 +575,22 @@ main#mainContainer #containerWrite {
   }
 }
 
+main#mainContainer #containerWrite form#formularioPost {
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  main#mainContainer #containerWrite form#formularioPost {
+    margin-top: 0;
+  }
+}
+
 main#mainContainer #containerWrite form#formularioPost #top {
-  width: 100%;
+  width: 50%;
+  margin: auto;
   background: var(--panelsBackgroundLight);
   height: 55%;
-  border-radius: 2px;
+  border-radius: 6px;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   position: relative;
@@ -582,6 +600,12 @@ main#mainContainer #containerWrite form#formularioPost #top {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  main#mainContainer #containerWrite form#formularioPost #top {
+    width: 100%;
+  }
 }
 
 main#mainContainer #containerWrite form#formularioPost #top img {
@@ -609,10 +633,11 @@ main#mainContainer #containerWrite form#formularioPost #top textarea {
 }
 
 main#mainContainer #containerWrite form#formularioPost #bottom {
-  width: 100%;
+  width: 50%;
+  margin: auto;
   background: var(--panelsBackgroundLight);
   padding: 10px 0;
-  border-radius: 2px;
+  border-radius: 12px;
   margin-top: 3px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -625,6 +650,12 @@ main#mainContainer #containerWrite form#formularioPost #bottom {
           align-items: center;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  main#mainContainer #containerWrite form#formularioPost #bottom {
+    width: 100%;
+  }
 }
 
 main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite {
@@ -664,6 +695,7 @@ main#mainContainer #containerWrite form#formularioPost #bottom div#containerIcon
 }
 
 main#mainContainer #containerWrite form#formularioPost #bottom div#containerIconsWrite .iconsWrite h6 {
+  font-size: 15px;
   margin: 0;
   color: var(--fontColorLight);
 }
@@ -708,31 +740,49 @@ main#mainContainer #containerWrite form#formularioPost #bottom div#publishPostCo
 
 main#mainContainer aside#leftContainer,
 main#mainContainer aside#rightContainer {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  height: 450px;
+  width: 25%;
+  height: 89vh;
+  position: fixed;
+  top: 70px;
   background-color: var(--panelsBackgroundLight);
   color: var(--fontColorLight2);
   padding: 20px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  /*  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
   text-align: center;
+}
+
+main#mainContainer aside#leftContainer {
+  left: 0;
+}
+
+main#mainContainer aside#rightContainer {
+  right: 0;
+}
+
+.panel.panel-default {
+  margin: auto;
+  width: 50%;
 }
 
 @media (max-width: 768px) {
   .panel.panel-default {
     margin-bottom: 70px;
+    width: 98%;
   }
 }
 
 #panelPrivateUsers {
-  position: relative;
-  bottom: 70px;
+  width: 100%;
+}
+
+#panelPrivateUsers h3 {
+  color: var(--fontColorLight2);
+  margin: 10px;
 }
 
 div#postList div#postContainer,
+div#postListPerfil div#postContainer,
 div#postListPrivateUser div#postContainer {
   font-size: 2vh;
   background-color: var(--panelsBackgroundLight);
@@ -744,6 +794,7 @@ div#postListPrivateUser div#postContainer {
 }
 
 div#postList div#postContainer div#infoUser,
+div#postListPerfil div#postContainer div#infoUser,
 div#postListPrivateUser div#postContainer div#infoUser {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -751,16 +802,32 @@ div#postListPrivateUser div#postContainer div#infoUser {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 8px 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 4px 20px;
+}
+
+div#postList div#postContainer div#infoUser #userData,
+div#postListPerfil div#postContainer div#infoUser #userData,
+div#postListPrivateUser div#postContainer div#infoUser #userData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson,
+div#postListPerfil div#postContainer div#infoUser a#linkProfilePerson,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson {
   color: var(--fontColorLight2);
   margin: 0;
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost,
+div#postListPerfil div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -771,9 +838,10 @@ div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#u
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img,
+div#postListPerfil div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost img {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -783,11 +851,14 @@ div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#u
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5,
+div#postListPerfil div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 {
-  margin: 0 15px !important;
+  margin: 0 5px 0 15px;
+  font-size: 17px;
 }
 
 div#postList div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img,
+div#postListPerfil div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img,
 div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#userInfoPost h5 img {
   width: 14px;
   height: 14px;
@@ -795,6 +866,7 @@ div#postListPrivateUser div#postContainer div#infoUser a#linkProfilePerson div#u
 }
 
 div#postList div#postContainer div#infoUser div#containerDate,
+div#postListPerfil div#postContainer div#infoUser div#containerDate,
 div#postListPrivateUser div#postContainer div#infoUser div#containerDate {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -813,6 +885,7 @@ div#postListPrivateUser div#postContainer div#infoUser div#containerDate {
 }
 
 div#postList div#postContainer div#infoUser div#containerDate span#popoverOptions,
+div#postListPerfil div#postContainer div#infoUser div#containerDate span#popoverOptions,
 div#postListPrivateUser div#postContainer div#infoUser div#containerDate span#popoverOptions {
   color: var(--fontColorLight2) !important;
   outline: 0;
@@ -836,33 +909,41 @@ div#postListPrivateUser div#postContainer div#infoUser div#containerDate span#po
 }
 
 div#postList div#postContainer div#infoUser div#containerDate span#popoverOptions:hover,
+div#postListPerfil div#postContainer div#infoUser div#containerDate span#popoverOptions:hover,
 div#postListPrivateUser div#postContainer div#infoUser div#containerDate span#popoverOptions:hover {
   background-color: var(--backgroundLight);
   text-decoration: none !important;
 }
 
 div#postList div#postContainer #parrafoTexto,
+div#postListPerfil div#postContainer #parrafoTexto,
 div#postListPrivateUser div#postContainer #parrafoTexto {
-  padding: 0 20px;
+  padding: 0 25px;
+  margin: 15px 0;
   color: var(--fontColorLight2);
-  margin: 10px 0;
 }
 
 div#postList div#postContainer #postImageContainer,
+div#postListPerfil div#postContainer #postImageContainer,
 div#postListPrivateUser div#postContainer #postImageContainer {
+  padding: 0 20px;
   cursor: pointer;
 }
 
 div#postList div#postContainer #postImageContainer img,
+div#postListPerfil div#postContainer #postImageContainer img,
 div#postListPrivateUser div#postContainer #postImageContainer img {
+  width: 100%;
   height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
+  border-radius: 4px;
 }
 
 div#postList div#postContainer div#shareIcons,
+div#postListPerfil div#postContainer div#shareIcons,
 div#postListPrivateUser div#postContainer div#shareIcons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -871,12 +952,13 @@ div#postListPrivateUser div#postContainer div#shareIcons {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 div#postList div#postContainer div#shareIcons #shareIconsContainer,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -886,6 +968,9 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer {
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon {
@@ -898,6 +983,12 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIc
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button,
@@ -917,7 +1008,7 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
   background: transparent;
   outline: 0;
   border-radius: 6px;
-  width: 100px;
+  width: 80px;
   color: var(--fontColorLight2);
   padding: 10px 0;
   cursor: pointer;
@@ -930,6 +1021,12 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIc
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a:hover,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button:hover,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button:hover,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a:hover,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button:hover,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a:hover,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button:hover,
@@ -945,6 +1042,12 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIc
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a i,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button i,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button i,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a i,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button i,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a i,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button i,
@@ -960,6 +1063,12 @@ div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIc
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a #iconLikeRed::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button #iconLikeRed::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button #iconLikeRed::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a #iconLikeRed::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button #iconLikeRed::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a #iconLikeRed::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button #iconLikeRed::before,
@@ -970,9 +1079,33 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
   /* #E0245E */
 }
 
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button span,
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a span,
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button span,
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a span,
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button span,
+div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon button span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon a span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon button span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon a span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon button span,
+div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon a span {
+  font-weight: 600;
+}
+
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover span {
@@ -982,6 +1115,9 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #commentButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #commentButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #commentButton:hover i::before {
@@ -991,6 +1127,9 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover span,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover span,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover span,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover span {
@@ -1000,6 +1139,9 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover i::before,
 div#postList div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover i::before,
+div#postListPerfil div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#likeIcon #shareButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#commentIcon #shareButton:hover i::before,
 div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer div#shareIcon #shareButton:hover i::before {
@@ -1007,6 +1149,7 @@ div#postListPrivateUser div#postContainer div#shareIcons #shareIconsContainer di
 }
 
 div#postList div#postContainer div#shareIcons #likesCount span,
+div#postListPerfil div#postContainer div#shareIcons #likesCount span,
 div#postListPrivateUser div#postContainer div#shareIcons #likesCount span {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1020,17 +1163,20 @@ div#postListPrivateUser div#postContainer div#shareIcons #likesCount span {
 }
 
 div#postList div#postContainer div#shareIcons #likesCount span:hover,
+div#postListPerfil div#postContainer div#shareIcons #likesCount span:hover,
 div#postListPrivateUser div#postContainer div#shareIcons #likesCount span:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
 div#postList div#postContainer div#shareIcons #likesCount span i,
+div#postListPerfil div#postContainer div#shareIcons #likesCount span i,
 div#postListPrivateUser div#postContainer div#shareIcons #likesCount span i {
   margin-right: 5px;
 }
 
 div#postList div#postContainer div#shareIcons #likesCount span h6,
+div#postListPerfil div#postContainer div#shareIcons #likesCount span h6,
 div#postListPrivateUser div#postContainer div#shareIcons #likesCount span h6 {
   margin: 0;
   color: var(--fontColorLight2);
@@ -1040,6 +1186,7 @@ div#postListPrivateUser div#postContainer div#shareIcons #likesCount span h6 {
 }
 
 div#postList div#postContainer #commentBox,
+div#postListPerfil div#postContainer #commentBox,
 div#postListPrivateUser div#postContainer #commentBox {
   background: transparent;
   padding: 20px;
@@ -1048,6 +1195,7 @@ div#postListPrivateUser div#postContainer #commentBox {
 }
 
 div#postList div#postContainer #commentBox .top,
+div#postListPerfil div#postContainer #commentBox .top,
 div#postListPrivateUser div#postContainer #commentBox .top {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1058,9 +1206,10 @@ div#postListPrivateUser div#postContainer #commentBox .top {
 }
 
 div#postList div#postContainer #commentBox .top img,
+div#postListPerfil div#postContainer #commentBox .top img,
 div#postListPrivateUser div#postContainer #commentBox .top img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
@@ -1068,9 +1217,10 @@ div#postListPrivateUser div#postContainer #commentBox .top img {
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField {
   background: var(--backgroundLight);
-  width: 50%;
+  width: 80%;
   height: 35px;
   border-radius: 22px;
   -webkit-box-align: center;
@@ -1085,42 +1235,71 @@ div#postListPrivateUser div#postContainer #commentBox .top #commentaryField {
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField input,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField input,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input {
   background: transparent;
   border: none;
   height: 100%;
-  width: 70%;
+  width: 100%;
+  padding: 5px 15px;
+  font-size: 15px;
   outline: 0;
   color: var(--fontColorLight2);
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField input::-webkit-input-placeholder,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField input::-webkit-input-placeholder,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::-webkit-input-placeholder {
   color: var(--fontColorLight2);
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField input:-ms-input-placeholder,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField input:-ms-input-placeholder,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input:-ms-input-placeholder {
   color: var(--fontColorLight2);
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField input::-ms-input-placeholder,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField input::-ms-input-placeholder,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::-ms-input-placeholder {
   color: var(--fontColorLight2);
 }
 
 div#postList div#postContainer #commentBox .top #commentaryField input::placeholder,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField input::placeholder,
 div#postListPrivateUser div#postContainer #commentBox .top #commentaryField input::placeholder {
   color: var(--fontColorLight2);
 }
 
-div#postList div#postContainer #commentBox .top #commentaryField i,
-div#postListPrivateUser div#postContainer #commentBox .top #commentaryField i {
+div#postList div#postContainer #commentBox .top #commentaryField div#commentIcons,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField div#commentIcons,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField div#commentIcons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div#postList div#postContainer #commentBox .top #commentaryField div#commentIcons i,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField div#commentIcons i,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField div#commentIcons i {
+  margin-right: 5px;
   color: var(--fontColorLight2);
   cursor: pointer;
 }
 
+div#postList div#postContainer #commentBox .top #commentaryField div#commentIcons button,
+div#postListPerfil div#postContainer #commentBox .top #commentaryField div#commentIcons button,
+div#postListPrivateUser div#postContainer #commentBox .top #commentaryField div#commentIcons button {
+  background: no-repeat;
+  border: none;
+  outline: 0;
+}
+
 div#postList div#postContainer #commentBox #commentPost,
+div#postListPerfil div#postContainer #commentBox #commentPost,
 div#postListPrivateUser div#postContainer #commentBox #commentPost {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1129,6 +1308,7 @@ div#postListPrivateUser div#postContainer #commentBox #commentPost {
 }
 
 div#postList div#postContainer #commentBox #commentPost .top img,
+div#postListPerfil div#postContainer #commentBox #commentPost .top img,
 div#postListPrivateUser div#postContainer #commentBox #commentPost .top img {
   width: 35px;
   height: 35px;
@@ -1142,6 +1322,7 @@ div#postListPrivateUser div#postContainer #commentBox #commentPost .top img {
 }
 
 div#postList div#postContainer #commentBox #commentPost .bottom,
+div#postListPerfil div#postContainer #commentBox #commentPost .bottom,
 div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom {
   padding: 15px;
   border-radius: 15px;
@@ -1150,23 +1331,71 @@ div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom {
 }
 
 div#postList div#postContainer #commentBox #commentPost .bottom b,
+div#postListPerfil div#postContainer #commentBox #commentPost .bottom b,
 div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom b {
   margin: 10px 0;
 }
 
 div#postList div#postContainer #commentBox #commentPost .bottom p,
+div#postListPerfil div#postContainer #commentBox #commentPost .bottom p,
 div#postListPrivateUser div#postContainer #commentBox #commentPost .bottom p {
   margin: 0;
 }
 
 div#postList div#postContainer .commentBox.show,
+div#postListPerfil div#postContainer .commentBox.show,
 div#postListPrivateUser div#postContainer .commentBox.show {
   display: block !important;
 }
 
 div#postList #noPostText,
+div#postListPerfil #noPostText,
 div#postListPrivateUser #noPostText {
   color: var(--fontColorLight2);
+  margin: 30px auto;
+  max-width: 70%;
+}
+
+div#postList #noPostText h5,
+div#postListPerfil #noPostText h5,
+div#postListPrivateUser #noPostText h5 {
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 16px;
+}
+
+div#postList #noPostText a,
+div#postListPerfil #noPostText a,
+div#postListPrivateUser #noPostText a {
+  color: var(--panelsBackgroundLight);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #3751e4;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+div#postList #noPostText a:hover,
+div#postListPerfil #noPostText a:hover,
+div#postListPrivateUser #noPostText a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  div#postList {
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  div#postListPrivateUser {
+    top: 180px;
+    position: relative;
+  }
 }
 
 #notfound {
@@ -1457,6 +1686,8 @@ div#mainLoginPage #left #loginForm .form-group button {
   border-radius: 3px;
   padding: 0 15px;
   border-bottom: 2px solid #ccc;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 div#mainLoginPage #left #loginForm .form-group button {
@@ -1474,20 +1705,55 @@ div#mainLoginPage #left #loginForm .form-group input[type="password"]:focus {
   border-bottom: 2px solid var(--blueColor);
 }
 
-div#mainLoginPage #left #loginForm .form-group input#passwordLogin {
-  padding-right: 45px !important;
+div#mainLoginPage #left #loginForm .form-group #contenedorClaveLogin {
+  width: 340px;
+  height: 50px;
+  outline: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 15px;
+  border-bottom: 2px solid #ccc;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  background: #fff;
 }
 
-div#mainLoginPage #left #loginForm .form-group i#passwordEye {
+div#mainLoginPage #left #loginForm .form-group #contenedorClaveLogin input#passwordLogin {
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  left: 0;
+  padding-right: 45px !important;
+  width: 85%;
+  border: none;
+  padding-right: 0 !important;
+  height: 99%;
+}
+
+div#mainLoginPage #left #loginForm .form-group #contenedorClaveLogin i#passwordEye {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 15%;
+  padding: 15px;
+  height: 100%;
   cursor: pointer;
-  color: var(--fontColorLight2);
+  color: #555555;
+}
+
+div#mainLoginPage #left #loginForm .form-group #contenedorClaveLogin div#invalidFeed {
+  position: absolute !important;
+  top: 49px !important;
+  left: 0 !important;
+}
+
+div#mainLoginPage #left #loginForm .form-group input#passwordLogin:focus #contenedorClaveLogin {
+  border: 1px solid var(--blueColor) !important;
+  border-bottom: 2px solid var(--blueColor) !important;
 }
 
 div#mainLoginPage #left #loginForm .forgot {
   margin: 20px 0;
+  margin-top: 30px !important;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1506,6 +1772,10 @@ div#mainLoginPage #left #loginForm #submitButtonContainer p {
 
 div#mainLoginPage #left #loginForm #submitButtonContainer p a {
   margin-left: 5px;
+}
+
+div#mainLoginPage #left #loginForm #submitButtonContainer button:hover {
+  opacity: 0.9;
 }
 
 div#mainLoginPage #right {
@@ -1632,6 +1902,10 @@ i#checkIconRegister {
           flex-direction: column;
 }
 
+#mainRegisterPage #right h5 {
+  font-weight: normal;
+}
+
 #mainRegisterPage #right #registerForm .form-group {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1656,6 +1930,8 @@ i#checkIconRegister {
   border-radius: 3px;
   padding: 0 40px 0 15px;
   border-bottom: 2px solid #ccc;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 #mainRegisterPage #right #registerForm .form-group button {
@@ -1672,6 +1948,24 @@ i#checkIconRegister {
 #mainRegisterPage #right #registerForm .form-group input[type="password"]:focus {
   border: 1px solid var(--blueColor);
   border-bottom: 2px solid var(--blueColor);
+}
+
+#mainRegisterPage #right #registerForm .form-group input {
+  position: relative;
+}
+
+#mainRegisterPage #right #registerForm .form-group input::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: red;
+}
+
+#mainRegisterPage #right #registerForm .form-group button[type="submit"] {
+  margin-top: 15px;
 }
 
 #mainRegisterPage #right #registerForm .form-group .custom-select {
@@ -1699,6 +1993,9 @@ i#checkIconRegister {
 
 /* END LOGIN PAGE STYLES */
 .modal-content {
+  text-align: left;
+  background: var(--panelsBackgroundLight);
+  color: var(--fontColorLight2);
   border: none;
   border-radius: 6px;
 }
@@ -1710,7 +2007,7 @@ i#checkIconRegister {
 /* ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
 #containerProfile header {
   width: 100%;
-  height: 350px;
+  height: 330px;
 }
 
 #containerProfile header img {
@@ -1727,6 +2024,8 @@ i#checkIconRegister {
   display: -ms-flexbox;
   display: flex;
   background-color: transparent;
+  width: 80%;
+  margin: auto;
 }
 
 @media (max-width: 768px) {
@@ -1735,6 +2034,7 @@ i#checkIconRegister {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    width: 100%;
   }
 }
 
@@ -1750,13 +2050,14 @@ i#checkIconRegister {
       -ms-flex: 1;
           flex: 1;
   background: transparent;
-  padding: 30px;
+  padding: 10px;
   margin-left: 20px;
 }
 
 @media (max-width: 768px) {
   #containerProfile #main #left {
-    padding: 0;
+    padding: 10px;
+    margin: 0;
   }
 }
 
@@ -1764,12 +2065,18 @@ i#checkIconRegister {
   font-family: "Muli", sans-serif;
   width: 100%;
   background-color: var(--panelsBackgroundLight);
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 6px;
+  padding-bottom: 10px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   position: relative;
-  bottom: 100px;
+  bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #left #carta {
+    bottom: 90px;
+  }
 }
 
 #containerProfile #main #left #carta #profilePhoto {
@@ -1890,13 +2197,21 @@ i#checkIconRegister {
 #containerProfile #main #left div#containerProfilePhotos {
   width: 100%;
   background: var(--panelsBackgroundLight);
-  height: 390px;
-  border-radius: 10px;
+  min-height: 150px;
+  max-height: 390px;
+  border-radius: 6px;
   padding: 7px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   position: relative;
   bottom: 70px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #left div#containerProfilePhotos {
+    bottom: -60px;
+  }
 }
 
 #containerProfile #main #left div#containerProfilePhotos .top {
@@ -1912,18 +2227,14 @@ i#checkIconRegister {
           align-items: center;
 }
 
-#containerProfile #main #left div#containerProfilePhotos .top a {
+#containerProfile #main #left div#containerProfilePhotos .top h5 {
   text-decoration: none;
   color: var(--fontColorLight2);
   margin: 10px;
 }
 
-#containerProfile #main #left div#containerProfilePhotos .top a:hover {
+#containerProfile #main #left div#containerProfilePhotos .top h5:hover {
   text-decoration: underline;
-}
-
-#containerProfile #main #left div#containerProfilePhotos .top a h6 {
-  color: var(--blueColor);
 }
 
 #containerProfile #main #left div#containerProfilePhotos .bottom {
@@ -1949,6 +2260,8 @@ i#checkIconRegister {
       -ms-flex: 2;
           flex: 2;
   padding: 30px 0;
+  position: relative;
+  margin-right: 30px;
 }
 
 @media (max-width: 768px) {
@@ -1956,6 +2269,7 @@ i#checkIconRegister {
     padding: 10px;
     position: relative;
     bottom: 190px;
+    margin-right: 0px;
   }
 }
 
@@ -1965,8 +2279,8 @@ i#checkIconRegister {
 
 #containerProfile #main #center #top {
   background: var(--panelsBackgroundLight);
-  padding: 15px;
-  border-radius: 10px;
+  padding: 8px;
+  border-radius: 6px;
   position: relative;
   width: 100%;
   bottom: 100px;
@@ -1982,6 +2296,16 @@ i#checkIconRegister {
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+@media (max-width: 768px) {
+  #containerProfile #main #center #top {
+    bottom: 75px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 #containerProfile #main #center #top ul#options {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1989,12 +2313,21 @@ i#checkIconRegister {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 80%;
+  width: 78%;
   background: transparent;
   padding: 0;
-  margin: 0;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  margin: 0 !important;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #center #top ul#options {
+    font-size: 14px;
+    width: 50%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 #containerProfile #main #center #top ul#options li {
@@ -2002,27 +2335,53 @@ i#checkIconRegister {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: var(--fontColorLight2);
-  cursor: pointer;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  padding: 35px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  border-radius: 4px;
+  /* h6 {
+              margin: 0;
+              margin-top: 5px;
+            } */
 }
 
-#containerProfile #main #center #top ul#options li h6 {
-  margin: 0;
-  margin-top: 5px;
+@media (max-width: 768px) {
+  #containerProfile #main #center #top ul#options li {
+    width: 100%;
+  }
+}
+
+#containerProfile #main #center #top ul#options li a {
+  color: var(--fontColorLight2);
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 15px 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #center #top ul#options li a {
+    width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+#containerProfile #main #center #top ul#options li a.active {
+  border-bottom: 3px solid var(--blueColor);
+  border-radius: 0;
+}
+
+#containerProfile #main #center #top ul#options li i {
+  font-size: 18px;
+  margin: 5px;
 }
 
 #containerProfile #main #center #top ul#options li:hover {
@@ -2033,7 +2392,7 @@ i#checkIconRegister {
 #containerProfile #main #center #top div#containerFollowButton button.followButton {
   padding: 8px 20px;
   border: none;
-  border-radius: 22px;
+  border-radius: 6px;
   color: #f5f5f5;
   background: #e60000;
   cursor: pointer;
@@ -2042,36 +2401,93 @@ i#checkIconRegister {
   outline: 0;
 }
 
+#containerProfile #main #center #top div#containerFollowButton button.unfollowButton:hover,
+#containerProfile #main #center #top div#containerFollowButton button.followButton:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #center #top div#containerFollowButton button.unfollowButton,
+  #containerProfile #main #center #top div#containerFollowButton button.followButton {
+    padding: 0;
+    width: 90px;
+    height: 35px;
+    font-size: 13px;
+  }
+}
+
 #containerProfile #main #center #top div#containerFollowButton button.followButton {
   background: var(--blueColor) !important;
 }
 
-#containerProfile #main #right {
-  background: transparent;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  max-height: 620px;
-  padding: 30px;
+#containerProfile #main #center #tablaPrivateUsers {
+  position: absolute;
+  background: var(--panelsBackgroundLight);
+  top: 0;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  #containerProfile #main #center #tablaPrivateUsers {
+    top: 250px;
+  }
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane {
+  /* background: var(--panelsBackgroundLight);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane h3 {
+  margin: 0;
+  margin-bottom: 20px;
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul {
+  margin: 0;
+  padding: 10px;
+  color: var(--fontColorLight2);
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul li {
+  list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: relative;
-  bottom: 100px;
-  border-radius: 10px;
-  margin-right: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10px;
 }
 
-#containerProfile #main #right .card {
-  background: var(--panelsBackgroundLight);
-  color: var(--fontColorLight2);
-  padding: 15px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul li i {
+  margin-right: 10px;
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul li h5,
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul li p {
+  margin: 0;
+  font-size: 16px;
+}
+
+#containerProfile #main #center #tablaPrivateUsers .tab-pane ul li.description {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 /* FIN ESTILOS DE LA PÁGINA DE PERFIL DE USUARIO */
@@ -2118,5 +2534,473 @@ button.close {
             transform: translate3d(0, -40px, 0);
     opacity: 0;
   }
+}
+
+.popover-body {
+  padding: 0;
+}
+
+#profileContainer {
+  margin: auto;
+  margin-top: 60px;
+  width: 65%;
+  height: 350px;
+  background-size: cover !important;
+  background-position: center !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  position: relative;
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0px -47px 56px 0px rgba(0, 0, 0, 0.45);
+          box-shadow: inset 0px -47px 56px 0px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 768px) {
+  #profileContainer {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+#profileContainer .profilePhoto {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  top: 20px;
+}
+
+@media (max-width: 768px) {
+  #profileContainer .profilePhoto {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+#profileContainer .profilePhoto img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+#profileContainer .profilePhoto .cameraIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translate(-10%, -10%);
+          transform: translate(-10%, -10%);
+}
+
+#profileContainer .profilePhoto .cameraIcon i {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#profileContainer .profilePhoto .cameraIcon:hover i {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#profileContainer .profilePhoto img {
+  border-radius: 50%;
+  width: 100%;
+  border: 3px solid var(--fontColorLight2);
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
+
+#profileContainer .changeCoverButton {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  color: #f5f5f5;
+  background: rgba(255, 255, 255, 0.3);
+  outline: 0;
+}
+
+@media (max-width: 768px) {
+  #profileContainer .changeCoverButton {
+    top: 20px !important;
+    right: 20px !important;
+    bottom: 82%;
+  }
+}
+
+#profileContainer .changeCoverButton i {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+#profileContainer .changeCoverButton:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#informationProfile {
+  max-width: 100%;
+  min-height: 170px;
+  margin: auto;
+  background: var(--panelsBackgroundLight);
+}
+
+#informationProfile .contenedorNombre {
+  color: var(--fontColorLight2);
+  text-align: center;
+}
+
+#informationProfile .contenedorNombre h1 {
+  padding: 30px 0 0 0;
+  font-size: 38px;
+}
+
+#informationProfile .contenedorNombre hr {
+  border: none;
+  border-top: 1px solid #cccccc;
+  width: 65%;
+}
+
+#informationProfile .contenedorNombre #menuProfile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin: auto;
+  width: 65%;
+}
+
+@media (max-width: 768px) {
+  #informationProfile .contenedorNombre #menuProfile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 50%;
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+}
+
+#informationProfile .contenedorNombre #menuProfile li {
+  list-style: none;
+  padding: 6px 18px;
+  margin: 5px 10px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+#informationProfile .contenedorNombre #menuProfile li button {
+  text-decoration: none;
+  text-align: left !important;
+  color: var(--fontColorLight2);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  outline: 0;
+}
+
+#informationProfile .contenedorNombre #menuProfile li:hover {
+  background-color: var(--backgroundLight);
+  border-radius: 5px;
+}
+
+#informationProfile .contenedorNombre #menuProfile li.active {
+  border-bottom-color: #0a55ec;
+  border-radius: 5px 5px 0 0;
+}
+
+#informationProfile .contenedorNombre #menuProfile li.active:hover {
+  background: transparent;
+}
+
+#informationProfile .contenedorNombre #menuProfile li.active button {
+  color: #0a55ec;
+}
+
+#informationProfile .contenedorNombre #menuProfile :nth-child(4) {
+  background: #3a3b3c;
+  border-radius: 5px;
+}
+
+#informationProfile .contenedorNombre #menuProfile :nth-child(4):hover {
+  opacity: 0.8;
+  background: #3a3b3c;
+}
+
+#informationProfile .contenedorNombre #menuProfile :nth-child(4) i {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+#informationProfile .contenedorNombre #menuProfile :nth-child(4) button {
+  color: #f5f5f5;
+  text-align: center;
+}
+
+#informationProfile .contenedorNombre #menuProfile :nth-child(4).active {
+  background: #3a3b3c;
+  border: none;
+  color: #f5f5f5 !important;
+  border-radius: 5px;
+}
+
+#informationProfile .contenedorNombre #advert {
+  color: red;
+  font-style: italic;
+}
+
+#informationProfile .contenedorNombre span.input-group-append button i {
+  color: var(--fontColorLight2) !important;
+}
+
+#informationProfile .contenedorNombre #containerInformation,
+#informationProfile .contenedorNombre #containerFriends,
+#informationProfile .contenedorNombre #containerImages {
+  background: var(--panelsBackgroundLight);
+  width: 65%;
+  margin: 15px auto;
+  margin-bottom: 75px;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #informationProfile .contenedorNombre #containerInformation,
+  #informationProfile .contenedorNombre #containerFriends,
+  #informationProfile .contenedorNombre #containerImages {
+    width: 100%;
+  }
+}
+
+#informationProfile .contenedorNombre #containerInformation h5,
+#informationProfile .contenedorNombre #containerFriends h5,
+#informationProfile .contenedorNombre #containerImages h5 {
+  text-align: left;
+  margin-left: 12px;
+  padding: 10px 10px 0 10px;
+  font-weight: bold;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information,
+#informationProfile .contenedorNombre #containerFriends #information,
+#informationProfile .contenedorNombre #containerImages #information {
+  height: 80vh;
+  text-align: left !important;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile {
+  margin: 12px;
+  padding: 10px;
+  color: var(--fontColorLight2);
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile li,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile li,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile li {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile li i,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile li i,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile li i {
+  margin-right: 10px;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile li h5,
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile li p,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile li h5,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile li p,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile li h5,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile li p {
+  margin: 0;
+  font-size: 16px;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile li.description,
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile li.description,
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile li.description {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information ul#infoProfile :nth-child(1),
+#informationProfile .contenedorNombre #containerFriends #information ul#infoProfile :nth-child(1),
+#informationProfile .contenedorNombre #containerImages #information ul#infoProfile :nth-child(1) {
+  margin-top: 0;
+}
+
+#informationProfile .contenedorNombre .activeContainer {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+#informationProfile .contenedorNombre #containerInformation {
+  width: 80%;
+  background: none !important;
+}
+
+@media (max-width: 768px) {
+  #informationProfile .contenedorNombre #containerInformation {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+  }
+}
+
+#informationProfile .contenedorNombre #containerInformation #information,
+#informationProfile .contenedorNombre #containerInformation #postProfile {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background: var(--panelsBackgroundLight);
+  border-radius: 7px;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information .top,
+#informationProfile .contenedorNombre #containerInformation #postProfile .top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information .top button,
+#informationProfile .contenedorNombre #containerInformation #postProfile .top button {
+  border: none;
+  color: var(--backgroundLight);
+  background: var(--blueColor);
+  border-radius: 4px;
+  outline: 0;
+  font-size: 16px;
+  padding: 6px 18px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information .top button i,
+#informationProfile .contenedorNombre #containerInformation #postProfile .top button i {
+  margin-right: 5px;
+}
+
+#informationProfile .contenedorNombre #containerInformation #information .top button:hover,
+#informationProfile .contenedorNombre #containerInformation #postProfile .top button:hover {
+  opacity: 0.8;
+}
+
+#informationProfile .contenedorNombre #containerInformation #postProfile {
+  margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+  #informationProfile .contenedorNombre #containerInformation #postProfile {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}
+
+#informationProfile .contenedorNombre #containerImages {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#informationProfile .contenedorNombre #containerImages #lightgallery {
+  padding: 10px;
+  width: 100%;
+  background: var(--panelsBackgroundLight);
+  min-height: 400px;
+  max-height: 900px;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 8px;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
+  /*  grid-template-rows: repeat(5, 1fr); */
+}
+
+#informationProfile .contenedorNombre #containerImages #lightgallery a img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  #informationProfile .contenedorNombre #containerImages #lightgallery {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+#mensajeExito {
+  z-index: 999;
+}
+
+#genderField .pretty #gender {
+  width: 15px !important;
+  height: 15px !important;
+  position: absolute !important;
+}
+
+#genderField .pretty label#gender-error {
+  position: absolute;
+  top: 25px;
+}
+
+#genderField .pretty .state {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=styles.css.map */

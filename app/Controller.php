@@ -80,7 +80,7 @@ class Controller
                             $parametros['mensaje'] = 'That was an invalid email address or password.';
                         }
                     } else {
-                        $parametros['mensaje'] = 'You must fill all the fields.';
+                        $parametros['mensaje'] = 'Please, fill all fields.';
                     }
                 } else {
 
@@ -120,80 +120,87 @@ class Controller
 
     public function register()
     {
-        try {
-            $parametros = array(
-                'username' => '',
-                'email' => '',
-                'password' => '',
-                'resultado' => array(),
-                'mensaje' => '',
-                'exito' => ''
-            );
+        if (!isset($_SESSION['username'])) {
 
-            $model = new Model();
-            $validate = new Validation();
 
-            if (isset($_POST['registerButton'])) {
-
-                //recogemos los datos del formulario
-                $gender = $_POST['gender'];
-                $username = getData('username');
-                $email = getData('email');
-                $password = getData('password');
-                $finalPassword = crypt($password, '$2a$09$anexamplestringforsaleLouKejcjRlExmf1671qw3Khl49R3dfu');
-                $data = $_POST;
-
-                $rules = array(
-                    array(
-                        'name' => 'username',
-                        'regla' => 'no-empty'
-                    ),
-                    array(
-                        'name' => 'email',
-                        'regla' => 'no-empty, email'
-                    ),
-                    array(
-                        'name' => 'password',
-                        'regla' => 'no-empty, password'
-                    )
+            try {
+                $parametros = array(
+                    'username' => '',
+                    'email' => '',
+                    'password' => '',
+                    'resultado' => array(),
+                    'mensaje' => ''
                 );
 
-                $validations = $validate->rules($rules, $data);
+                $model = new Model();
+                $validate = new Validation();
 
-                if ($validations === true) {
-                    //Comprobamos si existe el usuario o email
-                    if ($model->userExists($username)) {
-                        $parametros['mensaje'] = 'The user already exists!';
-                    } else if ($model->emailExists($email)) {
-                        $parametros['mensaje'] = 'The email already exists!';
-                    } else {
-                        $profilePhoto = Config::$defaultImage;
-                        $coverPhoto = Config::$defaultCoverImage;
-                        if ($model->register($username, $email, $finalPassword, $gender, $profilePhoto, $coverPhoto, date('Y-m-d'))) {
-                            $parametros['exito'] = 'User registered successfully.';
-                            header('Refresh: 2; login');
+                if (isset($_POST['registerButton'])) {
+
+                    //recogemos los datos del formulario
+                    $gender = $_POST['gender'];
+                    $username = getData('username');
+                    $email = getData('email');
+                    $password = getData('password');
+                    $finalPassword = crypt($password, '$2a$09$anexamplestringforsaleLouKejcjRlExmf1671qw3Khl49R3dfu');
+                    $data = $_POST;
+
+                    $rules = array(
+                        array(
+                            'name' => 'username',
+                            'regla' => 'no-empty'
+                        ),
+                        array(
+                            'name' => 'email',
+                            'regla' => 'no-empty, email'
+                        ),
+                        array(
+                            'name' => 'password',
+                            'regla' => 'no-empty, password'
+                        )
+                    );
+
+                    $validations = $validate->rules($rules, $data);
+
+                    if ($validations === true) {
+                        //Comprobamos si existe el usuario o email
+                        if ($model->userExists($username)) {
+                            $parametros['mensaje'] = 'The user already exists.';
+                        } else if ($model->emailExists($email)) {
+                            $parametros['mensaje'] = 'The email already exists.';
                         } else {
-                            $parametros['mensaje'] = 'An error has occurred while registering, please check the data.';
+                            $profilePhoto = Config::$defaultImage;
+                            $coverPhoto = Config::$defaultCoverImage;
+                            if ($model->register($username, $email, $finalPassword, $gender, $profilePhoto, $coverPhoto, date('Y-m-d'))) {
+                                echo "<div class='alert alert-success' role='alert'>
+                                You have successfully registered, you will be redirected in a few seconds!
+                                </div>";
+                                echo "<script>setTimeout(\"location.href = 'login';\",4500);</script>";
+                            } else {
+                                $parametros['mensaje'] = 'An error has occurred while registering, please check the data.';
+                            }
                         }
-                    }
-                } else {
-                    foreach ($validations as $key => $errors) {
-                        foreach ($errors as $error => $key2) {
-                            foreach ($key2 as $end) {
-                                $parametros['mensaje'] .= $end . "<br>";
+                    } else {
+                        foreach ($validations as $key => $errors) {
+                            foreach ($errors as $error => $key2) {
+                                foreach ($key2 as $end) {
+                                    $parametros['mensaje'] .= $end . "<br>";
+                                }
                             }
                         }
                     }
                 }
+            } catch (Exception $e) {
+                error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
+                header('Location: error');
+            } catch (Error $e) {
+                error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
+                header('Location: error');
             }
-        } catch (Exception $e) {
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
-            header('Location: error');
-        } catch (Error $e) {
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
-            header('Location: error');
+            require __DIR__ . '/templates/registerForm.php';
+        } else {
+            header('Location: home');
         }
-        require __DIR__ . '/templates/registerForm.php';
     }
 
     public function closeSesion()
@@ -207,8 +214,7 @@ class Controller
     {
         try {
             $parametros = array(
-                'mensaje' => '',
-                'exito' => ''
+                'mensaje' => ''
             );
 
             $model = new Model();
@@ -228,7 +234,8 @@ class Controller
                 $validations = $validate->rules($rules, $data);
 
                 if ($validations === true) {
-                    if (count($userData = $model->checkEmail($email)) == 1) {
+                    if (count($model->checkEmail($email)) == 1) {
+                        $userData = $model->checkEmail($email);
                         foreach ($userData as $row) {
                             //Si existe el email introducido
                             $id = $row['id'];
@@ -256,20 +263,14 @@ class Controller
                                 $headers  = "MIME-Version: 1.0\r\n";
                                 $headers .= "Content-type: text/html; charset=utf-8\r\n";
                                 $headers .= "From:" . $from;
-                                mail($to, $subject, $message, $headers) ? $parametros['exito'] = "Message sent successfully!" : $parametros['mensaje'] = "Error to send email!";
+                                mail($to, $subject, $message, $headers) ? $parametros['mensaje'] = "Message sent successfully!" : $parametros['mensaje'] = "Error to send email!";
                             }
                         }
                     } else {
-                        $parametros['mensaje'] = "The email entered does not exist!";
+                        $parametros['mensaje'] = "<div class='alert alert-danger' role='danger'>The email entered does not exist.<i class='fas fa-times' id='closeAlertServer'></i></div>";
                     }
                 } else {
-                    foreach ($validations as $key => $errors) {
-                        foreach ($errors as $error => $key2) {
-                            foreach ($key2 as $end) {
-                                $parametros['mensaje'] .= $end . "<br>";
-                            }
-                        }
-                    }
+                    $parametros['mensaje'] = "<div class='alert alert-danger' role='danger'>Please fill the email field.<i class='fas fa-times' id='closeAlertServer'></i></div>";
                 }
             }
         } catch (Exception $e) {
@@ -371,27 +372,50 @@ class Controller
             $parametros = array(
                 'mensaje' => '',
                 'exito' => '',
-                'errores' => array()
+                'datos' => array()
             );
+
+            $limit = '';
+            $start = '';
+            if (isset($_REQUEST['limit'], $_REQUEST['start'])) {
+                $limit = $_REQUEST['limit'];
+                $start = $_REQUEST['start'];
+            }
 
             $model = new Model();
 
+            //Obtenemos los post del perfil
+            $parametros['datos'] = $model->getPostUser($_SESSION['datos'][0]['id']);
+
             //Actualizar datos de usuarios
-            $id = $_REQUEST['id'];
-            $city = $_REQUEST['city'];
-            $gender = $_REQUEST['gender'];
-            $birthday = $_REQUEST['birthday'];
-            $firstName = $_REQUEST['firstName'];
-            $lastName = $_REQUEST['lastName'];
-            $description = $_REQUEST['description'];
+            $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+            $city = isset($_REQUEST['city']) ? $_REQUEST['city'] : null;
+            $gender = isset($_REQUEST['gender']) ? $_REQUEST['gender'] : null;
+            $birthday = isset($_REQUEST['birthday']) ? $_REQUEST['birthday'] : null;
+            $firstName = isset($_REQUEST['firstName']) ? $_REQUEST['firstName'] : null;
+            $lastName = isset($_REQUEST['lastName']) ? $_REQUEST['lastName'] : null;
+            $description = isset($_REQUEST['description']) ? $_REQUEST['description'] : null;
 
             if ($model->updateProfile($id, $city, $gender, $birthday, $firstName, $lastName, $description)) {
-                echo json_encode(array('success' => 1));
+                echo json_encode(1);
                 $Sesion = new Sesion();
                 $Sesion->setSesion('datos', $model->getDataUser($id));
-            } else {
-                echo json_encode(array('success' => 0));
-            }
+            } /* else {
+                echo json_encode(0);
+            } */
+
+            /*        if (isset($_POST['detailsButton'])) {
+                //Details
+                $position = isset($_REQUEST['position']) ? $_REQUEST['position'] : null;
+                $link = isset($_REQUEST['link']) ? $_REQUEST['link'] : null;
+                $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : null;
+
+                if ($model->details($_SESSION['datos'][0]['id'], $position, $link, $status)) {
+                    echo json_encode(1);
+                    $Sesion = new Sesion();
+                    $Sesion->setSesion('datos', $model->getDataUser($_SESSION['datos'][0]['id']));
+                }
+            } */
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logException.txt");
             header('Location: error');
@@ -439,6 +463,7 @@ class Controller
                     $Sesion = new Sesion();
                     $Sesion->setSesion('datos', $model->getDataUser($id));
                     $parametros['exito'] = 'Profile cover photo updated successfully!';
+                    header('Location: profile');
                 } else {
                     $parametros['mensaje'] = 'Error updating cover photo picture!';
                 }
@@ -522,12 +547,19 @@ class Controller
             $datosUser = array();
             $postsUser = array();
 
+            $limit = '';
+            $start = '';
+            if (isset($_REQUEST['limit'], $_REQUEST['start'])) {
+                $limit = $_REQUEST['limit'];
+                $start = $_REQUEST['start'];
+            }
+
             //Obtenemos el username del usuario que estamos visitando
             if (isset($_REQUEST['person'])) {
                 if ($model->userExists($_REQUEST['person'])) {
                     $username = $_REQUEST['person'];
                     $datosUser = $model->getInfoUser($username);
-                    $postsUser = $model->getPostUser($datosUser[0]['id']);
+                    $postsUser = $model->getPostUser($datosUser[0]['id'], $start, 15);
                 } else {
                     $datosUser = array('success' => 0);
                     $postsUser = "User not exists";
@@ -559,7 +591,10 @@ class Controller
         }
         $datosUser = $model->getInfoUser($username);
         $sesionId = $_SESSION['datos'][0]['id']; //Id usuario sesión
-        $idUserProfile = $datosUser[0]['id']; //Id persona a la que estamos visitando
+        if ($datosUser[0]['id'] != '') {
+            $idUserProfile = $datosUser[0]['id']; //Id persona a la que estamos visitando
+        }
+
         echo json_encode($model->checkFollow($idUserProfile, $sesionId) ? array('success' => 1, 'id' => $idUserProfile, 'nFollowing' => $model->countFollowing(), 'nFollowers' => $model->countFollowers()) : array('success' => 0, 'id' => $idUserProfile, 'nFollowing' => $model->countFollowing(), 'nFollowers' => $model->countFollowers()));
     }
 
@@ -608,8 +643,15 @@ class Controller
     public function getPost()
     {
         try {
+            $limit = '';
+            $start = '';
+            if (isset($_REQUEST['limit'], $_REQUEST['start'])) {
+                $limit = $_REQUEST['limit'];
+                $start = $_REQUEST['start'];
+            }
+
             $model = new Model();
-            $resultado = $model->getPost($_SESSION['datos'][0]['id']);
+            $resultado = $model->getPost($_SESSION['datos'][0]['id'], $start, $limit);
 
             echo json_encode($resultado);
         } catch (Exception $e) {
@@ -641,7 +683,7 @@ class Controller
         $id = $_SESSION['datos'][0]['id'];
         $id_post = $_REQUEST['id_post'];
 
-        if ($model->checkLike($id_post, $id) == true) {
+        if ($model->checkLike($id, $id_post) == true) {
             echo json_encode(array('true', $model->countLikes()));
         } else {
             echo json_encode(array('false', $model->countLikes()));
@@ -718,5 +760,10 @@ class Controller
         $id_post = $_REQUEST['id_post'];
         $text = $_REQUEST['text'];
         echo json_encode($model->insertComment($_SESSION['datos'][0]['id'], $id_post, $text));
+    }
+
+    public function chat()
+    {
+        require __DIR__ . '/templates/chat.php';
     }
 }

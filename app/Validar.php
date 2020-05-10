@@ -67,7 +67,7 @@ class Validation
         if ($valor != '') {
             return true;
         } else {
-            $this->mensaje[$campo][] = "The field must be full.";
+            $this->mensaje[$campo][] = `<div class='alert alert-danger' role='danger'>Please, fill all fields. <i class='fas fa-times' id='closeAlertServer'></i></div>`;
             return false;
         }
     }
@@ -87,7 +87,7 @@ class Validation
         if (preg_match("/^[a-z]+([\.]?[a-z0-9_-]+)*@[a-z]+([\.-]+[a-z0-9]+)*\.[a-z]{2,}$/", $valor)) {
             return true;
         } else {
-            $this->mensaje[$campo][] = "The email field of being in the email format user@domain.com .";
+            $this->mensaje[$campo][] = `<div class='alert alert-danger' role='danger'>The email field of being in the email format user@domain.com <i class='fas fa-times' id='closeAlertServer'></i></div>`;
             return false;
         }
     }
@@ -96,7 +96,7 @@ class Validation
         if (preg_match("/^(?=.*\d.*\d)[0-9A-Za-z]{6,}$/", $valor)) {
             return true;
         } else {
-            $this->mensaje[$campo][] = "Incorrect password format.";
+            $this->mensaje[$campo][] = `<div class='alert alert-danger' role='danger'>Incorrect password format.<i class='fas fa-times' id='closeAlertServer'></i></div>`;
             return false;
         }
     }

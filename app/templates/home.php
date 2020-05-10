@@ -26,12 +26,12 @@
                     <label for="photoPost">
                         <div class="iconsWrite">
                             <i class="fas fa-camera m-2 icono"></i>
-                            <h6>Photo</h6>
+                            <h6>Photo/video</h6>
                         </div>
                     </label>
                     <div class="iconsWrite">
-                        <i class="fas fa-video m-2 icono"></i>
-                        <h6>Video</h6>
+                        <i class="fas fa-laugh-squint m-2"></i>
+                        <h6>Mood</h6>
                     </div>
                 </div>
                 <div id="publishPostContainer">
