@@ -60,25 +60,31 @@ class Model extends PDO
         return count($resultado->fetchAll()) == 1 ? true : false;
     }
 
-    //Borrar función ya está arriba ^^^^^^^
+    //Función para recuperar contraseña
     public function checkEmail($email)
     {
         $consulta = "SELECT * FROM users WHERE email = :email LIMIT 1";
         $resultado = $this->conexion->prepare($consulta);
         $resultado->bindParam(':email', $email);
         $resultado->execute();
+        $count = $resultado->rowCount();
 
-        return $resultado->fetchAll();
+        return $count == 1 ? $resultado->fetchAll() : false;
     }
 
 
     //Función que inserta el token para recuperar la contraseña
     public function insertPasswordRecovery($id, $email, $token)
     {
-        $consulta = "INSERT INTO passwordrecovery (id, email, token) VALUES ('$id', '$email', '$token')";
-        $resultado = $this->conexion->query($consulta);
+        $consulta = "INSERT INTO passwordrecovery (id, email, token) VALUES (?, ?, ?)";
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->bindParam(1, $id);
+        $resultado->bindParam(2, $email);
+        $resultado->bindParam(3, $token);
+        $resultado->execute();
+        $count = $resultado->rowCount();
 
-        return count($resultado->fetchAll()) == 1 ? true : false;
+        return $count == 1 ? true : false;
     }
 
     //Función que valida que exista el token
@@ -86,8 +92,10 @@ class Model extends PDO
     {
         $consulta = "SELECT * FROM passwordrecovery WHERE token = '$token'";
         $resultado = $this->conexion->query($consulta);
+        $resultado->execute();
+        $count = $resultado->rowCount();
 
-        return $resultado->fetchAll();
+        return $count == 1 ? $resultado->fetchAll() : false;
     }
 
     //Función que actualiza la contraseña
@@ -103,9 +111,11 @@ class Model extends PDO
     public function deleteToken($email)
     {
         $consulta = "DELETE FROM passwordrecovery WHERE email = '$email'";
-        $resultado = $this->conexion->query($consulta);
+        $resultado = $this->conexion->prepare($consulta);
+        $resultado->execute();
+        $count = $resultado->rowCount();
 
-        return count($resultado->fetchAll()) == 1 ? true : false;
+        return $count == 1 ? true : false;
     }
 
     //Función que actualiza el perfil del usuario

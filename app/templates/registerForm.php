@@ -43,7 +43,7 @@
                     <label>Gender</label>
                     <div id="contenedorGenero">
                         <div class="pretty p-default p-round">
-                            <input type="radio" name="gender" id="gender" value="Male" checked>
+                            <input type="radio" name="gender" id="gender" value="Male">
                             <div class="state">
                                 <label>Male</label>
                             </div>

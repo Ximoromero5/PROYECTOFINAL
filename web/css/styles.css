@@ -3003,4 +3003,74 @@ button.close {
   display: -ms-flexbox;
   display: flex;
 }
+
+.contenedorForm {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.contenedorForm #forgotPasswordForm,
+.contenedorForm #formResetPassword {
+  margin: auto;
+  width: 340px;
+}
+
+.contenedorForm #forgotPasswordForm .form-group,
+.contenedorForm #formResetPassword .form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left;
+  position: relative;
+}
+
+.contenedorForm #forgotPasswordForm .form-group label,
+.contenedorForm #formResetPassword .form-group label {
+  font-size: 14px;
+}
+
+.contenedorForm #forgotPasswordForm .form-group p,
+.contenedorForm #formResetPassword .form-group p {
+  margin-top: 10px;
+}
+
+.contenedorForm #forgotPasswordForm .form-group input,
+.contenedorForm #forgotPasswordForm .form-group button,
+.contenedorForm #formResetPassword .form-group input,
+.contenedorForm #formResetPassword .form-group button {
+  width: 340px;
+  height: 50px;
+  outline: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 15px;
+  border-bottom: 2px solid #ccc;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.contenedorForm #forgotPasswordForm .form-group button,
+.contenedorForm #formResetPassword .form-group button {
+  color: var(--panelsBackgroundLight);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #3751e4;
+  border: none !important;
+  border-radius: 5px;
+}
+
+.contenedorForm #forgotPasswordForm .form-group input[type="text"]:focus,
+.contenedorForm #forgotPasswordForm .form-group input[type="email"]:focus,
+.contenedorForm #forgotPasswordForm .form-group input[type="password"]:focus,
+.contenedorForm #formResetPassword .form-group input[type="text"]:focus,
+.contenedorForm #formResetPassword .form-group input[type="email"]:focus,
+.contenedorForm #formResetPassword .form-group input[type="password"]:focus {
+  border: 1px solid var(--blueColor);
+  border-bottom: 2px solid var(--blueColor);
+}
 /*# sourceMappingURL=styles.css.map */

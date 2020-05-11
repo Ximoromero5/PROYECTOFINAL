@@ -2081,3 +2081,51 @@ button.close {
     }
   }
 }
+
+//Estilos página recuperar contraseña
+.contenedorForm {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  #forgotPasswordForm,
+  #formResetPassword {
+    margin: auto;
+    width: 340px;
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+      label {
+        font-size: 14px;
+      }
+      p {
+        margin-top: 10px;
+      }
+      input,
+      button {
+        width: 340px;
+        height: 50px;
+        outline: 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 0 15px;
+        border-bottom: 2px solid #ccc;
+        transition: all 0.2s;
+      }
+      button {
+        color: var(--panelsBackgroundLight);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        background: #3751e4;
+        border: none !important;
+        border-radius: 5px;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        border: 1px solid var(--blueColor);
+        border-bottom: 2px solid var(--blueColor);
+      }
+    }
+  }
+}

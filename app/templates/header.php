@@ -18,7 +18,7 @@
             <!-- Icono principal -->
             <div id="logoContainer">
                 <a href="home">
-                    <h4>facebook.</h4>
+                    <h4>finterest.</h4>
                 </a>
             </div>
 

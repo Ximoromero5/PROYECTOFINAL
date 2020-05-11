@@ -758,5 +758,8 @@ $(document).ready(function () {
         $(this).click(function () {
             alert('d');
         })
-    })
+    });
+
+    //Alertas
+    $('.alert').alert();
 }); //Fin document.ready

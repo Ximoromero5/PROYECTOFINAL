@@ -5,24 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="web/css/styles.css">
     <title>Forgot password</title>
 </head>
 
-<body class="d-flex" style="min-height: 100vh">
-
-    <div class="container d-flex flex-column align-items-center m-auto">
+<body>
+    <div class="contenedorForm">
         <div class="errores">
             <?php echo $parametros['mensaje'] != '' ? $parametros['mensaje'] : '' ?>
         </div>
         <h2>Reset your password</h2>
-        <form method="POST" action="forgotPassword" class="d-flex flex-column align-items-center w-100">
-            <div class="form-group col-md-4">
+        <form method="POST" action="forgotPassword" id="forgotPasswordForm">
+            <div class="form-group">
                 <label for="field1">Email address</label>
-                <input type="email" class="form-control" id="field1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-                <small id="emailHelp" class="form-text text-muted">Enter your email to reset the password.</small>
+                <input type="email" id="field1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                <small id="emailHelp">Enter your email to reset the password.</small>
             </div>
-            <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary w-25" name="send">Send</button>
+            <div class="form-group" id="submitButtonContainer">
+                <button type="submit" name="send">SEND</button>
+                <p>Already registered? <a href="login">Login here</a></p>
             </div>
         </form>
     </div>

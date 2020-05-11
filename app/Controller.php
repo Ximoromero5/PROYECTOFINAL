@@ -234,7 +234,7 @@ class Controller
                 $validations = $validate->rules($rules, $data);
 
                 if ($validations === true) {
-                    if (count($model->checkEmail($email)) == 1) {
+                    if ($model->checkEmail($email) != false) {
                         $userData = $model->checkEmail($email);
                         foreach ($userData as $row) {
                             //Si existe el email introducido
@@ -246,7 +246,7 @@ class Controller
                             if ($model->insertPasswordRecovery($id, $email, $token)) {
 
                                 //Enviamos el correo para restablecer la contraseña
-                                $from = "admin@admin.com";
+                                $from = "joaquinromeroesteve@gmail.com";
                                 $to = $email;
                                 $subject = "Reset your password";
                                 $message = " <!DOCTYPE html>
@@ -256,14 +256,17 @@ class Controller
                                             </head>
                                             <body>
                                             <h2>Click the link below to reset your password: </h2><br>
-                                            <a href='http://localhost/web/index.php?action=resetPassword&token=" . $token . "'>Click here to reset your password</a>
+                                            <a href='http://localhost/proyectofinal/index.php?action=resetPassword&token=" . $token . "'>Click here to reset your password</a>
                                             </body>
                                             </html>";
 
                                 $headers  = "MIME-Version: 1.0\r\n";
                                 $headers .= "Content-type: text/html; charset=utf-8\r\n";
                                 $headers .= "From:" . $from;
-                                mail($to, $subject, $message, $headers) ? $parametros['mensaje'] = "Message sent successfully!" : $parametros['mensaje'] = "Error to send email!";
+
+                                mail($to, $subject, $message, $headers) ? ($parametros['mensaje'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Message sent successfully!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>") : ($parametros['mensaje'] = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Error sending message!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                            } else {
+                                echo "<script>alert('Error al insertar el token')</script>";
                             }
                         }
                     } else {
@@ -299,7 +302,7 @@ class Controller
             if (isset($_GET['token'])) {
                 $token = $_GET['token'];
 
-                if (count($userData = $model->checkToken($token)) == 1) {
+                if ($userData = $model->checkToken($token)) {
                     foreach ($userData as $row) {
                         $token = $row['token'];
                         $email = $row['email'];
@@ -333,10 +336,10 @@ class Controller
 
                                     //Ejecutamos el metodo para actualizar contraseña y borrar token
                                     if ($model->deleteToken($email)) {
-                                        $parametros['exito'] = 'The password has been updated successfully!';
-                                        header('Refresh: 2; login');
+                                        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>The password has been updated successfully, you will be redirected in a few seconds!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+                                        echo "<script>setTimeout(\"location.href = 'login';\",4500);</script>";
                                     } else {
-                                        $parametros['mensaje'] = "Error updating password!";
+                                        $parametros['mensaje'] = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Error updating password!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
                                     }
                                 }
                             } else {
